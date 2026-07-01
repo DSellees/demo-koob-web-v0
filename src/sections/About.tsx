@@ -44,10 +44,10 @@ const About = () => {
                 Por qué KOOB es diferente
               </p>
               <h2 className="text-4xl lg:text-5xl font-semibold text-black leading-tight mb-6">
-                La consultoría que se queda hasta que el cambio es real
+                Estrategias que se ejecutan, cambios que se consolidan
               </h2>
               <p className="text-gray-500 leading-relaxed max-w-md">
-                El modelo tradicional entrega metodologías. KOOB entra con tus equipos, trabaja junto a ellos y acompaña la ejecución día a día. En determinados proyectos, alineamos parte de nuestra remuneración a la consecución de objetivos — compartiendo el compromiso y el riesgo con el cliente.
+                Mientras el modelo tradicional se limita a entregar metodologías, en KOOB nos integramos con tus equipos en el día a día. Diseñamos soluciones prácticas y acompañamos la implantación para asegurar un impacto real, alineando incluso parte de nuestra remuneración a tus resultados.
               </p>
             </motion.div>
 
