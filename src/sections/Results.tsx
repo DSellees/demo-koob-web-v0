@@ -1,96 +1,114 @@
-import { Building2, Smartphone, Landmark, Briefcase } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { staggerContainer, staggerItem, fadeUp, viewportOnce } from '../lib/animations';
 
-const cases = [
+const profiles = [
   {
-    industry: 'Banca de Particulares',
-    icon: Building2,
-    title: 'Proceso comercial de captación',
-    description: 'Revisión y afinamiento del proceso comercial de captación de clientes premium y gestión de equipos comerciales.',
-    result: '+35%',
-    metric: 'captación clientes premium',
-    timeline: '6 meses',
+    label: 'Empresa familiar · PYME',
+    title: 'Empresas que quieren crecer con estructura',
+    description:
+      'La dirección concentra gran parte de las decisiones y empiezan a aparecer señales que piden acompañamiento externo.',
+    signals: [
+      'Decisiones muy centralizadas en la propiedad o dirección',
+      'Voluntad de crecer, pero sin estructura ni metodología',
+      'Tensiones de tesorería o dificultades financieras',
+      'Oportunidades que no se convierten en proyectos reales',
+    ],
   },
   {
-    industry: 'Telecomunicaciones',
-    icon: Smartphone,
-    title: 'Estrategia IT y reducción de costes',
-    description: 'Redefinición de la estrategia IT para reducir costes de explotación y desarrollo de aplicaciones.',
-    result: '2.4M€',
-    metric: 'ahorro anual',
-    timeline: '12 meses',
-  },
-  {
-    industry: 'Banca de Empresas',
-    icon: Landmark,
-    title: 'Plan global de reducción de costes',
-    description: 'Implantación de plan global de reducción de costes mediante análisis de procesos.',
-    result: '-18%',
-    metric: 'costes operativos',
-    timeline: '8 meses',
-  },
-  {
-    industry: 'Sector Industrial',
-    icon: Briefcase,
-    title: 'Transformación operacional',
-    description: 'Rediseño de procesos productivos y optimización de la cadena de suministro.',
-    result: '+28%',
-    metric: 'productividad',
-    timeline: '9 meses',
+    label: 'Gran empresa',
+    title: 'Empresas que necesitan impulsar cambios concretos',
+    description:
+      'Organizaciones que buscan acompañamiento especializado para acelerar transformaciones en áreas concretas.',
+    signals: [
+      'Visión externa e independiente sobre un área o proceso',
+      'Cambios que internamente no consiguen avanzar',
+      'Especialistas con experiencia ejecutiva real',
+      'Proyectos estratégicos que necesitan agilidad',
+    ],
   },
 ];
 
 const Results = () => {
   return (
-    <section id="resultados" className="py-20 lg:py-32 bg-koob-beige">
+    <section id="para-quien" className="py-24 lg:py-36 bg-white">
       <div className="w-full px-6 lg:px-12 xl:px-20">
         <div className="max-w-7xl mx-auto">
+
           {/* Header */}
-          <div className="max-w-3xl mb-16">
-            <p className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
-              Resultados
-            </p>
-            <h2 className="text-3xl lg:text-4xl font-semibold text-black mb-6">
-              Casos de éxito en sectores exigentes
-            </h2>
-            <p className="text-lg text-gray-600">
-              Estos son algunos ejemplos de resultados concretos que hemos conseguido 
-              para nuestros clientes en sectores tan competitivos como la banca y las telecomunicaciones.
-            </p>
-          </div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer}
+            className="mb-16 max-w-3xl"
+          >
+            <motion.p variants={staggerItem} className="text-sm font-medium text-koob-gold uppercase tracking-widest mb-4">
+              Para quién trabajamos
+            </motion.p>
+            <motion.h2 variants={staggerItem} className="text-4xl lg:text-5xl font-semibold text-black leading-tight mb-6">
+              Empresas en momentos que requieren decisión
+            </motion.h2>
+            <motion.p variants={staggerItem} className="text-gray-500 text-lg leading-relaxed">
+              Trabajamos con empresas que han llegado a un punto en el que necesitan apoyo externo para avanzar o afrontar un reto importante.
+            </motion.p>
+          </motion.div>
 
-          {/* Cases Grid */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {cases.map((caseItem) => (
-              <div
-                key={caseItem.title}
-                className="bg-white p-8 border border-gray-200 hover:border-black transition-colors duration-300"
+          {/* Perfiles — tarjetas con borde superior dorado */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 gap-px bg-gray-200"
+          >
+            {profiles.map((profile) => (
+              <motion.div
+                key={profile.title}
+                variants={staggerItem}
+                className="bg-white p-10 group hover:bg-gray-50 transition-colors duration-300"
               >
-                {/* Industry */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-gray-100 flex items-center justify-center">
-                    <caseItem.icon className="w-5 h-5 text-black" />
-                  </div>
-                  <span className="text-sm text-gray-500">{caseItem.industry}</span>
-                </div>
+                {/* Top accent */}
+                <div className="w-10 h-0.5 bg-koob-gold mb-8 group-hover:w-14 transition-all duration-300" />
 
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-black mb-3">{caseItem.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-6">{caseItem.description}</p>
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">
+                  {profile.label}
+                </p>
+                <h3 className="text-2xl font-semibold text-black mb-4 leading-snug">
+                  {profile.title}
+                </h3>
+                <p className="text-gray-500 leading-relaxed mb-8 text-sm">{profile.description}</p>
 
-                {/* Result */}
-                <div className="flex items-end justify-between pt-6 border-t border-gray-100">
-                  <div>
-                    <p className="text-4xl font-semibold text-black">{caseItem.result}</p>
-                    <p className="text-sm text-gray-500 mt-1">{caseItem.metric}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm text-gray-400">Timeline</p>
-                    <p className="text-sm font-medium text-black">{caseItem.timeline}</p>
-                  </div>
-                </div>
-              </div>
+                <ul className="space-y-3 border-t border-gray-100 pt-6">
+                  {profile.signals.map((signal) => (
+                    <li key={signal} className="flex items-start gap-3 text-sm text-gray-500">
+                      <span className="w-1 h-1 bg-koob-gold rounded-full mt-2 flex-shrink-0" />
+                      {signal}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={fadeUp}
+            className="mt-12 text-center"
+          >
+            <Link
+              to="/contacto"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white font-medium hover:bg-gray-800 transition-colors"
+            >
+              Hablar con KOOB
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
         </div>
       </div>
     </section>

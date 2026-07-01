@@ -53,6 +53,8 @@ module.exports = {
             100: '#f5f5f5',
           },
           beige: '#f8f6f3',
+          'beige-strong': '#ede8e1',
+          gold: '#DCCEC2',
         },
       },
       borderRadius: {

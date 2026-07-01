@@ -1,92 +1,99 @@
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import YouTubeEmbed from '../components/YouTubeEmbed';
+import { fadeUp, staggerContainer, staggerItem, scaleIn } from '../lib/animations';
+
+const pillars = [
+  { title: 'Experiencia ejecutiva real', desc: 'Profesionales que han dirigido empresas y equipos' },
+  { title: 'Acompañamiento en la ejecución', desc: 'No solo diagnóstico, sino implantación real' },
+  { title: 'Enfoque práctico', desc: 'Soluciones aplicables al día a día de tu empresa' },
+];
 
 const Hero = () => {
-  const scrollToContact = () => {
-    const element = document.querySelector('#contacto');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const scrollToServices = () => {
-    const element = document.querySelector('#servicios');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector('#servicios')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section
-      id="inicio"
-      className="relative min-h-screen flex items-center bg-white pt-20"
-    >
+    <section id="inicio" className="relative min-h-screen flex items-center bg-white pt-20">
       <div className="w-full px-6 lg:px-12 xl:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left Content */}
-            <div className="order-2 lg:order-1">
-              {/* Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-black leading-tight mb-6 tracking-tight">
+
+            {/* Columna izquierda */}
+            <motion.div
+              className="order-2 lg:order-1"
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+            >
+              <motion.p
+                variants={staggerItem}
+                className="text-sm font-medium text-koob-gold uppercase tracking-widest mb-6"
+              >
+                Partner estratégico de transformación
+              </motion.p>
+
+              <motion.h1
+                variants={fadeUp}
+                className="text-5xl sm:text-6xl lg:text-[4.25rem] font-semibold text-black leading-[1.05] mb-7"
+              >
                 Reimpulsa tu empresa cuando más lo necesita
-              </h1>
+              </motion.h1>
 
-              {/* Description */}
-              <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-xl">
-                En KOOB Advisory acompañamos a empresas en momentos críticos de transformación. 
-                Diagnóstico ejecutivo, plan de acción y acompañamiento real para recuperar 
-                crecimiento y rentabilidad.
-              </p>
+              <motion.p
+                variants={fadeUp}
+                className="text-lg text-gray-500 leading-relaxed mb-9 max-w-lg"
+              >
+                Acompañamos a empresas en momentos clave de transformación, crecimiento y cambio.
+                Experiencia ejecutiva real, implicación directa en la ejecución.
+              </motion.p>
 
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={scrollToContact}
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/contacto"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-black text-white font-medium hover:bg-gray-800 transition-colors"
                 >
-                  Solicitar diagnóstico
+                  Pide tu diagnóstico inicial
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
                 <button
                   onClick={scrollToServices}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-black font-medium hover:border-black transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-200 text-black font-medium hover:border-black transition-colors cursor-pointer"
                 >
-                  Conocer servicios
+                  Ver servicios
                 </button>
-              </div>
+              </motion.div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-gray-200">
-                <div>
-                  <p className="text-3xl font-semibold text-black">20+</p>
-                  <p className="text-sm text-gray-500 mt-1">Años de experiencia</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-semibold text-black">150+</p>
-                  <p className="text-sm text-gray-500 mt-1">Proyectos ejecutados</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-semibold text-black">95%</p>
-                  <p className="text-sm text-gray-500 mt-1">Clientes satisfechos</p>
-                </div>
-              </div>
-            </div>
+              {/* Pilares */}
+              <motion.div
+                variants={staggerContainer}
+                className="grid grid-cols-3 gap-6 mt-14 pt-8 border-t border-gray-100"
+              >
+                {pillars.map((p) => (
+                  <motion.div key={p.title} variants={staggerItem}>
+                    <p className="text-xs font-semibold text-black leading-snug mb-1">{p.title}</p>
+                    <p className="text-xs text-gray-400 leading-relaxed">{p.desc}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
 
-            {/* Right Image */}
-            <div className="order-1 lg:order-2 relative">
-              <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden">
-                <img
-                  src="/images/hero-office.jpg"
-                  alt="Oficina ejecutiva moderna - KOOB Advisory"
-                  className="w-full h-full object-cover"
-                />
+            {/* Columna derecha — vídeo */}
+            <motion.div
+              className="order-1 lg:order-2"
+              initial="hidden"
+              animate="visible"
+              variants={scaleIn}
+              transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="aspect-[4/3] bg-gray-900 relative overflow-hidden shadow-2xl ring-1 ring-koob-gold/20">
+                <YouTubeEmbed videoId="gwcGSkRZ1YM" title="KOOB Advisory — Quiénes somos" />
               </div>
-              {/* Floating Card */}
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 shadow-xl max-w-xs hidden lg:block">
-                <p className="text-sm text-gray-500 mb-2">Resultado promedio</p>
-                <p className="text-2xl font-semibold text-black">+35% mejora</p>
-                <p className="text-sm text-gray-600 mt-1">en rentabilidad en 6 meses</p>
-              </div>
-            </div>
+              <div className="h-0.5 bg-gradient-to-r from-koob-gold/60 via-koob-gold to-koob-gold/60" />
+            </motion.div>
+
           </div>
         </div>
       </div>

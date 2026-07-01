@@ -1,0 +1,201 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Navigation from '../sections/Navigation';
+import Footer from '../sections/Footer';
+import SeoMeta from '../components/SeoMeta';
+import { insights, categories } from '../data/insights';
+import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
+
+const Insights = () => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const filtered = activeCategory
+    ? insights.filter((p) => p.category === activeCategory)
+    : insights;
+
+  return (
+    <div className="relative bg-white min-h-screen">
+      <SeoMeta
+        title="Insights — KOOB Advisory | Ideas para empresas en cambio"
+        description="Reflexiones y análisis sobre transformación empresarial, liderazgo, cultura organizativa y gestión del cambio. El conocimiento de quienes lo han vivido desde dentro."
+        url="https://koobadvisory.com/insights"
+      />
+      <Navigation />
+
+      {/* Hero */}
+      <section className="pt-32 pb-20 bg-koob-beige">
+        <div className="w-full px-6 lg:px-12 xl:px-20">
+          <div className="max-w-4xl mx-auto">
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="text-sm font-medium text-koob-gold uppercase tracking-wider mb-4"
+            >
+              Insights KOOB
+            </motion.p>
+            <motion.h1
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              transition={{ delay: 0.1 }}
+              className="text-4xl lg:text-5xl xl:text-6xl font-semibold text-black mb-6 leading-tight"
+            >
+              Ideas para empresas en cambio
+            </motion.h1>
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-gray-600 leading-relaxed max-w-2xl"
+            >
+              Reflexiones y análisis sobre transformación, liderazgo, cultura y gestión
+              desde la experiencia de quienes han estado en primera línea.
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* Filtros por categoría */}
+      <section className="py-8 border-b border-gray-200 sticky top-[72px] bg-white z-30">
+        <div className="w-full px-6 lg:px-12 xl:px-20">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
+              <button
+                onClick={() => setActiveCategory(null)}
+                className={`flex-shrink-0 px-4 py-2 text-sm font-medium border transition-colors whitespace-nowrap ${
+                  activeCategory === null
+                    ? 'bg-black text-white border-black'
+                    : 'border-gray-300 text-gray-600 hover:border-black hover:text-black'
+                }`}
+              >
+                Todos
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                  className={`flex-shrink-0 px-4 py-2 text-sm font-medium border transition-colors whitespace-nowrap ${
+                    activeCategory === cat
+                      ? 'bg-black text-white border-black'
+                      : 'border-gray-300 text-gray-600 hover:border-black hover:text-black'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Grid de artículos */}
+      <section className="py-16 lg:py-24">
+        <div className="w-full px-6 lg:px-12 xl:px-20">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              key={activeCategory}
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filtered.map((post) => (
+                <motion.article
+                  key={post.slug}
+                  variants={staggerItem}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className="group border border-gray-200 hover:border-black transition-colors duration-300 overflow-hidden"
+                >
+                  {/* Image placeholder */}
+                  <div className="aspect-[16/9] bg-gray-100 overflow-hidden">
+                    <div className="w-full h-full flex items-center justify-center bg-koob-beige group-hover:bg-gray-200 transition-colors duration-300">
+                      <span className="text-xs text-gray-400 uppercase tracking-wider">{post.category}</span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-xs font-medium text-koob-gold uppercase tracking-wider">
+                        {post.category}
+                      </span>
+                      <span className="w-px h-3 bg-gray-300" />
+                      <span className="flex items-center gap-1 text-xs text-gray-400">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </span>
+                    </div>
+
+                    <h2 className="text-lg font-semibold text-black mb-3 leading-snug group-hover:text-gray-700 transition-colors">
+                      {post.title}
+                    </h2>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    <Link
+                      to={`/insights/${post.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-black group-hover:text-koob-gold transition-colors"
+                    >
+                      Leer más
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.article>
+              ))}
+            </motion.div>
+
+            {filtered.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-20 text-gray-400"
+              >
+                No hay artículos en esta categoría todavía.
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-black text-white">
+        <div className="w-full px-6 lg:px-12 xl:px-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={staggerContainer}
+            >
+              <motion.h2 variants={staggerItem} className="text-3xl lg:text-4xl font-semibold mb-6">
+                ¿Alguno de estos temas resuena con tu empresa?
+              </motion.h2>
+              <motion.p variants={staggerItem} className="text-gray-400 leading-relaxed mb-8 max-w-xl mx-auto">
+                Hablemos. Una conversación sin compromiso puede ser el primer paso.
+              </motion.p>
+              <motion.div variants={staggerItem}>
+                <Link
+                  to="/contacto"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-koob-gold text-black font-semibold hover:bg-yellow-400 transition-colors"
+                >
+                  Hablar con KOOB
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Insights;

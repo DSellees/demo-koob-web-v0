@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Linkedin } from 'lucide-react';
+import { Linkedin, Instagram, Youtube, Mail, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -7,31 +7,83 @@ const Footer = () => {
       <div className="w-full px-6 lg:px-12 xl:px-20">
         <div className="max-w-7xl mx-auto">
           {/* Main Footer */}
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
             {/* Logo & Description */}
-            <div className="md:col-span-1">
-              <Link to="/" className="flex items-center gap-3 mb-4">
-                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 4C4 4 8 12 16 16C8 20 4 28 4 28" stroke="black" strokeWidth="2.5" strokeLinecap="round"/>
-                  <path d="M12 4C12 4 16 12 24 16C16 20 12 28 12 28" stroke="black" strokeWidth="2.5" strokeLinecap="round"/>
-                  <path d="M20 4C20 4 24 12 32 16C24 20 20 28 20 28" stroke="black" strokeWidth="2.5" strokeLinecap="round" opacity="0.4"/>
-                </svg>
-                <span className="text-lg font-semibold">KOOB</span>
+            <div className="lg:col-span-2">
+              <Link to="/" className="flex items-center mb-4">
+                <img src="/logo-koob-black.svg" alt="KOOB Advisory" className="h-6 w-auto" />
               </Link>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Consultoría estratégica de dirección para empresas que necesitan resultados.
+              <p className="text-sm text-gray-500 leading-relaxed mb-4 max-w-xs">
+                Consultoría estratégica para empresas en momentos de transformación, crecimiento
+                y cambio. Experiencia ejecutiva real, implicación directa.
               </p>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://www.linkedin.com/company/koob-advisory/?viewAsMember=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-black transition-colors"
+                  aria-label="LinkedIn KOOB Advisory"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.instagram.com/koob.advisory/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-black transition-colors"
+                  aria-label="Instagram KOOB Advisory"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@KOOB_ADVISORY"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-black transition-colors"
+                  aria-label="YouTube KOOB Advisory"
+                >
+                  <Youtube className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
-            {/* Navigation */}
+            {/* Servicios */}
             <div>
-              <h4 className="font-semibold text-black mb-4">Navegación</h4>
-              <ul className="space-y-2">
+              <h4 className="font-semibold text-black mb-4 text-sm uppercase tracking-wider">Servicios</h4>
+              <ul className="space-y-2.5">
                 <li>
-                  <Link to="/" className="text-sm text-gray-500 hover:text-black transition-colors">
-                    Inicio
+                  <Link to="/reimpulso" className="text-sm text-gray-500 hover:text-black transition-colors">
+                    KOOB Reimpulso
                   </Link>
                 </li>
+                <li>
+                  <Link to="/que-hacemos" className="text-sm text-gray-500 hover:text-black transition-colors">
+                    Recursos Humanos
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/que-hacemos" className="text-sm text-gray-500 hover:text-black transition-colors">
+                    Comunicación Interna
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/que-hacemos" className="text-sm text-gray-500 hover:text-black transition-colors">
+                    Ecosistema de Expertos
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/que-hacemos" className="text-sm text-gray-500 hover:text-black transition-colors">
+                    Ver todas las áreas
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Empresa */}
+            <div>
+              <h4 className="font-semibold text-black mb-4 text-sm uppercase tracking-wider">Empresa</h4>
+              <ul className="space-y-2.5">
                 <li>
                   <Link to="/quienes-somos" className="text-sm text-gray-500 hover:text-black transition-colors">
                     Quiénes Somos
@@ -43,74 +95,64 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/reimpulso" className="text-sm text-gray-500 hover:text-black transition-colors">
-                    Reimpulso
+                  <Link to="/insights" className="text-sm text-gray-500 hover:text-black transition-colors">
+                    Insights
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="text-sm text-gray-500 hover:text-black transition-colors">
+                  <Link to="/contacto" className="text-sm text-gray-500 hover:text-black transition-colors">
                     Contacto
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Legal */}
+            {/* Contacto */}
             <div>
-              <h4 className="font-semibold text-black mb-4">Legal</h4>
-              <ul className="space-y-2">
+              <h4 className="font-semibold text-black mb-4 text-sm uppercase tracking-wider">Contacto</h4>
+              <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-sm text-gray-500 hover:text-black transition-colors">
-                    Aviso Legal
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-gray-500 hover:text-black transition-colors">
-                    Política de Privacidad
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-gray-500 hover:text-black transition-colors">
-                    Política de Cookies
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="font-semibold text-black mb-4">Contacto</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="mailto:info@koobadvisory.com" className="text-sm text-gray-500 hover:text-black transition-colors">
+                  <a
+                    href="mailto:info@koobadvisory.com"
+                    className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors"
+                  >
+                    <Mail className="w-4 h-4 flex-shrink-0" />
                     info@koobadvisory.com
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+34609483114" className="text-sm text-gray-500 hover:text-black transition-colors">
+                  <a
+                    href="tel:+34609483114"
+                    className="flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors"
+                  >
+                    <Phone className="w-4 h-4 flex-shrink-0" />
                     609 483 114
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/company/koob-advisory/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors mt-2"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                    LinkedIn
-                  </a>
+                <li className="pt-2">
+                  <p className="text-xs text-gray-400">España · atención nacional</p>
+                  <p className="text-xs text-gray-400">Presencial y remota</p>
                 </li>
               </ul>
             </div>
           </div>
 
           {/* Copyright */}
-          <div className="pt-8 border-t border-gray-200">
-            <p className="text-sm text-gray-400 text-center">
-              © 2024 KOOB Advisory. Todos los derechos reservados.
+          <div className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-400">
+              © 2026 KOOB Advisory. Todos los derechos reservados.
             </p>
+            <div className="flex items-center gap-4">
+              <Link to="/legal" className="text-xs text-gray-400 hover:text-black transition-colors">
+                Aviso Legal
+              </Link>
+              <Link to="/privacidad" className="text-xs text-gray-400 hover:text-black transition-colors">
+                Privacidad
+              </Link>
+              <Link to="/cookies" className="text-xs text-gray-400 hover:text-black transition-colors">
+                Cookies
+              </Link>
+            </div>
           </div>
         </div>
       </div>

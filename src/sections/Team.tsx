@@ -1,103 +1,94 @@
-import { Linkedin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { staggerContainer, staggerItem, slideRight, viewportOnce } from '../lib/animations';
 
-const advisors = [
+const differentiators = [
   {
-    name: 'Jordi Fontanals',
-    role: 'Socio Fundador',
-    expertise: 'Estrategia y Transformación',
-    background: '25+ años en dirección de banca y consultoría estratégica. Ex-director en BBVA y Santander.',
+    title: 'Experiencia ejecutiva real',
+    description: 'Hemos ocupado posiciones de dirección y liderado equipos. No hablamos de teoría: conocemos los retos desde dentro.',
   },
   {
-    name: 'María García',
-    role: 'Socia',
-    expertise: 'Operaciones y Excelencia',
-    background: 'Especialista en optimización de procesos y reducción de costes. Ex-McKinsey & Company.',
+    title: 'Enfoque práctico, no teórico',
+    description: 'Nos implicamos en la ejecución para que los cambios sucedan de verdad, no solo en el papel.',
   },
   {
-    name: 'Carlos Ruiz',
-    role: 'Socio',
-    expertise: 'Desarrollo de Talento',
-    background: 'Experto en gestión de equipos de alto rendimiento y cambio organizacional.',
+    title: 'Trabajo integrado con tus equipos',
+    description: 'Trabajamos junto a las personas de la organización. Transferimos conocimiento y dejamos capacidades instaladas.',
+  },
+  {
+    title: 'Alineación con tus objetivos',
+    description: 'En determinados proyectos, alineamos parte de nuestra remuneración a los resultados. Compartimos el riesgo.',
+  },
+  {
+    title: 'Modelo flexible y ágil',
+    description: 'Reunimos a los especialistas adecuados para cada proyecto, sin estructuras pesadas ni costes innecesarios.',
   },
 ];
 
 const Team = () => {
   return (
-    <section id="equipo" className="py-20 lg:py-32 bg-white">
+    <section id="por-que-koob" className="py-24 lg:py-36 bg-koob-beige overflow-hidden">
       <div className="w-full px-6 lg:px-12 xl:px-20">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="grid lg:grid-cols-2 gap-12 mb-16">
-            <div>
-              <p className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
-                Equipo
-              </p>
-              <h2 className="text-3xl lg:text-4xl font-semibold text-black mb-6">
-                Profesionales senior con experiencia real
-              </h2>
-            </div>
-            <div className="flex items-end">
-              <p className="text-gray-600 leading-relaxed">
-                Nuestro equipo combina experiencia en dirección de grandes corporaciones 
-                con el conocimiento práctico de quienes han estado en tu lado del negocio. 
-                Entendemos la presión, los stakeholders y la necesidad de resultados.
-              </p>
-            </div>
-          </div>
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
 
-          {/* Advisors */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {advisors.map((advisor) => (
-              <div key={advisor.name} className="group">
-                {/* Avatar Placeholder */}
-                <div className="aspect-square bg-gray-100 mb-6 flex items-center justify-center">
-                  <span className="text-4xl font-semibold text-gray-300">
-                    {advisor.name.charAt(0)}
+            {/* Izquierda: pull quote */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={slideRight}
+              className="lg:col-span-2 lg:sticky lg:top-32"
+            >
+              <p className="text-sm font-medium text-koob-gold uppercase tracking-widest mb-8">
+                Por qué KOOB
+              </p>
+              <div className="text-[7rem] text-black/10 leading-none -mb-4 select-none" aria-hidden="true">
+                "
+              </div>
+              <blockquote className="text-2xl lg:text-3xl font-semibold text-black leading-snug mb-6">
+                Una manera diferente de entender la consultoría
+              </blockquote>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-xs mb-10">
+                Nuestro compromiso nace desde la experiencia real, con implicación genuina en cada proyecto.
+              </p>
+              <Link
+                to="/equipo"
+                className="inline-flex items-center gap-2 text-sm font-medium text-black border-b border-black/30 pb-0.5 hover:border-black transition-colors"
+              >
+                Conocer el equipo
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </motion.div>
+
+            {/* Derecha: lista numerada */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={staggerContainer}
+              className="lg:col-span-3 divide-y divide-gray-200"
+            >
+              {differentiators.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  variants={staggerItem}
+                  className="py-6 flex gap-6 group"
+                >
+                  <span className="text-xs font-mono text-gray-300 mt-1 w-5 flex-shrink-0 select-none">
+                    {String(i + 1).padStart(2, '0')}
                   </span>
-                </div>
-
-                {/* Info */}
-                <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h3 className="text-lg font-semibold text-black">{advisor.name}</h3>
-                    <p className="text-sm text-gray-500">{advisor.role}</p>
+                    <h3 className="text-sm font-semibold text-black mb-1.5 group-hover:text-koob-gold transition-colors duration-200">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
                   </div>
-                  <a
-                    href="https://www.linkedin.com/company/koob-advisory/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-black transition-colors"
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                </div>
+                </motion.div>
+              ))}
+            </motion.div>
 
-                <p className="text-sm font-medium text-black mb-2">{advisor.expertise}</p>
-                <p className="text-sm text-gray-500 leading-relaxed">{advisor.background}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Stats Banner */}
-          <div className="mt-20 p-8 bg-black text-white">
-            <div className="grid md:grid-cols-4 gap-8 text-center">
-              <div>
-                <p className="text-3xl font-semibold mb-2">20+</p>
-                <p className="text-sm text-gray-400">Años de experiencia media</p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold mb-2">150+</p>
-                <p className="text-sm text-gray-400">Proyectos ejecutados</p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold mb-2">50+</p>
-                <p className="text-sm text-gray-400">Empresas asesoradas</p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold mb-2">3</p>
-                <p className="text-sm text-gray-400">Sectores principales</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

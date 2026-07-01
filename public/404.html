@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>KOOB Advisory</title>
+    <script>
+      const segment = '';
+      if (sessionStorage.redirect) {
+        const redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        window.history.replaceState(null, null, redirect);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
+<script>
+  sessionStorage.redirect = location.pathname + location.search;
+  location.replace('/');
+</script>
