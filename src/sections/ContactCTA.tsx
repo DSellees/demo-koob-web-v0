@@ -1,9 +1,29 @@
-import { Phone, Mail, MessageCircle, ArrowRight, MapPin } from 'lucide-react';
+import { useState } from 'react';
+import { Phone, Mail, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { staggerContainer, staggerItem, fadeUp, viewportOnce } from '../lib/animations';
+import { staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
 
 const ContactCTA = () => {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    empresa: '',
+    email: '',
+    telefono: '',
+    mensaje: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: conectar con backend / formspree / emailjs
+    setSubmitted(true);
+  };
+
   return (
     <section id="contacto" className="py-20 lg:py-32 bg-black text-white">
       <div className="w-full px-6 lg:px-12 xl:px-20">
@@ -28,7 +48,7 @@ const ContactCTA = () => {
                 conversación honesta sobre los retos de tu empresa y cómo podemos acompañarte.
               </motion.p>
 
-              <motion.div variants={staggerItem} className="space-y-4 mb-10">
+              <motion.div variants={staggerItem} className="space-y-4">
                 <a
                   href="tel:+34609483114"
                   className="flex items-center gap-4 p-4 bg-white/5 hover:bg-white/10 transition-colors"
@@ -71,52 +91,119 @@ const ContactCTA = () => {
                 </a>
               </motion.div>
 
-              <motion.div variants={staggerItem}>
+              <motion.div variants={staggerItem} className="mt-8">
                 <Link
                   to="/contacto"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-medium hover:bg-koob-gold transition-colors"
                 >
-                  Contactar con KOOB
+                  Ver formulario completo
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
             </motion.div>
 
-            {/* Right - Info */}
+            {/* Right - Form */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={viewportOnce}
-              variants={fadeUp}
-              className="lg:pl-12"
+              variants={staggerContainer}
             >
-              <div className="p-8 bg-white/5 mb-8">
-                <h3 className="text-lg font-semibold mb-4">¿Cómo es la primera conversación?</h3>
-                <ul className="space-y-3">
-                  {[
-                    'Escuchamos la situación real de tu empresa',
-                    'Identificamos los puntos con mayor potencial de mejora',
-                    'Proponemos un enfoque adaptado a tu situación concreta',
-                    'Sin compromiso ni presión',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-koob-gold rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-gray-400">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-medium mb-1">Oficinas</p>
-                  <p className="text-gray-400 text-sm">España</p>
-                  <p className="text-gray-400 text-sm">Atención presencial y remota</p>
-                </div>
-              </div>
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-6 bg-white/5 border border-white/10"
+                >
+                  <h4 className="text-lg font-semibold mb-2">Mensaje recibido</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Gracias por ponerte en contacto. Revisaremos tu mensaje y te responderemos
+                    lo antes posible para coordinar una primera conversación.
+                  </p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <motion.div variants={staggerItem}>
+                    <label htmlFor="nombre" className="block text-sm font-medium mb-2">
+                      Nombre *
+                    </label>
+                    <input
+                      id="nombre"
+                      name="nombre"
+                      type="text"
+                      required
+                      value={formData.nombre}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500"
+                      placeholder="Tu nombre"
+                    />
+                  </motion.div>
+
+                  <motion.div variants={staggerItem}>
+                    <label htmlFor="empresa" className="block text-sm font-medium mb-2">
+                      Empresa *
+                    </label>
+                    <input
+                      id="empresa"
+                      name="empresa"
+                      type="text"
+                      required
+                      value={formData.empresa}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500"
+                      placeholder="Nombre de tu empresa"
+                    />
+                  </motion.div>
+
+                  <motion.div variants={staggerItem}>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email *
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500"
+                      placeholder="tu@empresa.com"
+                    />
+                  </motion.div>
+
+                  <motion.div variants={staggerItem}>
+                    <label htmlFor="mensaje" className="block text-sm font-medium mb-2">
+                      Cuéntanos tu situación *
+                    </label>
+                    <textarea
+                      id="mensaje"
+                      name="mensaje"
+                      required
+                      rows={4}
+                      value={formData.mensaje}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500 resize-none"
+                      placeholder="Breve descripción de los retos de tu empresa..."
+                    />
+                  </motion.div>
+
+                  <motion.button
+                    type="submit"
+                    variants={staggerItem}
+                    className="w-full px-6 py-3 bg-white text-black font-medium hover:bg-koob-gold transition-colors"
+                  >
+                    Enviar mensaje
+                  </motion.button>
+
+                  <motion.p variants={staggerItem} className="text-xs text-gray-500 text-center">
+                    Al enviar aceptas nuestra{' '}
+                    <Link to="/privacidad" className="underline hover:text-white transition-colors">
+                      política de privacidad
+                    </Link>.
+                  </motion.p>
+                </form>
+              )}
             </motion.div>
 
           </div>
