@@ -63,7 +63,7 @@ function App() {
 
   return (
     <HelmetProvider>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <div className="relative bg-white min-h-screen">
           <Routes>
             <Route path="/" element={<LandingPage />} />
