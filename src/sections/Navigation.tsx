@@ -49,7 +49,7 @@ const Navigation = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center flex-shrink-0">
-              <img src="/logo-koob-black.svg" alt="KOOB Advisory" className="h-8 w-auto" />
+              <img src="./logo-koob-black.svg" alt="KOOB Advisory" className="h-8 w-auto" />
             </Link>
 
             {/* Desktop Nav */}

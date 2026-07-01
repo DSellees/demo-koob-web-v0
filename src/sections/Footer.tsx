@@ -11,7 +11,7 @@ const Footer = () => {
             {/* Logo & Description */}
             <div className="lg:col-span-2">
               <Link to="/" className="flex items-center mb-4">
-                <img src="/logo-koob-black.svg" alt="KOOB Advisory" className="h-6 w-auto" />
+                <img src="./logo-koob-black.svg" alt="KOOB Advisory" className="h-6 w-auto" />
               </Link>
               <p className="text-sm text-gray-500 leading-relaxed mb-4 max-w-xs">
                 Consultoría estratégica para empresas en momentos de transformación, crecimiento
