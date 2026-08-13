@@ -25,14 +25,14 @@ const Insights = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="page-intro-space bg-koob-beige">
+      <section className="page-intro-space bg-black text-white">
         <div className="page-container">
           <div className="content-container-medium">
             <motion.p
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              className="text-sm font-medium text-koob-gold uppercase tracking-wider mb-4"
+              className="mb-4 text-sm font-medium uppercase tracking-wider text-koob-gold"
             >
               Insights KOOB
             </motion.p>
@@ -41,7 +41,7 @@ const Insights = () => {
               animate="visible"
               variants={fadeUp}
               transition={{ delay: 0.1 }}
-              className="text-4xl lg:text-5xl xl:text-6xl font-semibold text-black mb-6 leading-tight"
+              className="mb-6 text-4xl font-semibold leading-tight text-white lg:text-5xl xl:text-6xl"
             >
               Ideas para empresas en cambio
             </motion.h1>
@@ -50,7 +50,7 @@ const Insights = () => {
               animate="visible"
               variants={fadeUp}
               transition={{ delay: 0.2 }}
-              className="text-xl text-gray-600 leading-relaxed max-w-2xl"
+              className="max-w-2xl text-xl leading-relaxed text-gray-300"
             >
               Reflexiones y análisis sobre transformación, liderazgo, cultura y gestión
               desde la experiencia de quienes han estado en primera línea.
@@ -182,10 +182,13 @@ const Insights = () => {
               <motion.div variants={staggerItem}>
                 <Link
                   to="/contacto"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-koob-gold text-black font-semibold hover:bg-yellow-400 transition-colors"
+                  className="group inline-flex min-h-14 items-center gap-2 bg-white px-7 py-4 text-sm font-semibold tracking-[0.01em] text-black transition-[background-color,transform] duration-200 hover:scale-[1.03] hover:bg-white/85 active:scale-[0.98]"
                 >
                   Hablar con KOOB
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                  />
                 </Link>
               </motion.div>
             </motion.div>

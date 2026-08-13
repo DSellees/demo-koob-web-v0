@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navLinks = [
   { label: 'Inicio', href: '/' },
   {
-    label: 'Consultoría empresarial',
+    label: 'Consultoría',
     href: '/que-hacemos',
     children: [
       { label: 'KOOB Reimpulso', href: '/reimpulso', desc: 'Transformación empresarial urgente' },
@@ -14,8 +14,8 @@ const navLinks = [
     ],
   },
   { label: 'Quiénes somos', href: '/quienes-somos' },
-  { label: 'Equipo de consultores', href: '/equipo' },
-  { label: 'Recursos para empresas', href: '/insights' },
+  { label: 'Equipo', href: '/equipo' },
+  { label: 'Recursos', href: '/insights' },
   { label: 'Podcast', href: '/podcast' },
   { label: 'Contacto', href: '/contacto' },
 ];

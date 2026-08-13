@@ -10,7 +10,7 @@ interface SeoMetaProps {
 const SeoMeta = ({ title, description, url, ogImage = 'https://koobadvisory.com/og-image.png' }: SeoMetaProps) => {
   return (
     <Helmet>
-      <title>{title}</title>
+      <title>KOOB</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
       <meta property="og:title" content={title} />
