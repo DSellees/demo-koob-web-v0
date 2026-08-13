@@ -6,8 +6,10 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        accent: ['Iowan Old Style', 'Baskerville', 'Times New Roman', 'serif'],
       },
       colors: {
+        black: '#0c0c0c',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -43,7 +45,7 @@ module.exports = {
         },
         koob: {
           white: '#ffffff',
-          black: '#000000',
+          black: '#0c0c0c',
           gray: {
             900: '#1a1a1a',
             700: '#4a4a4a',
@@ -55,6 +57,7 @@ module.exports = {
           beige: '#f8f6f3',
           'beige-strong': '#ede8e1',
           gold: '#DCCEC2',
+          'gold-ink': '#7E5E44',
         },
       },
       borderRadius: {

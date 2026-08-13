@@ -25,10 +25,10 @@ const ContactCTA = () => {
   };
 
   return (
-    <section id="contacto" className="py-20 lg:py-32 bg-black text-white">
-      <div className="w-full px-6 lg:px-12 xl:px-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16">
+    <section id="contacto" className="section-space-compact bg-black text-white">
+      <div className="page-container">
+        <div className="content-container">
+          <div className="grid gap-section lg:grid-cols-2">
 
             {/* Left - CTA */}
             <motion.div
@@ -40,7 +40,7 @@ const ContactCTA = () => {
               <motion.p variants={staggerItem} className="text-sm font-medium text-koob-gold uppercase tracking-wider mb-4">
                 Contacto
               </motion.p>
-              <motion.h2 variants={staggerItem} className="text-3xl lg:text-4xl font-semibold mb-6">
+              <motion.h2 variants={staggerItem} className="type-section-title-compact mb-6">
                 El cambio empieza con una conversación
               </motion.h2>
               <motion.p variants={staggerItem} className="text-gray-400 leading-relaxed mb-8">
@@ -114,7 +114,7 @@ const ContactCTA = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-6 bg-white/5 border border-white/10"
+                  className="border-hairline-dark border bg-white/5 p-6"
                 >
                   <h4 className="text-lg font-semibold mb-2">Mensaje recibido</h4>
                   <p className="text-gray-400 text-sm leading-relaxed">
@@ -135,7 +135,7 @@ const ContactCTA = () => {
                       required
                       value={formData.nombre}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500"
+                      className="border-hairline-dark w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
                       placeholder="Tu nombre"
                     />
                   </motion.div>
@@ -151,7 +151,7 @@ const ContactCTA = () => {
                       required
                       value={formData.empresa}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500"
+                      className="border-hairline-dark w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
                       placeholder="Nombre de tu empresa"
                     />
                   </motion.div>
@@ -167,7 +167,7 @@ const ContactCTA = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500"
+                      className="border-hairline-dark w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
                       placeholder="tu@empresa.com"
                     />
                   </motion.div>
@@ -183,7 +183,7 @@ const ContactCTA = () => {
                       rows={4}
                       value={formData.mensaje}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-koob-gold focus:outline-none transition-colors text-white placeholder-gray-500 resize-none"
+                      className="border-hairline-dark w-full resize-none border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
                       placeholder="Breve descripción de los retos de tu empresa..."
                     />
                   </motion.div>
@@ -196,7 +196,7 @@ const ContactCTA = () => {
                     Enviar mensaje
                   </motion.button>
 
-                  <motion.p variants={staggerItem} className="text-xs text-gray-500 text-center">
+                  <motion.p variants={staggerItem} className="text-xs text-gray-400 text-center">
                     Al enviar aceptas nuestra{' '}
                     <Link to="/privacidad" className="underline hover:text-white transition-colors">
                       política de privacidad

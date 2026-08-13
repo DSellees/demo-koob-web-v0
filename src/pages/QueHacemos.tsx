@@ -76,7 +76,7 @@ const areas = [
 
 const QueHacemos = () => {
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="Qué hacemos — KOOB Advisory | Consultoría estratégica para empresas"
         description="Consultoría multidisciplinar para empresas: transformación empresarial, KOOB Reimpulso, RRHH estratégico, comunicación interna, cultura organizativa y ecosistema de expertos."
@@ -85,9 +85,9 @@ const QueHacemos = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="page-intro-space bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial="hidden"
@@ -122,9 +122,9 @@ const QueHacemos = () => {
       </section>
 
       {/* Intro editorial */}
-      <section className="py-20 lg:py-24 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section-space-editorial-lead bg-black text-white">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -145,9 +145,9 @@ const QueHacemos = () => {
       </section>
 
       {/* Grid de áreas */}
-      <section className="py-20 lg:py-32">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -179,7 +179,7 @@ const QueHacemos = () => {
                   className={`p-8 border transition-all duration-300 group relative overflow-hidden ${
                     area.highlight
                       ? 'border-koob-gold bg-black text-white'
-                      : 'border-gray-200 hover:border-black bg-white'
+                      : 'border-hairline-light hover:border-black bg-white'
                   }`}
                 >
                   {area.highlight && (
@@ -243,9 +243,9 @@ const QueHacemos = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 lg:py-32 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section-space-compact bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navLinks = [
   { label: 'Inicio', href: '/' },
   {
-    label: 'Qué hacemos',
+    label: 'Consultoría empresarial',
     href: '/que-hacemos',
     children: [
       { label: 'KOOB Reimpulso', href: '/reimpulso', desc: 'Transformación empresarial urgente' },
@@ -14,8 +14,8 @@ const navLinks = [
     ],
   },
   { label: 'Quiénes somos', href: '/quienes-somos' },
-  { label: 'Equipo', href: '/equipo' },
-  { label: 'Insights', href: '/insights' },
+  { label: 'Equipo de consultores', href: '/equipo' },
+  { label: 'Recursos para empresas', href: '/insights' },
   { label: 'Contacto', href: '/contacto' },
 ];
 
@@ -39,21 +39,21 @@ const Navigation = () => {
   const isActive = (href: string) => location.pathname === href;
 
   const navBg = isScrolled || isMobileMenuOpen
-    ? 'bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm'
+    ? 'bg-white/95 backdrop-blur-sm border-b border-hairline-light shadow-sm'
     : 'bg-transparent';
 
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
+        <div className="page-container">
+          <div className="nav-height flex w-full items-center justify-between">
+            {/* Logo — +20% */}
             <Link to="/" className="flex items-center flex-shrink-0">
-              <img src="./logo-koob-black.svg" alt="KOOB Advisory" className="h-8 w-auto" />
+              <img src="./logo-koob-black.svg" alt="KOOB Advisory" className="h-[3.3rem] w-auto" />
             </Link>
 
-            {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-6">
+            {/* Desktop Nav — resto de contenido +8% */}
+            <div className="hidden lg:flex items-center gap-[1.62rem]">
               {navLinks.map((link) =>
                 link.children ? (
                   <div
@@ -63,12 +63,12 @@ const Navigation = () => {
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <button
-                      className={`flex items-center gap-1 text-sm transition-colors duration-200 cursor-pointer ${
+                      className={`flex items-center gap-1 text-[0.945rem] transition-colors duration-200 cursor-pointer ${
                         isActive(link.href) ? 'text-black font-medium' : 'text-gray-600 hover:text-black'
                       }`}
                     >
                       {link.label}
-                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-[0.945rem] h-[0.945rem] transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
                     </button>
 
                     <AnimatePresence>
@@ -78,17 +78,17 @@ const Navigation = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 6 }}
                           transition={{ duration: 0.18 }}
-                          className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg overflow-hidden"
+                          className="absolute top-full left-0 mt-2 w-64 bg-white border border-hairline-light shadow-lg overflow-hidden"
                         >
                           {link.children.map((child) => (
                             <Link
                               key={child.label}
                               to={child.href}
-                              className="flex flex-col px-5 py-4 hover:bg-koob-beige transition-colors border-b border-gray-100 last:border-0"
+                              className="flex flex-col px-5 py-4 hover:bg-koob-beige transition-colors border-b border-hairline-subtle last:border-0"
                             >
                               <span className="text-sm font-medium text-black">{child.label}</span>
                               {child.desc && (
-                                <span className="text-xs text-gray-400 mt-0.5">{child.desc}</span>
+                                <span className="text-xs text-koob-gray-500 mt-0.5">{child.desc}</span>
                               )}
                             </Link>
                           ))}
@@ -100,7 +100,7 @@ const Navigation = () => {
                   <Link
                     key={link.label}
                     to={link.href}
-                    className={`text-sm transition-colors duration-200 ${
+                    className={`text-[0.945rem] transition-colors duration-200 ${
                       isActive(link.href) ? 'text-black font-medium' : 'text-gray-600 hover:text-black'
                     }`}
                   >
@@ -114,7 +114,7 @@ const Navigation = () => {
             <div className="hidden lg:flex items-center">
               <Link
                 to="/reimpulso"
-                className="px-5 py-2.5 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors"
+                className="px-[1.35rem] py-[0.675rem] border border-black bg-black text-white text-[0.945rem] font-bold hover:bg-koob-gray-900 transition-colors"
               >
                 KOOB Reimpulso
               </Link>
@@ -136,7 +136,7 @@ const Navigation = () => {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.15 }}
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-[1.62rem] h-[1.62rem]" />
                   </motion.span>
                 ) : (
                   <motion.span
@@ -146,7 +146,7 @@ const Navigation = () => {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.15 }}
                   >
-                    <Menu className="w-6 h-6" />
+                    <Menu className="w-[1.62rem] h-[1.62rem]" />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -184,7 +184,7 @@ const Navigation = () => {
                   <Link
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block py-3 text-3xl font-medium transition-colors border-b border-gray-100 ${
+                    className={`block py-3 text-3xl font-medium transition-colors border-b border-hairline-subtle ${
                       isActive(link.href) ? 'text-black' : 'text-gray-700 hover:text-black'
                     }`}
                   >
@@ -197,7 +197,7 @@ const Navigation = () => {
                           key={child.label}
                           to={child.href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="block py-2 text-base text-gray-500 hover:text-black transition-colors"
+                          className="block py-2 text-base text-koob-gray-700 hover:text-black transition-colors"
                         >
                           {child.label}
                         </Link>
@@ -214,7 +214,7 @@ const Navigation = () => {
                 <Link
                   to="/contacto"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full px-8 py-4 bg-black text-white font-medium text-center text-lg hover:bg-gray-800 transition-colors"
+                  className="block w-full px-8 py-4 border border-black text-black font-medium text-center text-lg hover:bg-black hover:text-white transition-colors"
                 >
                   Hablemos de tu empresa
                 </Link>

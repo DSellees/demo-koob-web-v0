@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-06T00:00:00.000Z",
+  "title": "Design System: KOOB Advisory",
+  "extensions": {
+    "colorMeta": {
+      "ink-black": { "role": "primary", "displayName": "Negro Tinta", "canonical": "#000000", "tonalRamp": ["#000000", "#1a1a1a", "#4a4a4a", "#6b6b6b", "#9a9a9a", "#d1d1d1", "#f5f5f5", "#ffffff"] },
+      "blush-champagne": { "role": "secondary", "displayName": "Blush Champán", "canonical": "#DCCEC2", "tonalRamp": ["#3a2f28", "#5c4b40", "#8a7266", "#b39d90", "#DCCEC2", "#e8ddd4", "#f2ece5", "#faf7f3"] },
+      "blush-champagne-ink": { "role": "secondary", "displayName": "Blush Champán Tinta", "canonical": "#7E5E44" },
+      "warm-beige": { "role": "neutral", "displayName": "Beige Cálido", "canonical": "#f8f6f3", "tonalRamp": ["#3d3a35", "#5e5850", "#8f867a", "#c2b9ad", "#ede8e1", "#f8f6f3", "#fbf9f7", "#ffffff"] },
+      "warm-beige-strong": { "role": "neutral", "displayName": "Beige Fuerte", "canonical": "#ede8e1" },
+      "charcoal-900": { "role": "neutral", "displayName": "Grafito 900", "canonical": "#1a1a1a" },
+      "graphite-700": { "role": "neutral", "displayName": "Grafito 700", "canonical": "#4a4a4a" },
+      "slate-500": { "role": "neutral", "displayName": "Pizarra 500", "canonical": "#6b6b6b" },
+      "mist-300": { "role": "neutral", "displayName": "Niebla 300", "canonical": "#d1d1d1" },
+      "fog-100": { "role": "neutral", "displayName": "Niebla 100", "canonical": "#f5f5f5" },
+      "paper-white": { "role": "neutral", "displayName": "Blanco Papel", "canonical": "#ffffff" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titular de Hero únicamente." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección (h2)." },
+      "body": { "displayName": "Body", "purpose": "Párrafo principal, 65-75ch máximo." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows y micro-etiquetas en mayúscula." }
+    },
+    "shadows": [
+      { "name": "nav-scrolled", "value": "0 1px 2px rgba(0,0,0,0.05)", "purpose": "Nav al hacer scroll, junto con bg-white/95 y backdrop-blur." },
+      { "name": "dropdown-open", "value": "0 10px 15px rgba(0,0,0,0.1)", "purpose": "Menú desplegable de navegación abierto." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Easing por defecto para fadeUp/slideLeft/slideRight/scaleIn/staggerItem." },
+      { "name": "duration-standard", "value": "0.65s", "purpose": "Duración de entradas principales (fadeUp, slide)." },
+      { "name": "duration-quick", "value": "0.18s-0.2s", "purpose": "Transiciones de estado: dropdown, hover de color." },
+      { "name": "stagger-children", "value": "0.1s", "purpose": "Retardo entre elementos de una lista animada en conjunto." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA principal sobre fondo claro (Hero, formularios).",
+      "html": "<a href=\"#\" class=\"ds-btn-primary\">Pide tu diagnóstico</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #000000; color: #ffffff; padding: 16px 28px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; border: none; border-radius: 0; transition: background 0.2s; } .ds-btn-primary:hover { background: #1a1a1a; } .ds-btn-primary:focus-visible { outline: 2px solid #000000; outline-offset: 2px; }"
+    },
+    {
+      "name": "Inverted Button",
+      "kind": "button",
+      "refersTo": "button-inverted",
+      "description": "CTA sobre fondo negro (sección Contacto) — hover es el único punto donde el acento cubre un botón entero.",
+      "html": "<a href=\"#\" class=\"ds-btn-inverted\">Ver formulario completo</a>",
+      "css": ".ds-btn-inverted { display: inline-flex; align-items: center; gap: 8px; background: #ffffff; color: #000000; padding: 16px 32px; font-size: 14px; font-weight: 500; border: none; border-radius: 0; transition: background 0.2s; } .ds-btn-inverted:hover { background: #DCCEC2; }"
+    },
+    {
+      "name": "Ghost Link",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Enlace secundario sin fondo, subrayado.",
+      "html": "<a href=\"#\" class=\"ds-link-ghost\">Quiénes somos</a>",
+      "css": ".ds-link-ghost { color: #6b6b6b; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s; } .ds-link-ghost:hover { color: #000000; }"
+    },
+    {
+      "name": "Dark Input",
+      "kind": "input",
+      "refersTo": "input-dark",
+      "description": "Campo de formulario sobre fondo negro (Contacto).",
+      "html": "<input class=\"ds-input-dark\" type=\"text\" placeholder=\"Tu nombre\" />",
+      "css": ".ds-input-dark { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; border-radius: 0; transition: border-color 0.2s; } .ds-input-dark::placeholder { color: #6b6b6b; } .ds-input-dark:focus { border-color: #DCCEC2; outline: none; }"
+    },
+    {
+      "name": "Eyebrow Label (on dark)",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Micro-etiqueta en mayúscula sobre fondo negro/grafito — blush champán puro, 13.65:1.",
+      "html": "<p class=\"ds-eyebrow\">Contacto</p>",
+      "css": ".ds-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #DCCEC2; }"
+    },
+    {
+      "name": "Eyebrow Label (on light)",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Micro-etiqueta en mayúscula sobre fondo beige o blanco — usa koob-gold-ink (#7E5E44), no el blush champán puro (falla AA: 1.4-1.5:1 medido).",
+      "html": "<p class=\"ds-eyebrow-light\">Servicios</p>",
+      "css": ".ds-eyebrow-light { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #7E5E44; }"
+    },
+    {
+      "name": "Section Block",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Bloque de color a borde de sección con separador de 1px, en vez de tarjeta flotante individual.",
+      "html": "<div class=\"ds-block\"><p class=\"ds-eyebrow\">Servicios</p><h3 class=\"ds-block-title\">KOOB Reimpulso</h3><p class=\"ds-block-body\">Visión estratégica y acompañamiento ejecutivo.</p></div>",
+      "css": ".ds-block { background: #1a1a1a; color: #ffffff; padding: 40px; border-right: 1px solid rgba(220,206,194,0.2); } .ds-block-title { font-size: 24px; font-weight: 600; margin: 12px 0; } .ds-block-body { color: #9ca3af; line-height: 1.7; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Mesa sin Paredes",
+    "overview": "KOOB no tiene oficina fija ni estructura tradicional de consultora: reúne especialistas de dirección real en torno a un mismo proyecto, como quien se sienta a una mesa a hablar claro. El sistema visual traduce eso literalmente: sobriedad ejecutiva en negro, blanco y beige cálido — nunca fría ni distante — con esquinas siempre rectas (nada se \"suaviza\" para parecer amable) y bloques de color de borde a borde en vez de tarjetas encajonadas. La cercanía no viene de curvas ni de decoración, viene de la claridad: mucho aire, tipografía directa, un único acento blush-champán que aparece con moderación.\n\nEl sistema rechaza explícitamente la estética de consultora de stock (azules corporativos, iconografía de gráficos ascendentes, fotografía genérica de oficina) y el andamiaje SaaS/startup (gradientes, hero-metrics, glassmorphism, tarjetas idénticas repetidas). Tampoco usa nunca cifras, porcentajes o estadísticas como argumento — la autoridad se transmite por trayectoria y lenguaje, no por números en pantalla.",
+    "keyCharacteristics": [
+      "Paleta neutra (negro / blanco / beige cálido) con un único acento blush-champán, nunca dorado saturado ni corporativo.",
+      "Radius cero en todo el sistema: cada botón, input y bloque termina en esquina recta.",
+      "Secciones que invierten a fondo negro completo (no tarjetas oscuras) para marcar los momentos de mayor peso.",
+      "Plano en reposo; una sombra sutil solo aparece como respuesta a scroll o interacción.",
+      "Bloques de color a borde de sección, separados por líneas de 1px, en vez de tarjetas con sombra individual."
+    ],
+    "rules": [
+      { "name": "La Regla del Acento Único", "body": "El blush champán no decora superficies; marca un único punto de atención por vista (una etiqueta, un hover, un borde). Si aparece dos veces compitiendo en la misma composición, hay que retirar una.", "section": "colors" },
+      { "name": "La Regla del Tracking Negativo", "body": "Todo titular (display/headline) lleva letter-spacing negativo (-0.02em a -0.025em); nunca positivo. El tracking positivo (0.2em) queda reservado exclusivamente a los labels en mayúscula.", "section": "typography" },
+      { "name": "La Regla del Reposo Plano", "body": "Ningún elemento en su estado por defecto lleva sombra. Una sombra solo se justifica como reacción a scroll, hover o apertura — nunca como estética de \"tarjeta flotante\" permanente.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar radius 0 en absolutamente todo: botones, inputs, bloques de color, imágenes recortadas.",
+      "Do invertir secciones completas a negro (no tarjetas oscuras) para marcar los momentos de mayor peso comunicativo.",
+      "Do reservar el blush champán (#DCCEC2) para un único punto de atención por vista.",
+      "Do mantener el cuerpo de texto en pizarra-500/gray-400 y verificar contraste AA en cada combinación fondo/texto.",
+      "Do transmitir autoridad mediante trayectoria y lenguaje concreto — nunca con cifras o estadísticas."
+    ],
+    "donts": [
+      "Don't usar azul corporativo, iconografía de gráficos ascendentes ni fotografía de stock de oficina.",
+      "Don't introducir gradientes, hero-metrics, glassmorphism decorativo ni tarjetas idénticas repetidas.",
+      "Don't redondear ninguna esquina, ni siquiera \"un poco\".",
+      "Don't añadir sombras decorativas permanentes a botones o tarjetas en reposo.",
+      "Don't mostrar ningún número, porcentaje, año o estadística como argumento comercial.",
+      "Don't usar tono de venta agresiva o urgencia artificial en CTAs."
+    ]
+  }
+}

@@ -35,7 +35,7 @@ const principios = [
 
 const Equipo = () => {
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="Equipo — KOOB Advisory"
         description="Profesionales senior con experiencia real en dirección de empresas. Cada proyecto liderado por quien conoce los retos desde dentro."
@@ -44,9 +44,9 @@ const Equipo = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="page-intro-space bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -68,9 +68,9 @@ const Equipo = () => {
       </section>
 
       {/* Cómo trabajamos */}
-      <section className="py-20 lg:py-32">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -120,9 +120,9 @@ const Equipo = () => {
       </section>
 
       {/* Ecosistema de expertos */}
-      <section className="py-20 lg:py-32 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section-space-compact bg-black text-white">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -144,9 +144,9 @@ const Equipo = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 lg:py-32 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section-space-compact bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"

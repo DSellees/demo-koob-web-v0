@@ -16,7 +16,7 @@ const Insights = () => {
     : insights;
 
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="Insights — KOOB Advisory | Ideas para empresas en cambio"
         description="Reflexiones y análisis sobre transformación empresarial, liderazgo, cultura organizativa y gestión del cambio. El conocimiento de quienes lo han vivido desde dentro."
@@ -25,9 +25,9 @@ const Insights = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto">
+      <section className="page-intro-space bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container-medium">
             <motion.p
               initial="hidden"
               animate="visible"
@@ -60,9 +60,9 @@ const Insights = () => {
       </section>
 
       {/* Filtros por categoría */}
-      <section className="py-8 border-b border-gray-200 sticky top-[72px] bg-white z-30">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="border-hairline-light utility-bar-space sticky top-[72px] z-30 border-b bg-white">
+        <div className="page-container">
+          <div className="content-container">
             <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
               <button
                 onClick={() => setActiveCategory(null)}
@@ -93,9 +93,9 @@ const Insights = () => {
       </section>
 
       {/* Grid de artículos */}
-      <section className="py-16 lg:py-24">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-editorial">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               key={activeCategory}
               initial="hidden"
@@ -109,7 +109,7 @@ const Insights = () => {
                   variants={staggerItem}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.2 }}
-                  className="group border border-gray-200 hover:border-black transition-colors duration-300 overflow-hidden"
+                  className="border-hairline-light group overflow-hidden border transition-colors duration-300 hover:border-black"
                 >
                   {/* Image placeholder */}
                   <div className="aspect-[16/9] bg-gray-100 overflow-hidden">
@@ -165,8 +165,8 @@ const Insights = () => {
 
       {/* CTA */}
       <section className="py-20 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"

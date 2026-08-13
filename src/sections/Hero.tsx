@@ -2,32 +2,33 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Linkedin, Instagram, Youtube } from 'lucide-react';
+import InlineArrowLink from '../components/InlineArrowLink';
 import YouTubeEmbed from '../components/YouTubeEmbed';
 import { fadeUp, staggerContainer, staggerItem, scaleIn } from '../lib/animations';
 
 const pillars = [
-  { title: 'Experiencia ejecutiva real', desc: 'Profesionales que han dirigido empresas y equipos' },
-  { title: 'Acompañamiento en la ejecución', desc: 'No solo diagnóstico, sino implantación real' },
-  { title: 'Enfoque práctico', desc: 'Soluciones aplicables al día a día de tu empresa' },
+  { title: 'Dirección estratégica', desc: 'Alineamos objetivos, prioridades y decisiones' },
+  { title: 'Ejecución del plan', desc: 'Implantamos los cambios junto al equipo directivo' },
+  { title: 'Crecimiento empresarial', desc: 'Soluciones prácticas para avanzar con control' },
 ];
 
 const Hero = () => {
   return (
-    <section id="inicio" className="relative bg-koob-beige h-screen flex flex-col pt-20 overflow-hidden">
+    <section id="inicio" className="relative bg-koob-beige flex flex-col pt-24 lg:pt-20 lg:h-screen overflow-hidden">
 
       {/* Main row */}
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-col lg:flex-row lg:flex-1 lg:min-h-0">
 
         {/* LEFT: social strip + text content */}
-        <div className="flex w-[46%] min-w-0">
+        <div className="relative flex w-full lg:w-[50%] min-w-0">
 
-          {/* Social strip */}
-          <aside className="hidden lg:flex flex-col items-center justify-center w-16 xl:w-20 shrink-0 gap-5">
+          {/* Social strip — posicionada de forma absoluta: no desplaza el texto, vive dentro del mismo margen que el nav */}
+          <aside className="hidden lg:flex flex-col items-center justify-center gap-5 absolute left-0 top-1/2 -translate-y-1/2 lg:w-12 xl:w-20">
             <div className="flex flex-col items-center gap-5">
               <a
                 href="https://www.linkedin.com/company/koob-advisory/"
                 target="_blank" rel="noopener noreferrer"
-                className="text-gray-400 hover:text-black transition-colors duration-200"
+                className="text-koob-gray-500 hover:text-black transition-colors duration-200"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -35,7 +36,7 @@ const Hero = () => {
               <a
                 href="https://www.instagram.com/koob.advisory/"
                 target="_blank" rel="noopener noreferrer"
-                className="text-gray-400 hover:text-black transition-colors duration-200"
+                className="text-koob-gray-500 hover:text-black transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -43,23 +44,23 @@ const Hero = () => {
               <a
                 href="https://www.youtube.com/@KOOB_ADVISORY"
                 target="_blank" rel="noopener noreferrer"
-                className="text-gray-400 hover:text-black transition-colors duration-200"
+                className="text-koob-gray-500 hover:text-black transition-colors duration-200"
                 aria-label="YouTube"
               >
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
             <span
-              className="text-[10px] font-medium text-gray-400 tracking-[0.25em] uppercase select-none mt-3"
+              className="type-micro-label text-koob-gray-500 select-none mt-3"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
-              Social Media
+              Conecta
             </span>
           </aside>
 
-          {/* Text content — centrado verticalmente */}
+          {/* Text content — centrado verticalmente y con una segunda capa de aire respecto al borde */}
           <motion.div
-            className="flex-1 flex flex-col justify-center px-8 lg:px-10 xl:px-14"
+            className="flex-1 flex flex-col justify-center pr-6 sm:pr-8 lg:pr-10 xl:pr-10 pl-8 sm:pl-12 lg:pl-[calc(var(--layout-gutter)+1.5rem)]"
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
@@ -67,69 +68,62 @@ const Hero = () => {
             {/* Eyebrow label */}
             <motion.p
               variants={staggerItem}
-              className="text-xs font-semibold text-koob-gold uppercase tracking-[0.2em] mb-5"
+              className="type-eyebrow text-koob-gold-ink mb-6"
             >
-              Partner estratégico de transformación
+              Consultoría estratégica para pymes
             </motion.p>
 
             {/* Headline — bold, authoritative */}
             <motion.h1
               variants={fadeUp}
-              className="text-[2.6rem] sm:text-5xl xl:text-[3.75rem] font-bold text-black leading-[1.0] tracking-tight mb-6"
+              className="type-display-hero text-black mb-8"
             >
-              Reimpulsa<br />tu empresa<br />cuando más lo necesita
+              Recupera el control.<br />Reimpulsa tu empresa.
             </motion.h1>
 
             {/* Body — lg size for readability */}
             <motion.p
               variants={fadeUp}
-              className="text-lg text-gray-500 leading-relaxed mb-8 max-w-sm"
+              className="type-lead-flagship text-koob-gray-700 mb-10 max-w-xl"
             >
-              Acompañamos a empresas en momentos de transformación y cambio.
-              Experiencia ejecutiva real, implicación directa en la ejecución.
+              Trabajamos junto a propietarios y equipos directivos para detectar bloqueos,
+              tomar decisiones con claridad e implantar los cambios que la empresa necesita.
             </motion.p>
 
             {/* CTA block */}
-            <motion.div variants={fadeUp} className="flex flex-col gap-3">
-              <div className="flex items-center gap-4">
-                {/* Primary CTA — solid, high contrast */}
-                <Link
-                  to="/contacto"
-                  className="inline-flex items-center gap-2 px-7 py-4 bg-black text-white text-sm font-semibold tracking-wide hover:bg-gray-900 transition-colors duration-200 cursor-pointer"
-                >
-                  Pide tu diagnóstico
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+            <motion.div variants={fadeUp} className="flex items-stretch gap-4 self-start">
+              {/* Primary CTA — solid, high contrast — 70% */}
+              <Link
+                to="/contacto"
+                className="type-button-prominent inline-flex items-center gap-2 px-8 2xl:px-10 py-[1.125rem] 2xl:py-5 bg-black text-white hover:bg-gray-900 transition-colors duration-200 cursor-pointer"
+              >
+                Solicita un diagnóstico
+                <ArrowRight className="w-5 h-5" />
+              </Link>
 
-                {/* Ghost link */}
-                <Link
-                  to="/quienes-somos"
-                  className="text-sm text-gray-500 hover:text-black transition-colors duration-200 underline underline-offset-4 cursor-pointer"
-                >
-                  Quiénes somos
-                </Link>
-              </div>
-
-              {/* Trust line */}
-              <p className="text-xs text-gray-400 tracking-wide">
-                Consulta inicial · Sin compromiso · Totalmente confidencial
-              </p>
+              {/* Secondary CTA — outlined, mismo estilo que "KOOB Reimpulso" — 30% */}
+              <Link
+                to="/quienes-somos"
+                className="type-button-prominent inline-flex items-center justify-center px-5 2xl:px-7 py-[1.125rem] 2xl:py-5 border border-black text-black hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer"
+              >
+                Cómo trabajamos
+              </Link>
             </motion.div>
           </motion.div>
 
         </div>
 
-        {/* RIGHT: video 5:4 alineado a la izquierda de su columna */}
+        {/* Video 5:4 — visible en todos los breakpoints; a la derecha en desktop, apilado debajo del texto en mobile/tablet */}
         <motion.div
-          className="hidden lg:flex items-center justify-start w-[54%] px-6 xl:px-8 py-28"
+          className="flex items-center justify-center px-6 pb-10 lg:w-[50%] lg:pl-2 lg:pr-12 xl:pl-3 xl:pr-20 lg:pb-0"
           initial="hidden"
           animate="visible"
           variants={scaleIn}
           transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <div
-            className="relative bg-gray-900 overflow-hidden shadow-xl"
-            style={{ aspectRatio: '5/4', height: '100%', maxWidth: '100%' }}
+            className="relative bg-gray-900 overflow-hidden shadow-xl w-full lg:w-auto"
+            style={{ aspectRatio: '3/2', maxWidth: '100%', height: 'min(34rem, 78%)' }}
           >
             <YouTubeEmbed videoId="gwcGSkRZ1YM" title="KOOB Advisory — Quiénes somos" />
           </div>
@@ -137,8 +131,41 @@ const Hero = () => {
 
       </div>
 
-      {/* BOTTOM: barra negra parcial + enlace a la derecha */}
-      <div className="relative h-28">
+      {/* BOTTOM: pilares — apilados en mobile/tablet, barra negra parcial + enlace en desktop */}
+
+      {/* Mobile/tablet: pilares apilados a ancho completo */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+        className="lg:hidden bg-black divide-y divide-hairline-dark"
+      >
+        {pillars.map((p) => (
+          <motion.div
+            key={p.title}
+            variants={staggerItem}
+            className="strip-cell-space group flex items-start justify-between gap-3 hover:bg-white/5 transition-colors duration-200 cursor-pointer"
+          >
+            <div>
+              <div className="w-5 h-px bg-koob-gold mb-3" />
+              <p className="type-strip-title text-white mb-1">{p.title}</p>
+              <p className="type-strip-copy text-gray-400">{p.desc}</p>
+            </div>
+            <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200 shrink-0 mt-3" />
+          </motion.div>
+        ))}
+        <Link
+          to="/que-hacemos"
+          className="strip-cell-space flex items-center justify-center gap-3 group cursor-pointer"
+        >
+          <span className="type-strip-action text-gray-400 group-hover:text-white transition-colors duration-200">Ver servicios de consultoría</span>
+          <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200" />
+        </Link>
+      </motion.div>
+
+      {/* Desktop: barra negra parcial + enlace a la derecha */}
+      <div className="relative h-28 hidden lg:block">
 
         {/* Barra negra — esquina cortada top-right */}
         <motion.div
@@ -151,17 +178,17 @@ const Hero = () => {
             clipPath: 'polygon(0 0, calc(100% - 44px) 0, 100% 44px, 100% 100%, 0 100%)',
           }}
         >
-          <div className="grid grid-cols-3 h-full divide-x divide-white/10">
+          <div className="grid grid-cols-3 h-full divide-x divide-hairline-dark">
             {pillars.map((p) => (
               <motion.div
                 key={p.title}
                 variants={staggerItem}
-                className="group flex items-start justify-between gap-3 px-5 xl:px-8 py-5 hover:bg-white/5 transition-colors duration-200 cursor-pointer"
+                className="strip-cell-space group flex items-start justify-between gap-3 hover:bg-white/5 transition-colors duration-200 cursor-pointer"
               >
                 <div>
                   <div className="w-5 h-px bg-koob-gold mb-3" />
-                  <p className="text-sm font-semibold text-white mb-1 leading-tight">{p.title}</p>
-                  <p className="text-xs text-gray-400 leading-relaxed">{p.desc}</p>
+                  <p className="type-strip-title text-white mb-1">{p.title}</p>
+                  <p className="type-strip-copy text-gray-400">{p.desc}</p>
                 </div>
                 <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200 shrink-0 mt-3" />
               </motion.div>
@@ -169,15 +196,13 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Ver servicios — pegado a la izquierda, justo tras la barra negra */}
-        <Link
+        {/* Ver servicios de consultoría — pegado a la izquierda, justo tras la barra negra */}
+        <InlineArrowLink
           to="/que-hacemos"
-          className="absolute left-[calc(63%+3rem)] top-1/2 -translate-y-1/2 flex items-center gap-3 group cursor-pointer"
+          className="absolute left-[calc(63%+3rem)] top-1/2 -translate-y-1/2"
         >
-          <span className="text-sm text-gray-500 tracking-wide group-hover:text-black transition-colors duration-200">Ver servicios</span>
-          <div className="w-16 h-px bg-gray-300 group-hover:bg-black transition-colors duration-200" />
-          <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-black group-hover:translate-x-0.5 transition-all duration-200" />
-        </Link>
+          Ver servicios de consultoría
+        </InlineArrowLink>
 
       </div>
 

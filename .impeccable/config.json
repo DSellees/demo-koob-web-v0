@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "reason": "Inter-only is CLAUDE.md's explicit, intentional font policy; confirmed false positive in landing-page critique",
+        "createdAt": "2026-07-06T14:56:22.039Z"
+      }
+    ]
+  }
+}

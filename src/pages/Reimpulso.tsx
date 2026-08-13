@@ -83,7 +83,7 @@ const diagnosticFases = [
 
 const Reimpulso = () => {
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="KOOB Reimpulso — Consultoría estratégica de transformación empresarial"
         description="Acompañamiento ejecutivo real para empresas que necesitan recuperar el foco, ordenar prioridades y activar cambios. No venimos a decirte qué hacer. Venimos a hacerlo contigo."
@@ -95,7 +95,7 @@ const Reimpulso = () => {
       <section className="relative min-h-[85vh] flex items-center bg-black text-white pt-20 overflow-hidden">
         <div className="absolute left-0 top-0 h-full w-1 bg-koob-gold opacity-60" />
 
-        <div className="w-full px-6 lg:px-12 xl:px-20">
+        <div className="page-container">
           <div className="max-w-5xl mx-auto">
             <motion.p
               initial="hidden"
@@ -158,9 +158,9 @@ const Reimpulso = () => {
       </section>
 
       {/* ─── ¿Es este el momento? ─── */}
-      <section className="py-20 lg:py-32 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -189,7 +189,7 @@ const Reimpulso = () => {
             >
               <motion.div
                 variants={staggerItem}
-                className="bg-white p-8 border border-gray-200 hover:border-black transition-colors duration-300"
+                className="border-hairline-light border bg-white p-8 transition-colors duration-300 hover:border-black"
               >
                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-4">
                   Tensión en resultados
@@ -217,7 +217,7 @@ const Reimpulso = () => {
 
               <motion.div
                 variants={staggerItem}
-                className="bg-white p-8 border border-gray-200 hover:border-black transition-colors duration-300"
+                className="border-hairline-light border bg-white p-8 transition-colors duration-300 hover:border-black"
               >
                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-4">
                   Potencial sin desarrollar
@@ -248,9 +248,9 @@ const Reimpulso = () => {
       </section>
 
       {/* ─── Metodología ─── */}
-      <section className="py-20 lg:py-32 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact bg-black text-white">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -300,7 +300,7 @@ const Reimpulso = () => {
               whileInView="visible"
               viewport={viewportOnce}
               variants={fadeUp}
-              className="mt-16 pt-16 border-t border-white/10"
+              className="border-hairline-dark mt-16 border-t pt-16"
             >
               <blockquote className="text-2xl lg:text-3xl font-medium text-white/80 italic leading-relaxed max-w-4xl">
                 "Porque los momentos críticos no se resuelven con informes.
@@ -312,9 +312,9 @@ const Reimpulso = () => {
       </section>
 
       {/* ─── Por qué KOOB / Áreas de actuación ─── */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact bg-white">
+        <div className="page-container">
+          <div className="content-container">
             <div className="grid lg:grid-cols-2 gap-16 mb-16">
               <motion.div
                 initial="hidden"
@@ -356,7 +356,7 @@ const Reimpulso = () => {
                   variants={staggerItem}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.2 }}
-                  className="p-8 border border-gray-200 hover:border-black hover:shadow-sm transition-all duration-300 group"
+                  className="border-hairline-light group border p-8 transition-all duration-300 hover:border-black hover:shadow-sm"
                 >
                   <div className="w-12 h-12 bg-gray-50 flex items-center justify-center mb-6 group-hover:bg-black transition-colors duration-300">
                     <servicio.icon className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors duration-300" />
@@ -371,9 +371,9 @@ const Reimpulso = () => {
       </section>
 
       {/* ─── Cómo empezamos ─── */}
-      <section className="py-20 lg:py-32 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -404,7 +404,7 @@ const Reimpulso = () => {
                 <motion.div
                   key={fase.title}
                   variants={staggerItem}
-                  className="bg-white p-8 border border-gray-200"
+                  className="border-hairline-light border bg-white p-8"
                 >
                   <p className="text-xs font-medium text-koob-gold uppercase tracking-wider mb-3">
                     {fase.step}
@@ -438,9 +438,9 @@ const Reimpulso = () => {
       </section>
 
       {/* ─── CTA Final ─── */}
-      <section className="py-24 lg:py-40 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section-space-feature bg-black text-white">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"

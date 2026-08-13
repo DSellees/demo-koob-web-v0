@@ -27,7 +27,7 @@ const Contacto = () => {
   };
 
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="Contacto — KOOB Advisory"
         description="Hablemos de lo que necesita tu empresa. Contacta con KOOB Advisory para una primera conversación sin compromiso."
@@ -36,9 +36,9 @@ const Contacto = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto">
+      <section className="page-intro-space bg-black text-white">
+        <div className="page-container">
+          <div className="content-container-medium">
             <motion.p
               initial="hidden"
               animate="visible"
@@ -71,9 +71,9 @@ const Contacto = () => {
       </section>
 
       {/* Formulario + datos */}
-      <section className="py-20 lg:py-32">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact">
+        <div className="page-container">
+          <div className="content-container">
             <div className="grid lg:grid-cols-2 gap-16">
 
               {/* Formulario */}
@@ -91,7 +91,7 @@ const Contacto = () => {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-8 bg-koob-beige border border-gray-200"
+                    className="border-hairline-light border bg-koob-beige p-8"
                   >
                     <h3 className="text-xl font-semibold text-black mb-3">Mensaje recibido</h3>
                     <p className="text-gray-600 leading-relaxed">
@@ -217,7 +217,7 @@ const Contacto = () => {
                   <div className="space-y-4">
                     <a
                       href="mailto:info@koobadvisory.com"
-                      className="flex items-center gap-4 p-4 border border-gray-200 hover:border-black transition-colors group"
+                      className="border-hairline-light group flex items-center gap-4 border p-4 transition-colors hover:border-black"
                     >
                       <div className="w-10 h-10 bg-gray-50 flex items-center justify-center group-hover:bg-black transition-colors">
                         <Mail className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
@@ -229,7 +229,7 @@ const Contacto = () => {
                     </a>
                     <a
                       href="tel:+34609483114"
-                      className="flex items-center gap-4 p-4 border border-gray-200 hover:border-black transition-colors group"
+                      className="border-hairline-light group flex items-center gap-4 border p-4 transition-colors hover:border-black"
                     >
                       <div className="w-10 h-10 bg-gray-50 flex items-center justify-center group-hover:bg-black transition-colors">
                         <Phone className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
@@ -243,7 +243,7 @@ const Contacto = () => {
                       href="https://wa.me/34609483114?text=Hola,%20me%20gustaría%20hablar%20con%20KOOB."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 border border-gray-200 hover:border-black transition-colors group"
+                      className="border-hairline-light group flex items-center gap-4 border p-4 transition-colors hover:border-black"
                     >
                       <div className="w-10 h-10 bg-gray-50 flex items-center justify-center group-hover:bg-black transition-colors">
                         <MessageCircle className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
@@ -270,7 +270,7 @@ const Contacto = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={label}
-                        className="w-12 h-12 border border-gray-200 flex items-center justify-center text-gray-500 hover:border-black hover:text-black transition-colors"
+                        className="border-hairline-light flex h-12 w-12 items-center justify-center border text-gray-500 transition-colors hover:border-black hover:text-black"
                       >
                         <Icon className="w-5 h-5" />
                       </a>

@@ -23,7 +23,7 @@ const InsightPost = () => {
     .filter((line) => line.trim() !== '');
 
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title={`${post.title} — KOOB Insights`}
         description={post.excerpt}
@@ -32,9 +32,9 @@ const InsightPost = () => {
       <Navigation />
 
       {/* Hero del artículo */}
-      <section className="pt-32 pb-16 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-3xl mx-auto">
+      <section className="page-intro-space-article bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container-narrow">
             {/* Breadcrumb */}
             <motion.nav
               initial="hidden"
@@ -92,9 +92,9 @@ const InsightPost = () => {
       </div>
 
       {/* Contenido */}
-      <article className="py-16 lg:py-24">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-3xl mx-auto">
+      <article className="section-space-editorial">
+        <div className="page-container">
+          <div className="content-container-narrow">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -144,7 +144,7 @@ const InsightPost = () => {
                 whileInView="visible"
                 viewport={viewportOnce}
                 variants={fadeUp}
-                className="mt-12 pt-8 border-t border-gray-200 flex flex-wrap gap-2"
+                className="border-hairline-light mt-12 flex flex-wrap gap-2 border-t pt-8"
               >
                 {post.tags.map((tag) => (
                   <span
@@ -188,9 +188,9 @@ const InsightPost = () => {
 
       {/* Artículos relacionados */}
       {related.length > 0 && (
-        <section className="py-16 lg:py-24 bg-koob-beige">
-          <div className="w-full px-6 lg:px-12 xl:px-20">
-            <div className="max-w-7xl mx-auto">
+        <section className="section-space-editorial bg-koob-beige">
+          <div className="page-container">
+            <div className="content-container">
               <motion.h2
                 initial="hidden"
                 whileInView="visible"
@@ -213,7 +213,7 @@ const InsightPost = () => {
                     variants={staggerItem}
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.2 }}
-                    className="bg-white border border-gray-200 hover:border-black transition-colors duration-300 p-8"
+                    className="border-hairline-light border bg-white p-8 transition-colors duration-300 hover:border-black"
                   >
                     <p className="text-xs font-medium text-koob-gold uppercase tracking-wider mb-3">
                       {rel.category}
@@ -240,9 +240,9 @@ const InsightPost = () => {
       )}
 
       {/* Volver */}
-      <div className="py-8 border-t border-gray-200">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-3xl mx-auto">
+      <div className="border-hairline-light utility-bar-space border-t">
+        <div className="page-container">
+          <div className="content-container-narrow">
             <Link
               to="/insights"
               className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-black transition-colors"

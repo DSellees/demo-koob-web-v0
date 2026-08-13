@@ -12,13 +12,13 @@ section {
 
 /* Custom focus styles */
 *:focus-visible {
-  outline: 2px solid #000000;
+  outline: 2px solid var(--koob-black);
   outline-offset: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: #000000;
+  background: var(--koob-black);
   color: #ffffff;
 }
 

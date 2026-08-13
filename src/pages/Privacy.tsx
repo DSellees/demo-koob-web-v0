@@ -4,7 +4,7 @@ import SeoMeta from '../components/SeoMeta';
 
 const Privacy = () => {
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="Política de Privacidad — KOOB Advisory"
         description="Información sobre cómo KOOB Advisory protege tu privacidad y trata tus datos personales."
@@ -12,9 +12,9 @@ const Privacy = () => {
       />
       <Navigation />
 
-      <section className="pt-32 pb-20">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-3xl mx-auto">
+      <section className="page-intro-space">
+        <div className="page-container">
+          <div className="content-container-narrow">
             <h1 className="text-4xl font-semibold text-black mb-8">Política de Privacidad</h1>
 
             <div className="prose prose-sm max-w-none text-gray-600 space-y-6">

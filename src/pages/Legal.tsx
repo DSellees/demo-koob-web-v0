@@ -4,7 +4,7 @@ import SeoMeta from '../components/SeoMeta';
 
 const Legal = () => {
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="Aviso Legal — KOOB Advisory"
         description="Información legal y términos de uso del sitio web de KOOB Advisory."
@@ -12,9 +12,9 @@ const Legal = () => {
       />
       <Navigation />
 
-      <section className="pt-32 pb-20">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-3xl mx-auto">
+      <section className="page-intro-space">
+        <div className="page-container">
+          <div className="content-container-narrow">
             <h1 className="text-4xl font-semibold text-black mb-8">Aviso Legal</h1>
 
             <div className="prose prose-sm max-w-none text-gray-600 space-y-6">

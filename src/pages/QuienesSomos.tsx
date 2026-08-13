@@ -53,7 +53,7 @@ const sectores = [
 
 const QuienesSomos = () => {
   return (
-    <div className="relative bg-white min-h-screen">
+    <div className="page-root">
       <SeoMeta
         title="Quiénes Somos — KOOB Advisory"
         description="Somos una consultoría multidisciplinar con experiencia real en dirección de empresas. Conocemos los retos porque los hemos vivido desde dentro."
@@ -62,9 +62,9 @@ const QuienesSomos = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="page-intro-space bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial="hidden"
@@ -112,9 +112,9 @@ const QuienesSomos = () => {
       </section>
 
       {/* Quiénes somos */}
-      <section className="py-20 lg:py-32">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact">
+        <div className="page-container">
+          <div className="content-container">
             <div className="grid lg:grid-cols-2 gap-16">
               <motion.div
                 initial="hidden"
@@ -175,9 +175,9 @@ const QuienesSomos = () => {
       </section>
 
       {/* Valores */}
-      <section className="py-20 lg:py-32 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact bg-black text-white">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -216,9 +216,9 @@ const QuienesSomos = () => {
       </section>
 
       {/* Sectores */}
-      <section className="py-20 lg:py-32 bg-koob-beige">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-7xl mx-auto">
+      <section className="section-space-compact bg-koob-beige">
+        <div className="page-container">
+          <div className="content-container">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -248,7 +248,7 @@ const QuienesSomos = () => {
                   variants={staggerItem}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.2 }}
-                  className="bg-white p-8 border border-gray-200 hover:border-black transition-colors duration-300"
+                  className="border-hairline-light border bg-white p-8 transition-colors duration-300 hover:border-black"
                 >
                   <h3 className="text-xl font-semibold text-black mb-4">{sector.name}</h3>
                   <p className="text-gray-600 leading-relaxed">{sector.description}</p>
@@ -260,9 +260,9 @@ const QuienesSomos = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 lg:py-32 bg-black text-white">
-        <div className="w-full px-6 lg:px-12 xl:px-20">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section-space-compact bg-black text-white">
+        <div className="page-container">
+          <div className="content-container-medium text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"

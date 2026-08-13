@@ -2,38 +2,152 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-variable-italic.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --foreground: 0 0% 4.7%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 0 0% 4.7%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 0 0% 0%;
+    --popover-foreground: 0 0% 4.7%;
+    --primary: 0 0% 4.7%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary-foreground: 0 0% 4.7%;
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
     --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 0%;
+    --accent-foreground: 0 0% 4.7%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 0% 0%;
+    --ring: 0 0% 4.7%;
     --radius: 0rem;
 
     /* KOOB Corporate Colors */
     --koob-white: #ffffff;
-    --koob-black: #000000;
+    --koob-black: #0c0c0c;
     --koob-gray-900: #1a1a1a;
     --koob-gray-700: #4a4a4a;
     --koob-gray-500: #6b6b6b;
     --koob-gray-300: #d1d1d1;
     --koob-gray-100: #f5f5f5;
     --koob-beige: #f8f6f3;
+
+    /* KOOB layout system — Header/Navigation is the gutter reference */
+    --layout-gutter: 1.5rem;
+    --layout-content-max: 80rem;
+    --layout-content-medium: 56rem;
+    --layout-content-narrow: 48rem;
+    --layout-nav-height: 5.4rem;
+
+    --page-intro-top: 8rem;
+    --page-intro-bottom: 5rem;
+    --page-intro-article-bottom: 4rem;
+    --section-y: 6rem;
+    --section-y-compact: 5rem;
+    --section-y-editorial: 4rem;
+    --section-y-editorial-lead: 5rem;
+    --section-y-feature: 6rem;
+    --section-y-intro: 5rem;
+    --section-y-footer: 4rem;
+    --section-y-viewport: 4rem;
+    --utility-bar-y: 2rem;
+
+    --gap-actions: 1rem;
+    --gap-grid: 1.5rem;
+    --gap-wide: 3rem;
+    --gap-section: 4rem;
+    --gap-row: 1rem;
+    --gap-section-content: 3rem;
+    --gap-section-heading: 3.5rem;
+    --gap-section-heading-stacked: 4rem;
+    --gap-section-heading-large: 5rem;
+    --gap-title-lead: 1.5rem;
+
+    --module-padding: 2rem;
+    --module-padding-compact: 1.75rem;
+    --module-padding-grid: 2rem;
+    --module-padding-large: 2.5rem;
+
+    --line-light: #e5e7eb;
+    --line-light-subtle: #f3f4f6;
+    --line-light-strong: var(--koob-gray-300);
+    --line-ink: rgb(0 0 0 / 0.1);
+    --line-dark: rgb(255 255 255 / 0.1);
+    --line-width: 1px;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --section-y-intro: 6rem;
+      --module-padding-compact: 2rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --gap-wide: 3rem;
+      --gap-section-content: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --layout-gutter: 3rem;
+      --section-y: 9rem;
+      --section-y-compact: 8rem;
+      --section-y-editorial: 6rem;
+      --section-y-editorial-lead: 6rem;
+      --section-y-feature: 10rem;
+      --section-y-viewport: 2rem;
+      --gap-wide: 5rem;
+      --gap-row: 2rem;
+      --gap-section-content: 4rem;
+      --module-padding: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    :root {
+      --layout-gutter: 5rem;
+      --section-y-intro: 7rem;
+    }
+  }
+
+  @media (min-width: 1024px) and (min-height: 800px) {
+    :root {
+      --section-y-viewport: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) and (min-height: 1000px) {
+    :root {
+      --section-y-viewport: 4rem;
+    }
+  }
+
+  @media (min-width: 1024px) and (min-height: 1300px) {
+    :root {
+      --section-y-viewport: 6rem;
+    }
   }
 }
 
@@ -44,6 +158,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--layout-nav-height) + 1rem);
   }
 
   body {
@@ -63,6 +178,494 @@
   }
 }
 
+/*
+ * KOOB semantic type system
+ *
+ * HTML headings describe the document hierarchy. These classes describe only
+ * the visual role, so a product display can remain an SEO-correct h2.
+ * Colors, spacing, widths and alignment stay in each component.
+ */
+@layer components {
+  /*
+   * KOOB semantic layout system
+   *
+   * The Navigation establishes the global gutter. Section roles control
+   * vertical rhythm; component-specific compositions remain local.
+   */
+  .page-container {
+    width: 100%;
+    padding-inline: var(--layout-gutter);
+  }
+
+  .page-root {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: clip;
+    background-color: var(--koob-white);
+  }
+
+  .content-container {
+    width: 100%;
+    max-width: var(--layout-content-max);
+    margin-inline: auto;
+  }
+
+  .content-container-medium {
+    width: 100%;
+    max-width: var(--layout-content-medium);
+    margin-inline: auto;
+  }
+
+  .content-container-narrow {
+    width: 100%;
+    max-width: var(--layout-content-narrow);
+    margin-inline: auto;
+  }
+
+  .content-measure-narrow {
+    max-width: var(--layout-content-narrow);
+  }
+
+  .nav-height {
+    height: var(--layout-nav-height);
+  }
+
+  .page-intro-space {
+    padding-top: var(--page-intro-top);
+    padding-bottom: var(--page-intro-bottom);
+  }
+
+  .page-intro-space-article {
+    padding-top: var(--page-intro-top);
+    padding-bottom: var(--page-intro-article-bottom);
+  }
+
+  .section-space {
+    padding-block: var(--section-y);
+  }
+
+  .section-space-compact {
+    padding-block: var(--section-y-compact);
+  }
+
+  .section-space-editorial {
+    padding-block: var(--section-y-editorial);
+  }
+
+  .section-space-editorial-lead {
+    padding-block: var(--section-y-editorial-lead);
+  }
+
+  .section-space-feature {
+    padding-block: var(--section-y-feature);
+  }
+
+  .section-space-intro {
+    padding-block: var(--section-y-intro);
+  }
+
+  .section-space-viewport {
+    padding-block: var(--section-y-viewport);
+  }
+
+  .footer-space {
+    padding-block: var(--section-y-footer);
+  }
+
+  .utility-bar-space {
+    padding-block: var(--utility-bar-y);
+  }
+
+  .section-content-gap {
+    margin-top: var(--gap-section-content);
+  }
+
+  .section-heading-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-grid);
+    margin-bottom: var(--gap-section-heading);
+  }
+
+  .section-heading-gap {
+    margin-bottom: var(--gap-section-heading-stacked);
+  }
+
+  .section-heading-gap-large {
+    margin-bottom: var(--gap-section-heading-large);
+  }
+
+  .title-lead-gap {
+    margin-top: var(--gap-title-lead);
+  }
+
+  .gap-actions {
+    gap: var(--gap-actions);
+  }
+
+  .gap-grid {
+    gap: var(--gap-grid);
+  }
+
+  .gap-wide {
+    gap: var(--gap-wide);
+  }
+
+  .gap-section {
+    gap: var(--gap-section);
+  }
+
+  .section-separation-before {
+    margin-top: var(--gap-section);
+  }
+
+  .section-separation-after {
+    margin-bottom: var(--gap-section);
+  }
+
+  .gap-row {
+    gap: var(--gap-row);
+  }
+
+  .module-padding {
+    padding: var(--module-padding);
+  }
+
+  .module-padding-compact {
+    padding: var(--module-padding-compact);
+  }
+
+  .module-padding-grid {
+    padding: var(--module-padding-grid);
+  }
+
+  .module-padding-large {
+    padding: var(--module-padding-large);
+  }
+
+  .strip-cell-space {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .list-row-space {
+    display: flex;
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+  }
+
+  .grid-frame-light {
+    border-top: var(--line-width) solid var(--line-light-strong);
+    border-left: var(--line-width) solid var(--line-light-strong);
+  }
+
+  .grid-cell-light {
+    border-right: var(--line-width) solid var(--line-light-strong);
+    border-bottom: var(--line-width) solid var(--line-light-strong);
+  }
+
+  .border-hairline-light {
+    border-color: var(--line-light);
+  }
+
+  .border-hairline-subtle {
+    border-color: var(--line-light-subtle);
+  }
+
+  .border-hairline-strong {
+    border-color: var(--line-light-strong);
+  }
+
+  .border-hairline-ink {
+    border-color: var(--line-ink);
+  }
+
+  .border-hairline-dark {
+    border-color: var(--line-dark);
+  }
+
+  .divide-hairline-light > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--line-light);
+  }
+
+  .divide-hairline-subtle > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--line-light-subtle);
+  }
+
+  .divide-hairline-dark > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--line-dark);
+  }
+
+  .bg-hairline-light {
+    background-color: var(--line-light);
+  }
+
+  .bg-hairline-strong {
+    background-color: var(--line-light-strong);
+  }
+
+  .bg-hairline-dark {
+    background-color: var(--line-dark);
+  }
+
+  @media (min-width: 1024px) {
+    .section-heading-row {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .strip-cell-space {
+      padding-inline: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .strip-cell-space {
+      padding-inline: 2rem;
+    }
+  }
+
+  .type-micro-label {
+    font-size: 0.625rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .type-eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .type-display-hero {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .type-display-flagship {
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  .type-section-title {
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .type-section-title-compact {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 2.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .type-section-title-compact-centered {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .type-lead-flagship {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: normal;
+  }
+
+  .type-inline-link {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.025em;
+  }
+
+  .type-module-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .type-product-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .type-module-body {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: normal;
+  }
+
+  .type-card-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .type-card-body {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.625;
+    letter-spacing: normal;
+  }
+
+  .type-card-heading-small {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .type-card-heading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.375;
+    letter-spacing: -0.02em;
+  }
+
+  .type-card-heading-medium {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.375;
+    letter-spacing: -0.02em;
+  }
+
+  .type-card-heading-large {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.375;
+    letter-spacing: -0.02em;
+  }
+
+  .type-body-small {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.625;
+    letter-spacing: normal;
+  }
+
+  .type-button {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    letter-spacing: normal;
+  }
+
+  .type-button-prominent {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    letter-spacing: 0.025em;
+  }
+
+  .type-strip-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: normal;
+  }
+
+  .type-strip-copy {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.625;
+    letter-spacing: normal;
+  }
+
+  .type-strip-action {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.025em;
+  }
+
+  @media (min-width: 640px) {
+    .type-display-hero {
+      font-size: 2.9rem;
+    }
+
+    .type-display-flagship {
+      font-size: 3rem;
+    }
+
+    .type-inline-link {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    .type-card-title {
+      font-size: 1.875rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .type-display-flagship {
+      font-size: 3.75rem;
+    }
+
+    .type-section-title {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .type-section-title-compact {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+
+    .type-section-title-compact-centered {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+
+    .type-card-heading {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .type-display-hero {
+      font-size: clamp(3.1rem, 3.5vw, 4.25rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .type-display-flagship {
+      font-size: clamp(3.75rem, 4.2vw, 4.5rem);
+    }
+
+    .type-module-body {
+      font-size: 1.0625rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .type-button-prominent {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -71,13 +674,13 @@
 
 /* Selection */
 ::selection {
-  background: #000000;
+  background: var(--koob-black);
   color: #ffffff;
 }
 
 /* Focus styles */
 *:focus-visible {
-  outline: 2px solid #000000;
+  outline: 2px solid var(--koob-black);
   outline-offset: 2px;
 }
 
@@ -91,7 +694,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #000000;
+  background: var(--koob-black);
 }
 
 /* Reduced motion */
