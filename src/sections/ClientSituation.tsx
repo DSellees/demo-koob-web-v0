@@ -95,7 +95,7 @@ const ClientSituation = () => {
                 </div>
                 <InlineArrowLink
                   to="/contacto"
-                  className="!text-black hover:!bg-koob-gold flex items-center justify-center bg-white px-6 text-base font-bold transition-colors"
+                  className="!text-black flex items-center justify-center bg-white px-6 text-base font-bold hover:!bg-white/85 hover:scale-[1.03] active:scale-[0.98] transition-[background-color,transform] duration-200"
                   style={{ aspectRatio: '16/4' }}
                 >
                   Solicita un diagnóstico

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -44,13 +44,13 @@ const AutodiagnosticoModal = ({ open, onClose }: AutodiagnosticoModalProps) => {
 
   const hasProgress = step > 0 && step < TOTAL_STEPS - 1;
 
-  const requestClose = () => {
+  const requestClose = useCallback(() => {
     if (hasProgress) {
       setConfirmingClose(true);
     } else {
       onClose();
     }
-  };
+  }, [hasProgress, onClose]);
 
   useEffect(() => {
     if (!open) return;
@@ -63,7 +63,7 @@ const AutodiagnosticoModal = ({ open, onClose }: AutodiagnosticoModalProps) => {
       document.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = '';
     };
-  }, [open, hasProgress]);
+  }, [open, requestClose]);
 
   const selectAnswer = () => {
     setTimeout(() => setStep((s) => s + 1), 200);
@@ -145,7 +145,7 @@ const AutodiagnosticoModal = ({ open, onClose }: AutodiagnosticoModalProps) => {
                       <button
                         type="button"
                         onClick={() => setConfirmingClose(false)}
-                        className="bg-black px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-gray-900"
+                        className="bg-black px-7 py-4 text-sm font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-koob-gray-900 hover:scale-[1.03] active:scale-[0.98]"
                       >
                         Seguir con el autodiagnóstico
                       </button>
@@ -263,7 +263,7 @@ const AutodiagnosticoModal = ({ open, onClose }: AutodiagnosticoModalProps) => {
 
                       <button
                         type="submit"
-                        className="mt-2 bg-black px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-gray-900"
+                        className="mt-2 bg-black px-7 py-4 text-sm font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-koob-gray-900 hover:scale-[1.03] active:scale-[0.98]"
                       >
                         Recibir mi diagnóstico
                       </button>
@@ -301,7 +301,7 @@ const AutodiagnosticoModal = ({ open, onClose }: AutodiagnosticoModalProps) => {
                     <button
                       type="button"
                       onClick={onClose}
-                      className="mt-6 self-start bg-black px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-gray-900"
+                      className="mt-6 self-start bg-black px-7 py-4 text-sm font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-koob-gray-900 hover:scale-[1.03] active:scale-[0.98]"
                     >
                       Cerrar
                     </button>

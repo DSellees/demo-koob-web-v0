@@ -4,11 +4,12 @@ import { Play } from 'lucide-react';
 interface YouTubeEmbedProps {
   videoId: string;
   title: string;
+  posterSrc?: string;
 }
 
-const YouTubeEmbed = ({ videoId, title }: YouTubeEmbedProps) => {
+const YouTubeEmbed = ({ videoId, title, posterSrc }: YouTubeEmbedProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const thumbnailUrl = posterSrc ?? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   if (isLoaded) {
     return (

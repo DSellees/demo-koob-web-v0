@@ -29,7 +29,7 @@ const InsightPost = () => {
         description={post.excerpt}
         url={`https://koobadvisory.com/insights/${post.slug}`}
       />
-      <Navigation />
+      <Navigation variant="dark" />
 
       {/* Hero del artículo */}
       <section className="page-intro-space-article bg-koob-beige">

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
 import AutodiagnosticoModal from '../components/AutodiagnosticoModal';
+import SweepArrowLink from '../components/SweepArrowLink';
 
 const drawVariants = (duration: number, delay: number, ease: 'linear' | readonly [number, number, number, number] = 'linear') => ({
   hidden: { strokeDashoffset: 600 },
@@ -27,23 +27,6 @@ const popVariants = (duration: number, delay: number) => ({
   },
 });
 
-const ArrowLinkIcon = () => (
-  <svg
-    aria-hidden="true"
-    className="h-4 w-7 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
-    viewBox="0 0 32 20"
-    fill="none"
-  >
-    <path
-      d="M1 10H30M24 4L30 10L24 16"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="square"
-      strokeLinejoin="miter"
-    />
-  </svg>
-);
-
 const ReimpulsoFlagshipCards = () => {
   const [autodiagnosticoOpen, setAutodiagnosticoOpen] = useState(false);
 
@@ -62,7 +45,7 @@ const ReimpulsoFlagshipCards = () => {
             variants={staggerContainer}
             className="mb-12"
           >
-            <motion.p variants={staggerItem} className="type-eyebrow text-[0.95rem] text-koob-gold-ink mb-5">
+            <motion.p variants={staggerItem} className="type-eyebrow mb-0 text-[0.95rem] text-koob-gold-ink">
               Nuestro servicio insignia
             </motion.p>
             <div className="grid items-end gap-wide lg:grid-cols-[3fr_2fr]">
@@ -72,7 +55,7 @@ const ReimpulsoFlagshipCards = () => {
                 className="text-black"
               >
                 <span className="type-display-flagship block">KOOB Reimpulso</span>
-                <span className="type-section-title mt-3 block">
+                <span className="type-section-title mt-1 block text-[1.55rem] leading-tight lg:text-[2.1rem]">
                   Foco y dirección para la empresa
                 </span>
               </motion.h2>
@@ -80,16 +63,9 @@ const ReimpulsoFlagshipCards = () => {
                 <p className="text-pretty text-[1.05rem] leading-relaxed text-koob-gray-700 max-w-xl mb-3">
                   Cuando los resultados se tensan o las oportunidades crecen sin una dirección clara, ayudamos a tu empresa a volver a avanzar.
                 </p>
-                <Link
-                  to="/reimpulso"
-                  className="type-inline-link group relative inline-flex items-center overflow-hidden text-black transition-colors duration-300 hover:text-white"
-                >
-                  <span className="absolute inset-0 origin-left scale-x-0 bg-black transition-transform duration-300 group-hover:scale-x-100" />
-                  <span className="relative flex items-center gap-2 py-3 pl-0 pr-5 transition-[padding-left] duration-300 group-hover:pl-5">
-                    <span>Conocer KOOB Reimpulso</span>
-                    <ArrowLinkIcon />
-                  </span>
-                </Link>
+                <SweepArrowLink to="/reimpulso" variant="light">
+                  Conocer KOOB Reimpulso
+                </SweepArrowLink>
               </motion.div>
             </div>
           </motion.div>
@@ -104,8 +80,11 @@ const ReimpulsoFlagshipCards = () => {
             {/* Left column: two diagnostic cards */}
             <div className="flex flex-col gap-3">
               <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
                 variants={staggerItem}
-                className="flex min-h-[10rem] flex-col border border-black/15 p-6 sm:p-7 lg:flex-1"
+                className="flex min-h-[10rem] flex-col border border-black/15 bg-white/60 p-6 sm:p-7 lg:flex-1"
               >
                 <div>
                   <span className="text-2xl font-bold tracking-[0.05em] text-koob-gold-ink">01</span>
@@ -171,8 +150,11 @@ const ReimpulsoFlagshipCards = () => {
               </motion.div>
 
               <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
                 variants={staggerItem}
-                className="flex min-h-[10rem] flex-col border border-black/15 p-6 sm:p-7 lg:flex-1"
+                className="flex min-h-[10rem] flex-col border border-black/15 bg-white/60 p-6 sm:p-7 lg:flex-1"
               >
                 <div>
                   <span className="text-2xl font-bold tracking-[0.05em] text-koob-gold-ink">02</span>
@@ -294,6 +276,9 @@ const ReimpulsoFlagshipCards = () => {
 
             {/* Middle column: black flagship card */}
             <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
               variants={fadeUp}
               className="relative flex min-h-[25rem] flex-col overflow-hidden border border-black bg-black p-6 text-white sm:p-7 lg:min-h-full lg:p-8"
             >
@@ -336,8 +321,11 @@ const ReimpulsoFlagshipCards = () => {
             {/* Right column: outcome card + autodiagnóstico CTA card */}
             <div className="flex flex-col gap-3 lg:h-full">
               <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
                 variants={staggerItem}
-                className="flex flex-col border border-black/15 p-6 sm:p-7 lg:basis-[30%] lg:justify-center"
+                className="flex flex-col border border-black/15 bg-white/60 p-6 sm:p-7 lg:basis-[30%] lg:justify-center"
               >
                 <p className="type-eyebrow text-[0.8rem] text-koob-gold-ink">Autodiagnóstico</p>
                 <h3 className="mt-3 text-xl font-bold leading-tight tracking-[-0.03em]">
@@ -347,22 +335,22 @@ const ReimpulsoFlagshipCards = () => {
                   Responde a unas preguntas sobre tu situación y recibe una lectura inicial de si este servicio encaja contigo.
                 </p>
 
-                <button
-                  type="button"
+                <SweepArrowLink
                   onClick={() => setAutodiagnosticoOpen(true)}
-                  className="type-inline-link group relative -mx-6 -mb-6 mt-5 flex items-center overflow-hidden border-t border-black/15 text-black transition-colors duration-300 hover:text-white sm:-mx-7 sm:-mb-7"
+                  variant="light"
+                  layout="block"
+                  className="-mx-6 -mb-6 mt-5 border-t border-black/15 sm:-mx-7 sm:-mb-7"
                 >
-                  <span className="absolute inset-0 origin-left scale-x-0 bg-black transition-transform duration-300 group-hover:scale-x-100" />
-                  <span className="relative flex w-full items-center justify-between gap-2 px-6 py-3.5 sm:px-7">
-                    <span>Empezar el autodiagnóstico</span>
-                    <ArrowLinkIcon />
-                  </span>
-                </button>
+                  Empezar el autodiagnóstico
+                </SweepArrowLink>
               </motion.div>
 
               <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
                 variants={staggerItem}
-                className="flex min-h-[10rem] flex-col justify-center border border-black/15 p-6 sm:p-7 lg:basis-[70%]"
+                className="flex min-h-[10rem] flex-col justify-center border border-black/15 bg-white/60 p-6 sm:p-7 lg:basis-[70%]"
               >
                 <div className="space-y-6">
                   {[

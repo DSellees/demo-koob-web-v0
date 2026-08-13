@@ -7,6 +7,17 @@
     <meta name="description" content="Consultoría multidisciplinar de dirección y transformación para empresas que necesitan recuperar crecimiento, rentabilidad y dirección estratégica." />
     <meta name="theme-color" content="#0c0c0c" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <script>
+      const pagesRedirect = sessionStorage.getItem('koob-pages-redirect');
+      if (pagesRedirect) {
+        sessionStorage.removeItem('koob-pages-redirect');
+        const projectBase = '/demo-koob-web-v0';
+        const route = pagesRedirect.startsWith(projectBase)
+          ? pagesRedirect.slice(projectBase.length) || '/'
+          : pagesRedirect;
+        window.history.replaceState(null, '', `${projectBase}${route}`);
+      }
+    </script>
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />

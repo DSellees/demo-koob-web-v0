@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, Instagram, Youtube, Mail, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
+import { OPEN_PREFERENCES_EVENT } from '../components/CookieConsent';
+import SocialLinks from '../components/SocialLinks';
 
 const Footer = () => {
   return (
@@ -11,41 +13,13 @@ const Footer = () => {
             {/* Logo & Description */}
             <div className="lg:col-span-2">
               <Link to="/" className="flex items-center mb-4">
-                <img src="./logo-koob-black.svg" alt="KOOB Advisory" className="h-6 w-auto" />
+                <img src={`${import.meta.env.BASE_URL}logo-koob-black.svg`} alt="KOOB Advisory" className="h-9 w-auto" />
               </Link>
               <p className="text-sm text-koob-gray-700 leading-relaxed mb-4 max-w-xs">
                 Consultoría estratégica para empresas en momentos de transformación, crecimiento
                 y cambio. Experiencia ejecutiva real, implicación directa.
               </p>
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://www.linkedin.com/company/koob-advisory/?viewAsMember=true"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-koob-gray-500 hover:text-black transition-colors"
-                  aria-label="LinkedIn KOOB Advisory"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://www.instagram.com/koob.advisory/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-koob-gray-500 hover:text-black transition-colors"
-                  aria-label="Instagram KOOB Advisory"
-                >
-                  <Instagram className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://www.youtube.com/@KOOB_ADVISORY"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-koob-gray-500 hover:text-black transition-colors"
-                  aria-label="YouTube KOOB Advisory"
-                >
-                  <Youtube className="w-4 h-4" />
-                </a>
-              </div>
+              <SocialLinks gapClassName="gap-4" iconClassName="w-5 h-5" />
             </div>
 
             {/* Servicios */}
@@ -152,6 +126,13 @@ const Footer = () => {
               <Link to="/cookies" className="text-xs text-koob-gray-500 hover:text-black transition-colors">
                 Cookies
               </Link>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_PREFERENCES_EVENT))}
+                className="text-xs text-koob-gray-500 hover:text-black transition-colors"
+              >
+                Preferencias de cookies
+              </button>
             </div>
           </div>
         </div>

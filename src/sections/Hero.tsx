@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Linkedin, Instagram, Youtube } from 'lucide-react';
 import InlineArrowLink from '../components/InlineArrowLink';
 import YouTubeEmbed from '../components/YouTubeEmbed';
+import SocialLinks from '../components/SocialLinks';
 import { fadeUp, staggerContainer, staggerItem, scaleIn } from '../lib/animations';
 
 const pillars = [
@@ -24,32 +24,7 @@ const Hero = () => {
 
           {/* Social strip — posicionada de forma absoluta: no desplaza el texto, vive dentro del mismo margen que el nav */}
           <aside className="hidden lg:flex flex-col items-center justify-center gap-5 absolute left-0 top-1/2 -translate-y-1/2 lg:w-12 xl:w-20">
-            <div className="flex flex-col items-center gap-5">
-              <a
-                href="https://www.linkedin.com/company/koob-advisory/"
-                target="_blank" rel="noopener noreferrer"
-                className="text-koob-gray-500 hover:text-black transition-colors duration-200"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.instagram.com/koob.advisory/"
-                target="_blank" rel="noopener noreferrer"
-                className="text-koob-gray-500 hover:text-black transition-colors duration-200"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.youtube.com/@KOOB_ADVISORY"
-                target="_blank" rel="noopener noreferrer"
-                className="text-koob-gray-500 hover:text-black transition-colors duration-200"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
-            </div>
+            <SocialLinks gapClassName="flex-col gap-5" />
             <span
               className="type-micro-label text-koob-gray-500 select-none mt-3"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
@@ -95,7 +70,7 @@ const Hero = () => {
               {/* Primary CTA — solid, high contrast — 70% */}
               <Link
                 to="/contacto"
-                className="type-button-prominent inline-flex items-center gap-2 px-8 2xl:px-10 py-[1.125rem] 2xl:py-5 bg-black text-white hover:bg-gray-900 transition-colors duration-200 cursor-pointer"
+                className="type-button-prominent inline-flex items-center gap-2 px-8 2xl:px-10 py-[1.125rem] 2xl:py-5 bg-black text-white hover:bg-koob-gray-900 hover:scale-[1.03] active:scale-[0.98] transition-[background-color,transform] duration-200 cursor-pointer"
               >
                 Solicita un diagnóstico
                 <ArrowRight className="w-5 h-5" />
@@ -125,7 +100,11 @@ const Hero = () => {
             className="relative bg-gray-900 overflow-hidden shadow-xl w-full lg:w-auto"
             style={{ aspectRatio: '3/2', maxWidth: '100%', height: 'min(34rem, 78%)' }}
           >
-            <YouTubeEmbed videoId="gwcGSkRZ1YM" title="KOOB Advisory — Quiénes somos" />
+            <YouTubeEmbed
+              videoId="gwcGSkRZ1YM"
+              title="KOOB Advisory — Quiénes somos"
+              posterSrc={`${import.meta.env.BASE_URL}images/portada-video-josep-manel-ventosa-koob.png`}
+            />
           </div>
         </motion.div>
 

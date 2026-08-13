@@ -16,14 +16,20 @@ const navLinks = [
   { label: 'Quiénes somos', href: '/quienes-somos' },
   { label: 'Equipo de consultores', href: '/equipo' },
   { label: 'Recursos para empresas', href: '/insights' },
+  { label: 'Podcast', href: '/podcast' },
   { label: 'Contacto', href: '/contacto' },
 ];
 
-const Navigation = () => {
+interface NavigationProps {
+  variant?: 'light' | 'dark';
+}
+
+const Navigation = ({ variant = 'light' }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const isDark = variant === 'dark';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
@@ -32,15 +38,20 @@ const Navigation = () => {
   }, []);
 
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setOpenDropdown(null);
+    const frame = window.requestAnimationFrame(() => {
+      setIsMobileMenuOpen(false);
+      setOpenDropdown(null);
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [location.pathname]);
 
   const isActive = (href: string) => location.pathname === href;
 
-  const navBg = isScrolled || isMobileMenuOpen
-    ? 'bg-white/95 backdrop-blur-sm border-b border-hairline-light shadow-sm'
-    : 'bg-transparent';
+  const navBg = isDark
+    ? 'bg-black border-b border-white/10'
+    : isScrolled || isMobileMenuOpen
+      ? 'bg-white/95 backdrop-blur-sm border-b border-hairline-light shadow-sm'
+      : 'bg-white border-b border-hairline-light';
 
   return (
     <>
@@ -49,7 +60,11 @@ const Navigation = () => {
           <div className="nav-height flex w-full items-center justify-between">
             {/* Logo — +20% */}
             <Link to="/" className="flex items-center flex-shrink-0">
-              <img src="./logo-koob-black.svg" alt="KOOB Advisory" className="h-[3.3rem] w-auto" />
+              <img
+                src={`${import.meta.env.BASE_URL}logo-koob-black.svg`}
+                alt="KOOB Advisory"
+                className={`h-[3.3rem] w-auto ${isDark ? 'invert' : ''}`}
+              />
             </Link>
 
             {/* Desktop Nav — resto de contenido +8% */}
@@ -64,7 +79,9 @@ const Navigation = () => {
                   >
                     <button
                       className={`flex items-center gap-1 text-[0.945rem] transition-colors duration-200 cursor-pointer ${
-                        isActive(link.href) ? 'text-black font-medium' : 'text-gray-600 hover:text-black'
+                        isActive(link.href)
+                          ? isDark ? 'text-white font-medium' : 'text-black font-medium'
+                          : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
                       }`}
                     >
                       {link.label}
@@ -101,7 +118,9 @@ const Navigation = () => {
                     key={link.label}
                     to={link.href}
                     className={`text-[0.945rem] transition-colors duration-200 ${
-                      isActive(link.href) ? 'text-black font-medium' : 'text-gray-600 hover:text-black'
+                      isActive(link.href)
+                        ? isDark ? 'text-white font-medium' : 'text-black font-medium'
+                        : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
                     }`}
                   >
                     {link.label}
@@ -114,7 +133,11 @@ const Navigation = () => {
             <div className="hidden lg:flex items-center">
               <Link
                 to="/reimpulso"
-                className="px-[1.35rem] py-[0.675rem] border border-black bg-black text-white text-[0.945rem] font-bold hover:bg-koob-gray-900 transition-colors"
+                className={
+                  isDark
+                    ? 'px-[1.35rem] py-[0.675rem] border border-white bg-white text-black text-[0.945rem] font-bold hover:bg-koob-gold transition-colors'
+                    : 'px-[1.35rem] py-[0.675rem] border border-black bg-black text-white text-[0.945rem] font-bold hover:bg-koob-gray-900 transition-colors'
+                }
               >
                 KOOB Reimpulso
               </Link>
@@ -123,7 +146,7 @@ const Navigation = () => {
             {/* Mobile hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 cursor-pointer"
+              className={`lg:hidden p-2 cursor-pointer ${isDark ? 'text-white' : 'text-black'}`}
               aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
               aria-expanded={isMobileMenuOpen}
             >

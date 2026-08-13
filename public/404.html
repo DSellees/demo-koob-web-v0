@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
   <head>
     <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
     <title>KOOB Advisory</title>
     <script>
-      const segment = '';
-      if (sessionStorage.redirect) {
-        const redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        window.history.replaceState(null, null, redirect);
-      }
+      sessionStorage.setItem(
+        'koob-pages-redirect',
+        location.pathname + location.search + location.hash,
+      );
+      location.replace('/demo-koob-web-v0/');
     </script>
   </head>
   <body></body>
 </html>
-<script>
-  sessionStorage.redirect = location.pathname + location.search;
-  location.replace('/');
-</script>

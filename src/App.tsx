@@ -7,23 +7,20 @@ import ClientSituation from './sections/ClientSituation';
 import AboutIntro from './sections/AboutIntro';
 import ReimpulsoFlagshipCards from './sections/ReimpulsoFlagshipCards';
 import TeamPreview from './sections/TeamPreview';
+import CasosExito from './sections/CasosExito';
 import InsightsTeaser from './sections/InsightsTeaser';
-import InsightsVariants from './sections/InsightsVariants';
 import SeoMeta from './components/SeoMeta';
 import ContactCTA from './sections/ContactCTA';
 import Footer from './sections/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import CookieConsent from './components/CookieConsent';
 
-import Reimpulso from './pages/Reimpulso';
-import QuienesSomos from './pages/QuienesSomos';
-import Equipo from './pages/Equipo';
-import Contacto from './pages/Contacto';
 import Insights from './pages/Insights';
 import InsightPost from './pages/InsightPost';
-import QueHacemos from './pages/QueHacemos';
 import Legal from './pages/Legal';
 import Privacy from './pages/Privacy';
 import Cookies from './pages/Cookies';
+import EnConstruccion from './pages/EnConstruccion';
 
 import './App.css';
 
@@ -40,9 +37,9 @@ const LandingPage = () => (
       <AboutIntro />
       <ReimpulsoFlagshipCards />
       <TeamPreview />
+      <CasosExito />
       <ClientSituation />
       <InsightsTeaser />
-      <InsightsVariants />
       <ContactCTA />
     </main>
     <Footer />
@@ -57,18 +54,20 @@ function App() {
           <div className="relative bg-white min-h-screen">
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/reimpulso" element={<Reimpulso />} />
-              <Route path="/que-hacemos" element={<QueHacemos />} />
-              <Route path="/quienes-somos" element={<QuienesSomos />} />
-              <Route path="/equipo" element={<Equipo />} />
-              <Route path="/contacto" element={<Contacto />} />
+              <Route path="/reimpulso" element={<EnConstruccion section="KOOB Reimpulso" url="https://koobadvisory.com/reimpulso" />} />
+              <Route path="/que-hacemos" element={<EnConstruccion section="Qué hacemos" url="https://koobadvisory.com/que-hacemos" />} />
+              <Route path="/quienes-somos" element={<EnConstruccion section="Quiénes somos" url="https://koobadvisory.com/quienes-somos" />} />
+              <Route path="/equipo" element={<EnConstruccion section="Equipo de consultores" url="https://koobadvisory.com/equipo" />} />
+              <Route path="/contacto" element={<EnConstruccion section="Contacto" url="https://koobadvisory.com/contacto" />} />
               <Route path="/insights" element={<Insights />} />
               <Route path="/insights/:slug" element={<InsightPost />} />
+              <Route path="/podcast" element={<EnConstruccion section="Podcast" url="https://koobadvisory.com/podcast" />} />
               <Route path="/legal" element={<Legal />} />
               <Route path="/privacidad" element={<Privacy />} />
               <Route path="/cookies" element={<Cookies />} />
             </Routes>
             <WhatsAppButton />
+            <CookieConsent />
           </div>
         </Router>
       </MotionConfig>

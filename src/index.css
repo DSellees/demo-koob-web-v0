@@ -159,6 +159,11 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--layout-nav-height) + 1rem);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a, button {
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -687,6 +692,7 @@
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -695,6 +701,16 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--koob-black);
+}
+
+/* Hides the scrollbar while keeping the element scrollable (drag/swipe still works) */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Reduced motion */

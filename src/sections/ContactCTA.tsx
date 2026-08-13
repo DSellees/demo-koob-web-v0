@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, Mail, MessageCircle, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
@@ -58,7 +58,7 @@ const ContactCTA = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Llámanos</p>
-                    <p className="font-medium">609 483 114</p>
+                    <p className="font-medium">+34 609 483 114</p>
                   </div>
                 </a>
 
@@ -73,7 +73,7 @@ const ContactCTA = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">WhatsApp</p>
-                    <p className="font-medium">Escríbenos directamente</p>
+                    <p className="font-medium">Pulsa aquí</p>
                   </div>
                 </a>
 
@@ -89,16 +89,6 @@ const ContactCTA = () => {
                     <p className="font-medium">info@koobadvisory.com</p>
                   </div>
                 </a>
-              </motion.div>
-
-              <motion.div variants={staggerItem} className="mt-8">
-                <Link
-                  to="/contacto"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-medium hover:bg-koob-gold transition-colors"
-                >
-                  Ver formulario completo
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             </motion.div>
 

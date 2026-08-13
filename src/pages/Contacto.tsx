@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Linkedin, Instagram, Youtube, ArrowRight, MessageCircle } from 'lucide-react';
+import { Mail, Phone, ArrowRight, MessageCircle } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SeoMeta from '../components/SeoMeta';
+import SocialLinks from '../components/SocialLinks';
 import { fadeUp, staggerContainer, staggerItem, viewportOnce, slideRight } from '../lib/animations';
 
 const Contacto = () => {
@@ -258,24 +259,7 @@ const Contacto = () => {
 
                 <motion.div variants={staggerItem}>
                   <h3 className="text-lg font-semibold text-black mb-4">Síguenos</h3>
-                  <div className="flex gap-4">
-                    {[
-                      { href: 'https://www.linkedin.com/company/koob-advisory/?viewAsMember=true', icon: Linkedin, label: 'LinkedIn' },
-                      { href: 'https://www.instagram.com/koob.advisory/', icon: Instagram, label: 'Instagram' },
-                      { href: 'https://www.youtube.com/@KOOB_ADVISORY', icon: Youtube, label: 'YouTube' },
-                    ].map(({ href, icon: Icon, label }) => (
-                      <a
-                        key={label}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={label}
-                        className="border-hairline-light flex h-12 w-12 items-center justify-center border text-gray-500 transition-colors hover:border-black hover:text-black"
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    ))}
-                  </div>
+                  <SocialLinks gapClassName="gap-4" iconClassName="w-5 h-5" />
                 </motion.div>
 
                 <motion.div variants={staggerItem} className="p-8 bg-koob-beige">
