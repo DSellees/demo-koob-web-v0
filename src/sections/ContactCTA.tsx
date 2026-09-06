@@ -2,7 +2,16 @@ import { useState } from 'react';
 import { Phone, Mail, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
+import { reveal, revealViewport } from '../lib/animations';
+
+// Cada elemento observa su propia visibilidad — ver "La Regla de la Animación
+// Visible" en src/lib/animations.ts.
+const revealProps = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: revealViewport,
+  variants: reveal,
+} as const;
 
 const ContactCTA = () => {
   const [formData, setFormData] = useState({
@@ -31,24 +40,19 @@ const ContactCTA = () => {
           <div className="grid gap-section lg:grid-cols-2">
 
             {/* Left - CTA */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={staggerContainer}
-            >
-              <motion.p variants={staggerItem} className="text-sm font-medium text-koob-gold uppercase tracking-wider mb-4">
+            <div>
+              <motion.p {...revealProps} className="text-sm font-medium text-koob-gold uppercase tracking-wider mb-4">
                 Contacto
               </motion.p>
-              <motion.h2 variants={staggerItem} className="type-section-title-compact mb-6">
+              <motion.h2 {...revealProps} custom={0.06} className="type-section-title-compact mb-6">
                 El cambio empieza con una conversación
               </motion.h2>
-              <motion.p variants={staggerItem} className="text-gray-400 leading-relaxed mb-8">
+              <motion.p {...revealProps} custom={0.12} className="text-gray-400 leading-relaxed mb-8">
                 Cuéntanos tu situación. Sin compromiso, sin formularios complejos. Solo una
                 conversación honesta sobre los retos de tu empresa y cómo podemos acompañarte.
               </motion.p>
 
-              <motion.div variants={staggerItem} className="space-y-4">
+              <motion.div {...revealProps} custom={0.18} className="space-y-4">
                 <a
                   href="tel:+34609483114"
                   className="flex items-center gap-4 p-4 bg-white/5 hover:bg-white/10 transition-colors"
@@ -90,16 +94,10 @@ const ContactCTA = () => {
                   </div>
                 </a>
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* Right - Form */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={staggerContainer}
-            >
-
+            <div>
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -114,7 +112,7 @@ const ContactCTA = () => {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <motion.div variants={staggerItem}>
+                  <motion.div {...revealProps}>
                     <label htmlFor="nombre" className="block text-sm font-medium mb-2">
                       Nombre *
                     </label>
@@ -130,7 +128,7 @@ const ContactCTA = () => {
                     />
                   </motion.div>
 
-                  <motion.div variants={staggerItem}>
+                  <motion.div {...revealProps} custom={0.06}>
                     <label htmlFor="empresa" className="block text-sm font-medium mb-2">
                       Empresa *
                     </label>
@@ -146,7 +144,7 @@ const ContactCTA = () => {
                     />
                   </motion.div>
 
-                  <motion.div variants={staggerItem}>
+                  <motion.div {...revealProps} custom={0.12}>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">
                       Email *
                     </label>
@@ -162,7 +160,7 @@ const ContactCTA = () => {
                     />
                   </motion.div>
 
-                  <motion.div variants={staggerItem}>
+                  <motion.div {...revealProps} custom={0.18}>
                     <label htmlFor="mensaje" className="block text-sm font-medium mb-2">
                       Cuéntanos tu situación *
                     </label>
@@ -180,13 +178,14 @@ const ContactCTA = () => {
 
                   <motion.button
                     type="submit"
-                    variants={staggerItem}
+                    {...revealProps}
+                    custom={0.24}
                     className="w-full px-6 py-3 bg-white text-black font-medium hover:bg-koob-gold transition-colors"
                   >
                     Enviar mensaje
                   </motion.button>
 
-                  <motion.p variants={staggerItem} className="text-xs text-gray-400 text-center">
+                  <motion.p {...revealProps} custom={0.3} className="text-xs text-gray-400 text-center">
                     Al enviar aceptas nuestra{' '}
                     <Link to="/privacidad" className="underline hover:text-white transition-colors">
                       política de privacidad
@@ -194,7 +193,7 @@ const ContactCTA = () => {
                   </motion.p>
                 </form>
               )}
-            </motion.div>
+            </div>
 
           </div>
         </div>

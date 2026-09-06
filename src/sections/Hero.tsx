@@ -4,7 +4,42 @@ import { Link } from 'react-router-dom';
 import InlineArrowLink from '../components/InlineArrowLink';
 import YouTubeEmbed from '../components/YouTubeEmbed';
 import SocialLinks from '../components/SocialLinks';
-import { fadeUp, staggerContainer, staggerItem, scaleIn } from '../lib/animations';
+import { staggerContainer, staggerItem } from '../lib/animations';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+// Momento (en segundos) en que terminan todas las animaciones de entrada del hero:
+// el último item de texto arranca a ~0.81s (1.1s dur → ~1.9s) y el vídeo a 0.6s (1.4s dur → 2.0s).
+const HERO_DONE = 2;
+
+// Variantes locales del hero — más lentas y con más recorrido que las globales
+const heroContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.22, delayChildren: 0.15 },
+  },
+};
+
+const heroItem = {
+  hidden: { opacity: 0, y: 34 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.1, ease: EASE } },
+};
+
+const heroVideo = {
+  hidden: { opacity: 0, scale: 0.88, y: 32 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 1.4, ease: EASE, delay: 0.6 },
+  },
+};
+
+// El hero se anima en ambas direcciones: al cargar, y cada vez que se vuelve a
+// él con scroll. `margin` descuenta la navbar fija — ver "La Regla de la
+// Animación Visible" en src/lib/animations.ts.
+const heroViewport = { once: false, amount: 0.15, margin: '-100px 0px 0px 0px' } as const;
 
 const pillars = [
   { title: 'Dirección estratégica', desc: 'Alineamos objetivos, prioridades y decisiones' },
@@ -24,25 +59,30 @@ const Hero = () => {
 
           {/* Social strip — posicionada de forma absoluta: no desplaza el texto, vive dentro del mismo margen que el nav */}
           <aside className="hidden lg:flex flex-col items-center justify-center gap-5 absolute left-0 top-1/2 -translate-y-1/2 lg:w-12 xl:w-20">
-            <SocialLinks gapClassName="flex-col gap-5" />
-            <span
+            <SocialLinks gapClassName="flex-col gap-5" animated animationDelay={HERO_DONE + 0.15} />
+            <motion.span
               className="type-micro-label text-koob-gray-500 select-none mt-3"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={heroViewport}
+              transition={{ duration: 0.5, ease: EASE, delay: HERO_DONE }}
             >
               Conecta
-            </span>
+            </motion.span>
           </aside>
 
           {/* Text content — centrado verticalmente y con una segunda capa de aire respecto al borde */}
           <motion.div
             className="flex-1 flex flex-col justify-center pr-6 sm:pr-8 lg:pr-10 xl:pr-10 pl-8 sm:pl-12 lg:pl-[calc(var(--layout-gutter)+1.5rem)]"
             initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
+            whileInView="visible"
+            viewport={heroViewport}
+            variants={heroContainer}
           >
             {/* Eyebrow label */}
             <motion.p
-              variants={staggerItem}
+              variants={heroItem}
               className="type-eyebrow text-koob-gold-ink mb-6"
             >
               Consultoría estratégica para pymes
@@ -50,7 +90,7 @@ const Hero = () => {
 
             {/* Headline — bold, authoritative */}
             <motion.h1
-              variants={fadeUp}
+              variants={heroItem}
               className="type-display-hero text-black mb-8"
             >
               Recupera el control.<br />Reimpulsa tu empresa.
@@ -58,15 +98,23 @@ const Hero = () => {
 
             {/* Body — lg size for readability */}
             <motion.p
-              variants={fadeUp}
-              className="type-lead-flagship text-koob-gray-700 mb-10 max-w-xl"
+              variants={heroItem}
+              className="type-lead-flagship text-koob-gray-700 mb-4 max-w-2xl"
             >
-              Trabajamos junto a propietarios y equipos directivos para detectar bloqueos,
-              tomar decisiones con claridad e implantar los cambios que la empresa necesita.
+              Si no sabes qué frena tu empresa, necesitas más que un diagnóstico. En KOOB
+              detectamos el bloqueo, tomamos decisiones y las ejecutamos contigo.
+            </motion.p>
+
+            {/* Cierre — misma fuente, tamaño y color que el subtítulo */}
+            <motion.p
+              variants={heroItem}
+              className="type-lead-flagship text-koob-gray-700 mb-10 max-w-2xl"
+            >
+              Estrategia, negocio y experiencia ejecutiva para conseguir resultados.
             </motion.p>
 
             {/* CTA block */}
-            <motion.div variants={fadeUp} className="flex items-stretch gap-4 self-start">
+            <motion.div variants={heroItem} className="flex items-stretch gap-4 self-start">
               {/* Primary CTA — solid, high contrast — 70% */}
               <Link
                 to="/contacto"
@@ -92,9 +140,9 @@ const Hero = () => {
         <motion.div
           className="flex items-center justify-center px-6 pb-10 lg:w-[50%] lg:pl-2 lg:pr-12 xl:pl-3 xl:pr-20 lg:pb-0"
           initial="hidden"
-          animate="visible"
-          variants={scaleIn}
-          transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          whileInView="visible"
+          viewport={heroViewport}
+          variants={heroVideo}
         >
           <div
             className="relative bg-gray-900 overflow-hidden shadow-xl w-full lg:w-auto"
@@ -116,7 +164,7 @@ const Hero = () => {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={heroViewport}
         variants={staggerContainer}
         className="lg:hidden bg-black divide-y divide-hairline-dark"
       >
@@ -149,7 +197,8 @@ const Hero = () => {
         {/* Barra negra — esquina cortada top-right */}
         <motion.div
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={heroViewport}
           variants={staggerContainer}
           className="absolute left-0 top-0 bottom-0 bg-black"
           style={{

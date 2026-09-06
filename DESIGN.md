@@ -250,6 +250,19 @@ El sistema es plano por defecto: sin `box-shadow` decorativo, jerarquía resuelt
 ### Named Rules
 **La Regla del Reposo Plano.** Ningún elemento en su estado por defecto lleva sombra. Una sombra solo se justifica como reacción a scroll, hover o apertura — nunca como estética de "tarjeta flotante" permanente.
 
+## 5b. Motion
+
+El movimiento acompaña a la lectura; no la precede. Entradas suaves, ascendentes (`y` positiva → 0), con `ease` `[0.22, 1, 0.36, 1]` y duración ~1.1s (los vídeos, algo más). El Hero se anima también en ambas direcciones: al cargar y cada vez que se vuelve a él con scroll (`whileInView`, `once: false`). `prefers-reduced-motion` reduce toda animación a ~0ms (ver `src/index.css`).
+
+### Named Rules
+
+**La Regla de la Animación Visible.** Ningún elemento se anima si el usuario no lo tiene en pantalla. **Cada elemento** que entra con scroll observa **su propia** visibilidad — nunca un contenedor `staggerContainer` que dispara a todos los hijos a la vez (eso anima elementos que aún están bajo el fold). La animación es **bidireccional**: se hace al entrar y se **deshace al salir** (`once: false`), de modo que hay movimiento tanto al bajar como al subir.
+
+Implementación (`src/lib/animations.ts` + `src/components/Reveal.tsx`):
+- Envuelve cada elemento en `<Reveal>` **o** pon `initial="hidden" whileInView="visible" viewport={revealViewport} variants={reveal}` en cada `motion.*`.
+- Para una cascada entre elementos **ya visibles**, pasa `custom={<segundos>}` (retardo por elemento; no adelanta nada que no se vea).
+- `staggerContainer` / `staggerItem` quedan **solo** para bloques que siempre entran completos en el viewport (p. ej. la cabecera del Hero, que anima con `animate` al cargar, no con scroll).
+
 ## 6. Components
 
 ### Buttons

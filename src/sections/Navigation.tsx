@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { fadeUp, slideLeft, slideRight, staggerContainer } from '../lib/animations';
 
 const navLinks = [
   { label: 'Inicio', href: '/' },
@@ -14,7 +15,6 @@ const navLinks = [
     ],
   },
   { label: 'Quiénes somos', href: '/quienes-somos' },
-  { label: 'Equipo', href: '/equipo' },
   { label: 'Recursos', href: '/insights' },
   { label: 'Podcast', href: '/podcast' },
   { label: 'Contacto', href: '/contacto' },
@@ -58,27 +58,41 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
         <div className="page-container">
           <div className="nav-height flex w-full items-center justify-between">
-            {/* Logo — +20% */}
-            <Link to="/" className="flex items-center flex-shrink-0">
-              <img
-                src={`${import.meta.env.BASE_URL}logo-koob-black.svg`}
-                alt="KOOB Advisory"
-                className={`h-[3.3rem] w-auto ${isDark ? 'invert' : ''}`}
-              />
-            </Link>
+            {/* Logo */}
+            <motion.div
+              variants={slideRight}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="flex-shrink-0"
+            >
+              <Link to="/" className="flex items-center">
+                <img
+                  src={`${import.meta.env.BASE_URL}logo-koob-black.svg`}
+                  alt="KOOB Advisory"
+                  className={`h-[4.4rem] w-auto ${isDark ? 'invert' : ''}`}
+                />
+              </Link>
+            </motion.div>
 
             {/* Desktop Nav — resto de contenido +8% */}
-            <div className="hidden lg:flex items-center gap-[1.62rem]">
+            <motion.div
+              className="hidden lg:flex items-center gap-8"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
               {navLinks.map((link) =>
                 link.children ? (
-                  <div
+                  <motion.div
                     key={link.label}
+                    variants={fadeUp}
                     className="relative"
                     onMouseEnter={() => setOpenDropdown(link.label)}
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <button
-                      className={`flex items-center gap-1 text-[0.945rem] transition-colors duration-200 cursor-pointer ${
+                      className={`flex items-center gap-1 text-[1rem] transition-colors duration-200 cursor-pointer ${
                         isActive(link.href)
                           ? isDark ? 'text-white font-medium' : 'text-black font-medium'
                           : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
@@ -112,25 +126,32 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 ) : (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    className={`text-[0.945rem] transition-colors duration-200 ${
-                      isActive(link.href)
-                        ? isDark ? 'text-white font-medium' : 'text-black font-medium'
-                        : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
+                  <motion.div key={link.label} variants={fadeUp}>
+                    <Link
+                      to={link.href}
+                      className={`text-[1rem] transition-colors duration-200 ${
+                        isActive(link.href)
+                          ? isDark ? 'text-white font-medium' : 'text-black font-medium'
+                          : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 )
               )}
-            </div>
+            </motion.div>
 
             {/* CTA desktop */}
-            <div className="hidden lg:flex items-center">
+            <motion.div
+              className="hidden lg:flex items-center"
+              variants={slideLeft}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            >
               <Link
                 to="/reimpulso"
                 className={
@@ -141,7 +162,7 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
               >
                 KOOB Reimpulso
               </Link>
-            </div>
+            </motion.div>
 
             {/* Mobile hamburger */}
             <button

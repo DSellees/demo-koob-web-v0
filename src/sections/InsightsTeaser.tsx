@@ -8,7 +8,7 @@ const latest = [...insights]
   .slice(0, 3);
 
 const InsightsTeaser = () => (
-  <section id="insights" className="section-space-editorial bg-white" aria-labelledby="insights-title">
+  <section id="insights" className="section-space-editorial bg-koob-beige" aria-labelledby="insights-title">
     <div className="page-container">
       <div className="content-container">
         <div className="section-heading-row">

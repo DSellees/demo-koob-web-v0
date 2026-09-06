@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { fadeUp, slideRight, staggerContainer, viewportOnce } from '../lib/animations';
-import SweepArrowLink from '../components/SweepArrowLink';
 
 const boardMembers = [
   { name: 'Josep Manel Ventosa', role: 'Founder', image: 'josep-manel-ventosa-koob.png' },
@@ -30,10 +29,6 @@ const TeamPreview = () => {
               <p className="text-pretty mt-6 max-w-sm text-[1.05rem] leading-relaxed text-gray-300">
                 Directivos con trayectoria contrastada que aportan criterio externo a los proyectos de KOOB Advisory.
               </p>
-
-              <SweepArrowLink to="/equipo" variant="dark" className="mt-8">
-                Conocer al resto del equipo
-              </SweepArrowLink>
             </motion.div>
 
             <motion.div

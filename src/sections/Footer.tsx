@@ -5,7 +5,7 @@ import SocialLinks from '../components/SocialLinks';
 
 const Footer = () => {
   return (
-    <footer className="border-hairline-light footer-space border-t bg-white">
+    <footer className="border-hairline-light footer-space border-t bg-koob-beige">
       <div className="page-container">
         <div className="content-container">
           {/* Main Footer */}
@@ -61,11 +61,6 @@ const Footer = () => {
                 <li>
                   <Link to="/quienes-somos" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
                     Quiénes Somos
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/equipo" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
-                    Equipo
                   </Link>
                 </li>
                 <li>

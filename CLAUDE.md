@@ -23,13 +23,21 @@ There are no tests. TypeScript errors surface via `npm run build` (runs `tsc -b`
 
 **Sections vs Pages:** `src/sections/` are homepage sections (always wrapped by `Navigation` + `Footer`). `src/pages/` are standalone route pages that import their own `Navigation` and `Footer`.
 
-**Animations:** All Framer Motion variant definitions live in `src/lib/animations.ts`. Import from there; do not define one-off variants inline. Key exports: `fadeUp`, `fadeIn`, `slideLeft`, `slideRight`, `scaleIn`, `staggerContainer`, `staggerItem`, `viewportOnce`. Standard pattern for scroll-triggered sections:
+**Animations:** All Framer Motion variant definitions live in `src/lib/animations.ts`. Import from there; do not define one-off variants inline. Key exports: `reveal`, `revealViewport`, `fadeUp`, `fadeIn`, `slideLeft`, `slideRight`, `scaleIn`, `staggerContainer`, `staggerItem`, `viewportOnce`, `EASE`.
+
+**La Regla de la Animación Visible (rule — see DESIGN.md §5b):** nothing animates while off-screen. Every scroll-revealed element observes *its own* visibility — never a `staggerContainer` that fires all children at once. Reveals are bidirectional (`revealViewport` uses `once: false`): they play on enter and reverse on exit, so there's motion scrolling both down and up. Standard pattern:
 
 ```tsx
-<motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={staggerContainer}>
-  <motion.p variants={staggerItem}>...</motion.p>
-</motion.div>
+import Reveal from '@/components/Reveal';
+
+<Reveal>...</Reveal>
+<Reveal delay={0.08}>...</Reveal>   // cascade among elements already in view
+
+// or, when the element must keep a specific tag:
+<motion.h2 initial="hidden" whileInView="visible" viewport={revealViewport} variants={reveal} custom={0.06}>…</motion.h2>
 ```
+
+`staggerContainer` / `staggerItem` are reserved for blocks that always enter the viewport whole (e.g. the Hero header, which animates with `animate` on load, not on scroll).
 
 **SEO:** Each route must include `<SeoMeta>` from `src/components/SeoMeta.tsx` (wraps react-helmet-async). Pass `title`, `description`, and `url`.
 

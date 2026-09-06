@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
+import { reveal, revealViewport, EASE } from '../lib/animations';
 import AutodiagnosticoModal from '../components/AutodiagnosticoModal';
 import SweepArrowLink from '../components/SweepArrowLink';
+
+// Cada elemento observa su propia visibilidad — ver "La Regla de la Animación
+// Visible" en src/lib/animations.ts.
+const revealProps = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: revealViewport,
+  variants: reveal,
+} as const;
 
 const drawVariants = (duration: number, delay: number, ease: 'linear' | readonly [number, number, number, number] = 'linear') => ({
   hidden: { strokeDashoffset: 600 },
@@ -38,20 +47,15 @@ const ReimpulsoFlagshipCards = () => {
     >
       <div className="page-container">
         <div className="content-container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            variants={staggerContainer}
-            className="mb-12"
-          >
-            <motion.p variants={staggerItem} className="type-eyebrow mb-0 text-[0.95rem] text-koob-gold-ink">
+          <div className="mb-12">
+            <motion.p {...revealProps} className="type-eyebrow mb-0 text-[0.95rem] text-koob-gold-ink">
               Nuestro servicio insignia
             </motion.p>
             <div className="grid items-end gap-wide lg:grid-cols-[3fr_2fr]">
               <motion.h2
                 id="reimpulso-flagship-cards-title"
-                variants={staggerItem}
+                {...revealProps}
+                custom={0.06}
                 className="text-black"
               >
                 <span className="type-display-flagship block">KOOB Reimpulso</span>
@@ -59,7 +63,7 @@ const ReimpulsoFlagshipCards = () => {
                   Foco y dirección para la empresa
                 </span>
               </motion.h2>
-              <motion.div variants={staggerItem}>
+              <motion.div {...revealProps} custom={0.12}>
                 <p className="text-pretty text-[1.05rem] leading-relaxed text-koob-gray-700 max-w-xl mb-3">
                   Cuando los resultados se tensan o las oportunidades crecen sin una dirección clara, ayudamos a tu empresa a volver a avanzar.
                 </p>
@@ -68,22 +72,16 @@ const ReimpulsoFlagshipCards = () => {
                 </SweepArrowLink>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            variants={staggerContainer}
-            className="mt-12 grid grid-cols-1 gap-4 lg:mt-14 lg:grid-cols-[0.92fr_1.3fr_0.92fr] lg:items-stretch"
-          >
+          <div className="mt-12 grid grid-cols-1 gap-4 lg:mt-14 lg:grid-cols-[0.92fr_1.3fr_0.92fr] lg:items-stretch">
             {/* Left column: two diagnostic cards */}
             <div className="flex flex-col gap-3">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={viewportOnce}
-                variants={staggerItem}
+                viewport={revealViewport}
+                variants={reveal}
                 className="flex min-h-[10rem] flex-col border border-black/15 bg-white/60 p-6 sm:p-7 lg:flex-1"
               >
                 <div>
@@ -152,8 +150,8 @@ const ReimpulsoFlagshipCards = () => {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={viewportOnce}
-                variants={staggerItem}
+                viewport={revealViewport}
+                variants={reveal}
                 className="flex min-h-[10rem] flex-col border border-black/15 bg-white/60 p-6 sm:p-7 lg:flex-1"
               >
                 <div>
@@ -276,20 +274,22 @@ const ReimpulsoFlagshipCards = () => {
 
             {/* Middle column: black flagship card */}
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={fadeUp}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={revealViewport}
+              transition={{ duration: 1.1, ease: EASE }}
               className="relative flex min-h-[25rem] flex-col overflow-hidden border border-black bg-black p-6 text-white sm:p-7 lg:min-h-full lg:p-8"
             >
               <div className="relative z-10">
-                <p className="type-module-label text-koob-gold">Qué hace KOOB Reimpulso</p>
+                <motion.p {...revealProps} className="type-module-label text-koob-gold">
+                  Qué hace KOOB Reimpulso
+                </motion.p>
               </div>
 
               <div className="relative z-10 mt-6 flex flex-1 flex-col">
-                <h3 className="max-w-lg text-[clamp(1.8rem,2.3vw,2.6rem)] font-bold leading-[0.98] tracking-[-0.045em]">
+                <motion.h3 {...revealProps} custom={0.1} className="max-w-lg text-[clamp(1.8rem,2.3vw,2.6rem)] font-bold leading-[0.98] tracking-[-0.045em]">
                   Del diagnóstico al cambio, acompañados en cada paso
-                </h3>
+                </motion.h3>
 
                 <div className="flex flex-1 flex-col justify-center">
                   <ol className="border-t border-white/25">
@@ -298,8 +298,10 @@ const ReimpulsoFlagshipCards = () => {
                       ['Prioridades empresariales', 'Ordenar decisiones, objetivos y recursos.'],
                       ['Implantación del cambio', 'Activar el avance junto al equipo directivo.'],
                     ].map(([title, description], index) => (
-                      <li
+                      <motion.li
                         key={title}
+                        {...revealProps}
+                        custom={0.2 + index * 0.1}
                         className="grid grid-cols-[3rem_1fr] items-center gap-4 border-b border-white/25 py-4"
                       >
                         <span className="text-3xl font-bold tracking-[0.05em] text-koob-gold/50">
@@ -311,7 +313,7 @@ const ReimpulsoFlagshipCards = () => {
                           </h4>
                           <p className="mt-1.5 text-sm leading-relaxed text-gray-300">{description}</p>
                         </div>
-                      </li>
+                      </motion.li>
                     ))}
                   </ol>
                 </div>
@@ -323,8 +325,8 @@ const ReimpulsoFlagshipCards = () => {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={viewportOnce}
-                variants={staggerItem}
+                viewport={revealViewport}
+                variants={reveal}
                 className="flex flex-col border border-black/15 bg-white/60 p-6 sm:p-7 lg:basis-[30%] lg:justify-center"
               >
                 <p className="type-eyebrow text-[0.8rem] text-koob-gold-ink">Autodiagnóstico</p>
@@ -348,8 +350,8 @@ const ReimpulsoFlagshipCards = () => {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={viewportOnce}
-                variants={staggerItem}
+                viewport={revealViewport}
+                variants={reveal}
                 className="flex min-h-[10rem] flex-col justify-center border border-black/15 bg-white/60 p-6 sm:p-7 lg:basis-[70%]"
               >
                 <div className="space-y-6">
@@ -368,7 +370,7 @@ const ReimpulsoFlagshipCards = () => {
                           className={`h-[3px] bg-black ${width}`}
                           initial={{ scaleX: 0 }}
                           whileInView={{ scaleX: 1 }}
-                          viewport={viewportOnce}
+                          viewport={revealViewport}
                           transition={{ duration: 0.7, ease: 'easeOut' }}
                           style={{ transformOrigin: 'left' }}
                         />
@@ -378,7 +380,7 @@ const ReimpulsoFlagshipCards = () => {
                 </div>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
