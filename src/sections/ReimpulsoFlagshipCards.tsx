@@ -48,7 +48,7 @@ const ReimpulsoFlagshipCards = () => {
       <div className="page-container">
         <div className="content-container">
           <div className="mb-12">
-            <motion.p {...revealProps} className="type-eyebrow mb-0 text-[0.95rem] text-koob-gold-ink">
+            <motion.p {...revealProps} className="type-eyebrow mb-0 text-koob-gold-ink">
               Nuestro servicio insignia
             </motion.p>
             <div className="grid items-end gap-wide lg:grid-cols-[3fr_2fr]">
@@ -59,7 +59,7 @@ const ReimpulsoFlagshipCards = () => {
                 className="text-black"
               >
                 <span className="type-display-flagship block">KOOB Reimpulso</span>
-                <span className="type-section-title mt-1 block text-[1.55rem] leading-tight lg:text-[2.1rem]">
+                <span className="mt-1 block text-[1.55rem] font-semibold leading-tight tracking-[-0.02em] lg:text-[2.1rem]">
                   Foco y dirección para la empresa
                 </span>
               </motion.h2>

@@ -45,10 +45,10 @@ const ClientSituation = () => {
 
             {/* Izquierda: tesis + señales */}
             <div>
-              <motion.p {...revealProps} className="type-eyebrow text-[0.95rem] text-koob-gold mb-5">
+              <motion.p {...revealProps} className="type-eyebrow text-koob-gold mb-5">
                 Señales de alerta empresarial
               </motion.p>
-              <motion.h2 {...revealProps} custom={0.06} className="text-[clamp(2.35rem,3.25vw,3.6rem)] font-bold leading-[0.98] tracking-[-0.045em] text-white mb-6">
+              <motion.h2 {...revealProps} custom={0.06} className="type-section-title text-white mb-6">
                 El bloqueo no aparece de repente
               </motion.h2>
               <motion.p {...revealProps} custom={0.12} className="text-pretty text-[1.05rem] leading-relaxed text-gray-300 mb-14 max-w-xl">

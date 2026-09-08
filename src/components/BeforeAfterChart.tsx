@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { revealViewport, EASE } from '../lib/animations';
+import { useEffect, useRef, useState } from 'react';
 
 export interface BeforeAfterMetric {
   /** Qué mide esta barra (se muestra debajo del grupo). */
@@ -28,22 +27,32 @@ const Bar = ({
   level,
   fill,
   delay,
+  shown,
+  instant,
 }: {
   x: number;
   level: number;
   fill: string;
   delay: number;
+  shown: boolean;
+  instant: boolean;
 }) => {
   const height = Math.max(4, level * MAX_H);
   return (
-    <motion.rect
+    <rect
       x={x}
       width={BAR_W}
+      height={height}
+      y={BASELINE - height}
       fill={fill}
-      initial={{ height: 0, y: BASELINE }}
-      whileInView={{ height, y: BASELINE - height }}
-      viewport={revealViewport}
-      transition={{ duration: 0.8, ease: EASE, delay }}
+      style={{
+        transformBox: 'fill-box',
+        transformOrigin: 'bottom',
+        transform: shown ? 'scaleY(1)' : 'scaleY(0)',
+        transition: instant
+          ? 'none'
+          : `transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
+      }}
     />
   );
 };
@@ -58,8 +67,12 @@ const Swatch = ({ className, children }: { className: string; children: string }
 /**
  * Gráfico "antes / después" agrupado: por cada aspecto, una barra gris (antes) y
  * una negra (después), siempre más alta — la mejora que deja la intervención de
- * KOOB. Sin cifras: la lectura es la forma, no un número. Se anima al entrar y se
- * deshace al salir (ver "La Regla de la Animación Visible" en lib/animations.ts).
+ * KOOB. Sin cifras: la lectura es la forma, no un número.
+ *
+ * Las barras crecen desde la base, escalonadas, cuando el gráfico entra en
+ * pantalla (IntersectionObserver + transición CSS — funciona aunque el motor de
+ * animación por JS esté en pausa). Red de seguridad: si el observador no
+ * dispara, se muestran igualmente pasado un instante, así nunca quedan en blanco.
  */
 const BeforeAfterChart = ({
   metrics,
@@ -68,6 +81,35 @@ const BeforeAfterChart = ({
   caption,
 }: BeforeAfterChartProps) => {
   const width = metrics.length * GROUP;
+  const ref = useRef<SVGSVGElement>(null);
+  const [shown, setShown] = useState(false);
+  const [instant, setInstant] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    // Red de seguridad: si la transición no ha podido reproducirse (p. ej. el
+    // documento está oculto y el motor de animación pausado), forzar el estado
+    // final sin transición para que nunca queden en blanco.
+    const fallback = window.setTimeout(() => {
+      setInstant(true);
+      setShown(true);
+    }, 1600);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(fallback);
+    };
+  }, []);
 
   return (
     <figure className="m-0">
@@ -77,18 +119,40 @@ const BeforeAfterChart = ({
       </div>
 
       <svg
+        ref={ref}
         viewBox={`0 0 ${width} ${BASELINE + 4}`}
         className="w-full"
         role="img"
         aria-label={caption}
       >
-        <line x1={0} y1={BASELINE} x2={width} y2={BASELINE} stroke="var(--line-light-strong)" strokeWidth={1} />
+        <line
+          x1={0}
+          y1={BASELINE}
+          x2={width}
+          y2={BASELINE}
+          stroke="var(--line-light-strong)"
+          strokeWidth={1}
+        />
         {metrics.map((m, i) => {
           const cx = i * GROUP + GROUP / 2;
           return (
             <g key={m.label}>
-              <Bar x={cx - BAR_W - 2} level={m.before} fill="#d1d1d1" delay={i * 0.07} />
-              <Bar x={cx + 2} level={m.after} fill="#0c0c0c" delay={0.3 + i * 0.07} />
+              <Bar
+                x={cx - BAR_W - 2}
+                level={m.before}
+                fill="#d1d1d1"
+                delay={i * 0.09}
+                shown={shown}
+                instant={instant}
+              />
+              <Bar
+                x={cx + 2}
+                level={m.after}
+                fill="#0c0c0c"
+                delay={0.12 + i * 0.09}
+                shown={shown}
+                instant={instant}
+              />
             </g>
           );
         })}
@@ -99,7 +163,7 @@ const BeforeAfterChart = ({
         style={{ gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))` }}
       >
         {metrics.map((m) => (
-          <span key={m.label} className="text-[0.7rem] leading-tight text-koob-gray-500">
+          <span key={m.label} className="type-caption text-koob-gray-500">
             {m.label}
           </span>
         ))}

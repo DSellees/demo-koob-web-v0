@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Phone, Mail, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { reveal, revealViewport } from '../lib/animations';
+import ValidationNote from '../components/ValidationNote';
 
 // Cada elemento observa su propia visibilidad — ver "La Regla de la Animación
 // Visible" en src/lib/animations.ts.
@@ -13,6 +14,12 @@ const revealProps = {
   variants: reveal,
 } as const;
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type FieldErrors = Partial<
+  Record<'nombre' | 'empresa' | 'email' | 'mensaje' | 'consent', string>
+>;
+
 const ContactCTA = () => {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -21,17 +28,39 @@ const ContactCTA = () => {
     telefono: '',
     mensaje: '',
   });
+  const [accepted, setAccepted] = useState(false);
+  const [errors, setErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
+
+  const clearError = (field: keyof FieldErrors) =>
+    setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    clearError(e.target.name as keyof FieldErrors);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const next: FieldErrors = {};
+    if (!formData.nombre.trim()) next.nombre = 'Dinos cómo te llamas.';
+    if (!formData.empresa.trim()) next.empresa = 'Indica el nombre de tu empresa.';
+    if (!formData.email.trim()) next.email = 'Necesitamos un correo para responderte.';
+    else if (!EMAIL_RE.test(formData.email.trim())) next.email = 'Ese correo no parece válido.';
+    if (!formData.mensaje.trim()) next.mensaje = 'Cuéntanos brevemente tu situación.';
+    if (!accepted) next.consent = 'Marca la casilla para poder enviar el mensaje.';
+
+    setErrors(next);
+    if (Object.keys(next).some((k) => next[k as keyof FieldErrors])) return;
+
     // TODO: conectar con backend / formspree / emailjs
     setSubmitted(true);
   };
+
+  const fieldClass = (field: keyof FieldErrors) =>
+    `w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:outline-none ${
+      errors[field] ? 'border-koob-gold' : 'border-hairline-dark focus:border-koob-gold'
+    }`;
 
   return (
     <section id="contacto" className="section-space-compact bg-black text-white">
@@ -44,7 +73,7 @@ const ContactCTA = () => {
               <motion.p {...revealProps} className="text-sm font-medium text-koob-gold uppercase tracking-wider mb-4">
                 Contacto
               </motion.p>
-              <motion.h2 {...revealProps} custom={0.06} className="type-section-title-compact mb-6">
+              <motion.h2 {...revealProps} custom={0.06} className="type-section-title-compact mb-6 font-bold tracking-[-0.03em]">
                 El cambio empieza con una conversación
               </motion.h2>
               <motion.p {...revealProps} custom={0.12} className="text-gray-400 leading-relaxed mb-8">
@@ -111,7 +140,7 @@ const ContactCTA = () => {
                   </p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} noValidate className="space-y-4">
                   <motion.div {...revealProps}>
                     <label htmlFor="nombre" className="block text-sm font-medium mb-2">
                       Nombre *
@@ -120,12 +149,18 @@ const ContactCTA = () => {
                       id="nombre"
                       name="nombre"
                       type="text"
-                      required
                       value={formData.nombre}
                       onChange={handleChange}
-                      className="border-hairline-dark w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
+                      aria-invalid={errors.nombre ? true : undefined}
+                      aria-describedby={errors.nombre ? 'error-nombre' : undefined}
+                      className={fieldClass('nombre')}
                       placeholder="Tu nombre"
                     />
+                    <AnimatePresence initial={false}>
+                      {errors.nombre && (
+                        <ValidationNote id="error-nombre">{errors.nombre}</ValidationNote>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
 
                   <motion.div {...revealProps} custom={0.06}>
@@ -136,12 +171,18 @@ const ContactCTA = () => {
                       id="empresa"
                       name="empresa"
                       type="text"
-                      required
                       value={formData.empresa}
                       onChange={handleChange}
-                      className="border-hairline-dark w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
+                      aria-invalid={errors.empresa ? true : undefined}
+                      aria-describedby={errors.empresa ? 'error-empresa' : undefined}
+                      className={fieldClass('empresa')}
                       placeholder="Nombre de tu empresa"
                     />
+                    <AnimatePresence initial={false}>
+                      {errors.empresa && (
+                        <ValidationNote id="error-empresa">{errors.empresa}</ValidationNote>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
 
                   <motion.div {...revealProps} custom={0.12}>
@@ -152,12 +193,18 @@ const ContactCTA = () => {
                       id="email"
                       name="email"
                       type="email"
-                      required
                       value={formData.email}
                       onChange={handleChange}
-                      className="border-hairline-dark w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
+                      aria-invalid={errors.email ? true : undefined}
+                      aria-describedby={errors.email ? 'error-email' : undefined}
+                      className={fieldClass('email')}
                       placeholder="tu@empresa.com"
                     />
+                    <AnimatePresence initial={false}>
+                      {errors.email && (
+                        <ValidationNote id="error-email">{errors.email}</ValidationNote>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
 
                   <motion.div {...revealProps} custom={0.18}>
@@ -167,30 +214,68 @@ const ContactCTA = () => {
                     <textarea
                       id="mensaje"
                       name="mensaje"
-                      required
                       rows={4}
                       value={formData.mensaje}
                       onChange={handleChange}
-                      className="border-hairline-dark w-full resize-none border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:border-koob-gold focus:outline-none"
+                      aria-invalid={errors.mensaje ? true : undefined}
+                      aria-describedby={errors.mensaje ? 'error-mensaje' : undefined}
+                      className={`${fieldClass('mensaje')} resize-none`}
                       placeholder="Breve descripción de los retos de tu empresa..."
                     />
+                    <AnimatePresence initial={false}>
+                      {errors.mensaje && (
+                        <ValidationNote id="error-mensaje">{errors.mensaje}</ValidationNote>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                  <motion.div {...revealProps} custom={0.24}>
+                    <label
+                      htmlFor="contacto-consent"
+                      className="flex items-start gap-2.5 text-xs leading-relaxed text-gray-400"
+                    >
+                      <input
+                        id="contacto-consent"
+                        name="consent"
+                        type="checkbox"
+                        checked={accepted}
+                        onChange={(e) => {
+                          setAccepted(e.target.checked);
+                          if (e.target.checked) clearError('consent');
+                        }}
+                        aria-invalid={errors.consent ? true : undefined}
+                        aria-describedby={errors.consent ? 'error-consent' : undefined}
+                        className={`mt-0.5 h-4 w-4 shrink-0 accent-koob-gold ${
+                          errors.consent ? 'outline outline-1 outline-koob-gold' : ''
+                        }`}
+                      />
+                      <span>
+                        He leído la{' '}
+                        <Link
+                          to="/privacidad"
+                          className="underline transition-colors hover:text-white"
+                        >
+                          política de privacidad
+                        </Link>{' '}
+                        y acepto que KOOB trate mis datos para responder a mi consulta.
+                      </span>
+                    </label>
+                    <AnimatePresence initial={false}>
+                      {errors.consent && (
+                        <ValidationNote id="error-consent">{errors.consent}</ValidationNote>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
 
                   <motion.button
                     type="submit"
                     {...revealProps}
-                    custom={0.24}
-                    className="w-full px-6 py-3 bg-white text-black font-medium hover:bg-koob-gold transition-colors"
+                    custom={0.3}
+                    className="type-button-prominent inline-flex w-full items-center justify-center gap-2 bg-white px-6 py-3 text-koob-black transition-[background-color,transform] duration-200 hover:scale-[1.03] hover:bg-white/85 active:scale-[0.98]"
                   >
                     Enviar mensaje
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </motion.button>
-
-                  <motion.p {...revealProps} custom={0.3} className="text-xs text-gray-400 text-center">
-                    Al enviar aceptas nuestra{' '}
-                    <Link to="/privacidad" className="underline hover:text-white transition-colors">
-                      política de privacidad
-                    </Link>.
-                  </motion.p>
                 </form>
               )}
             </div>

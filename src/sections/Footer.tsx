@@ -12,8 +12,8 @@ const Footer = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
             {/* Logo & Description */}
             <div className="lg:col-span-2">
-              <Link to="/" className="flex items-center mb-4">
-                <img src={`${import.meta.env.BASE_URL}logo-koob-black.svg`} alt="KOOB Advisory" className="h-9 w-auto" />
+              <Link to="/" className="mb-4 inline-flex items-center">
+                <img src={`${import.meta.env.BASE_URL}logo-koob-black.svg`} alt="KOOB Advisory" className="block h-6 w-auto" />
               </Link>
               <p className="text-sm text-koob-gray-700 leading-relaxed mb-4 max-w-xs">
                 Consultoría estratégica para empresas en momentos de transformación, crecimiento
@@ -99,8 +99,8 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="pt-2">
-                  <p className="text-xs text-koob-gray-500">España · atención nacional</p>
-                  <p className="text-xs text-koob-gray-500">Presencial y remota</p>
+                  <p className="text-xs text-koob-gray-500">Barcelona · España</p>
+                  <p className="text-xs text-koob-gray-500">Atención nacional, presencial y remota</p>
                 </li>
               </ul>
             </div>

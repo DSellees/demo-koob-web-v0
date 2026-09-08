@@ -13,7 +13,7 @@ const InsightsTeaser = () => (
       <div className="content-container">
         <div className="section-heading-row">
           <div>
-            <p className="type-eyebrow mb-4 text-koob-gold-ink">Insights</p>
+            <p className="type-eyebrow mb-5 text-koob-gold-ink">Insights</p>
             <h2 id="insights-title" className="type-section-title text-black">
               Seguimos pensando en esto
             </h2>
@@ -27,7 +27,7 @@ const InsightsTeaser = () => (
           {latest.map((post) => (
             <article
               key={post.slug}
-              className="group flex min-h-80 flex-col border border-hairline-light bg-white module-padding transition-colors duration-200 hover:border-black"
+              className="group relative flex min-h-80 flex-col border border-hairline-light bg-white module-padding transition-colors duration-200 hover:border-black"
             >
               <div className="mb-6 h-px w-9 bg-koob-gold-ink transition-[width] duration-200 group-hover:w-14" />
               <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -44,7 +44,8 @@ const InsightsTeaser = () => (
               <p className="type-body-small mb-8 text-koob-gray-500">{post.excerpt}</p>
               <Link
                 to={`/insights/${post.slug}`}
-                className="mt-auto inline-flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-black transition-colors hover:text-koob-gold-ink"
+                aria-label={`Leer: ${post.title}`}
+                className="mt-auto inline-flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-black transition-colors after:absolute after:inset-0 after:content-[''] hover:text-koob-gold-ink"
               >
                 Leer más
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />

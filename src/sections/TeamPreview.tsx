@@ -20,7 +20,7 @@ const TeamPreview = () => {
               viewport={viewportOnce}
               variants={slideRight}
             >
-              <p className="type-eyebrow text-[0.95rem] text-koob-gold mb-5">
+              <p className="type-eyebrow text-koob-gold mb-5">
                 Nuestro equipo
               </p>
               <h2 className="text-[clamp(2rem,2.6vw,3rem)] font-bold leading-[0.98] tracking-[-0.045em] text-white">

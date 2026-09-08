@@ -70,7 +70,7 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
                 <img
                   src={`${import.meta.env.BASE_URL}logo-koob-black.svg`}
                   alt="KOOB Advisory"
-                  className={`h-[4.4rem] w-auto ${isDark ? 'invert' : ''}`}
+                  className={`h-[1.65rem] w-auto ${isDark ? 'invert' : ''}`}
                 />
               </Link>
             </motion.div>

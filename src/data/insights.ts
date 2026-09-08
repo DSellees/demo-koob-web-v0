@@ -33,7 +33,8 @@ export const insights: InsightPost[] = [
     category: 'Transformación empresarial',
     date: '2026-06-15',
     readTime: '5 min',
-    image: '/images/insights/reimpulso-empresarial.jpg',
+    image:
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80',
     tags: ['transformación', 'reimpulso', 'dirección estratégica'],
     related: ['el-rol-estrategico-de-rrhh', 'cultura-que-impulsa'],
     content: `

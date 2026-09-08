@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { EASE } from '../lib/animations';
+import { AnimatePresence } from 'framer-motion';
 import Reveal from '../components/Reveal';
+import ValidationNote from '../components/ValidationNote';
 
 /**
  * Franja de suscripción a la newsletter, entre Reimpulso y Casos de éxito.
@@ -14,34 +15,6 @@ import Reveal from '../components/Reveal';
  * src/lib/animations.ts).
  */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-/**
- * Aviso de validación en el flujo (no flotante). Reserva su espacio al aparecer
- * animando la altura, así nunca tapa ni pisa lo que tiene debajo.
- */
-const ValidationNote = ({ id, children }: { id?: string; children: React.ReactNode }) => (
-  <motion.div
-    initial={{ height: 0, opacity: 0 }}
-    animate={{ height: 'auto', opacity: 1 }}
-    exit={{ height: 0, opacity: 0 }}
-    transition={{ duration: 0.2, ease: EASE }}
-    className="overflow-hidden"
-  >
-    <p
-      id={id}
-      role="alert"
-      className="mt-2 flex items-start gap-2 bg-white px-3 py-2 text-xs leading-snug text-koob-black"
-    >
-      <span
-        aria-hidden="true"
-        className="mt-px flex h-4 w-4 shrink-0 items-center justify-center bg-koob-gold text-[0.65rem] font-bold text-koob-black"
-      >
-        !
-      </span>
-      <span>{children}</span>
-    </p>
-  </motion.div>
-);
 
 const NewsletterBar = () => {
   const [email, setEmail] = useState('');
@@ -74,10 +47,10 @@ const NewsletterBar = () => {
 
             <Reveal className="max-w-xl">
               <p className="type-eyebrow text-koob-gold">Newsletter</p>
-              <h2 className="mt-4 text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold leading-tight tracking-[-0.03em] text-white">
+              <h2 className="mt-4 type-section-title-compact font-bold tracking-[-0.03em] text-white">
                 Cada mes, una lectura útil sobre tu sector
               </h2>
-              <p className="mt-3 text-[0.95rem] leading-relaxed text-gray-400">
+              <p className="mt-3 type-body text-gray-400">
                 Tendencias, criterios de gestión y aprendizajes de proyectos reales. Sin ruido.
               </p>
             </Reveal>
@@ -115,9 +88,10 @@ const NewsletterBar = () => {
                     </div>
                     <button
                       type="submit"
-                      className="shrink-0 self-start bg-white px-6 py-3 font-medium text-black transition-colors hover:bg-koob-gold sm:self-auto"
+                      className="type-button-prominent inline-flex shrink-0 items-center justify-center gap-2 self-start bg-white px-6 py-3 text-koob-black transition-[background-color,transform] duration-200 hover:scale-[1.03] hover:bg-white/85 active:scale-[0.98] sm:self-auto"
                     >
                       Suscribirme
+                      <ArrowRight aria-hidden="true" className="h-4 w-4" />
                     </button>
                   </div>
 

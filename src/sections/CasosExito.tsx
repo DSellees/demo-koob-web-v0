@@ -57,10 +57,10 @@ const CasosExito = () => (
 
         <div className="mb-14 flex flex-wrap items-end justify-between gap-10">
           <motion.div {...revealProps} className="max-w-xl">
-            <p className="type-eyebrow text-[0.95rem] text-koob-gold-ink mb-5">
+            <p className="type-eyebrow text-koob-gold-ink mb-5">
               Casos de éxito
             </p>
-            <h2 className="text-[clamp(2.35rem,3.25vw,3.6rem)] font-bold leading-[0.98] tracking-[-0.045em] text-black">
+            <h2 className="type-section-title text-black">
               Proyectos reales.<br />Impacto medible.
             </h2>
           </motion.div>

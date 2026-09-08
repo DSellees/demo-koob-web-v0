@@ -55,7 +55,7 @@ const AboutIntro = () => {
               whileInView="visible"
               viewport={inView}
               variants={rise}
-              className="type-eyebrow text-[0.95rem] text-koob-gold mb-5"
+              className="type-eyebrow text-koob-gold mb-5"
             >
               Sobre KOOB
             </motion.p>
@@ -65,7 +65,7 @@ const AboutIntro = () => {
                 whileInView="visible"
                 viewport={inView}
                 variants={rise}
-                className="text-[clamp(2.35rem,3.25vw,3.6rem)] font-bold leading-[0.98] tracking-[-0.045em] text-white"
+                className="type-section-title text-white"
               >
                 La experiencia de quienes<br className="hidden lg:block" /> han liderado empresas
               </motion.h2>

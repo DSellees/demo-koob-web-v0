@@ -14,6 +14,7 @@ import ContactCTA from './sections/ContactCTA';
 import Footer from './sections/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import CookieConsent from './components/CookieConsent';
+import ScrollToTop from './components/ScrollToTop';
 
 import Insights from './pages/Insights';
 import InsightPost from './pages/InsightPost';
@@ -51,6 +52,7 @@ function App() {
     <HelmetProvider>
       <MotionConfig reducedMotion="user">
         <Router basename={import.meta.env.BASE_URL}>
+          <ScrollToTop />
           <div className="relative bg-white min-h-screen">
             <Routes>
               <Route path="/" element={<LandingPage />} />

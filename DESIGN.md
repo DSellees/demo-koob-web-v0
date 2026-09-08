@@ -155,14 +155,16 @@ La jerarquía HTML y la jerarquía visual son independientes: `h1`, `h2` y `h3` 
 
 - **Hero display — `type-display-hero`:** 40px → 46.4px → `clamp(49.6px, 3.5vw, 68px)`, peso 800. Reservado al mensaje principal de portada.
 - **Flagship display — `type-display-flagship`:** 44px → 48px → 60px → `clamp(60px, 4.2vw, 72px)`, peso 700. Reservado al nombre aislado de la propuesta insignia de KOOB; no se utiliza para cualquier producto, servicio o titular largo.
-- **Section title — `type-section-title`:** 36px → 48px, peso 600. Título principal de una sección.
-- **Compact section title — `type-section-title-compact`:** 30px → 36px, peso 600. Secciones de apoyo y llamadas a la acción.
+- **Section title — `type-section-title`:** `clamp(37.6px, 3.25vw, 57.6px)`, peso 700, leading 0.98, tracking -0.045em. Título principal de toda sección de la landing (About, Casos, ClientSituation, Insights). Es el tamaño grande unificado; no usar un `clamp` a mano.
+- **Compact section title — `type-section-title-compact`:** 30px → 36px, peso 600. Secciones de apoyo y llamadas a la acción (Contacto).
 - **Lead / entradilla — `type-lead-flagship`:** 20px, peso 500, leading 1.6. Clase única para toda entradilla destacada del sitio (Hero incluido); ya no existe una variante `type-lead-hero` independiente.
 - **Card title:** escala semántica de 16px, 20px, 24px y display de conversión de 28px → 30px.
 - **Body — `type-module-body` / `type-card-body`:** 16px como mínimo de lectura; 17px en módulos amplios de escritorio.
+- **Body de apoyo — `type-body`:** 15px, peso 400, leading 1.65. Párrafo secundario un punto mayor que `type-body-small` (columnas junto a un titular, franjas). Sustituye al antiguo `text-[0.95rem]` suelto.
 - **Small body — `type-body-small`:** 14px solo para información secundaria y tarjetas, nunca como párrafo principal largo en móvil.
-- **Eyebrow — `type-eyebrow`:** 14px, peso 600, tracking 0.2em, uppercase.
+- **Eyebrow — `type-eyebrow`:** 15px, peso 600, tracking 0.2em, uppercase. Tamaño único en toda la landing. Única excepción: el eyebrow "Autodiagnóstico" (bloque y modal) va a `text-[0.8rem]` por ser una etiqueta contextual dentro de una tarjeta, no de sección.
 - **Module label — `type-module-label`:** 12px, peso 600, tracking 0.22em, uppercase.
+- **Caption — `type-caption`:** 11px, peso 500, tracking 0.01em. Leyendas de gráfico y etiquetas diminutas sobre imagen. Sustituye a los `text-[0.6/0.65/0.7rem]` sueltos.
 - **Actions — `type-button*` / `type-inline-link`:** 14–18px según jerarquía y superficie.
 
 ### Named Rules

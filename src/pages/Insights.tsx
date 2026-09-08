@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,14 +6,58 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SeoMeta from '../components/SeoMeta';
 import { insights, categories } from '../data/insights';
-import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
+import InsightCover from '../components/InsightCover';
+import PostCover from '../components/PostCover';
+import { staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
+
+const formatDate = (iso: string) =>
+  new Date(iso)
+    .toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })
+    .replace('.', '')
+    .toUpperCase();
 
 const Insights = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+  // Arrastrar la barra de filtros con el ratón (no hay scrollbar visible).
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const drag = useRef({ down: false, startX: 0, startScroll: 0, moved: false });
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el || e.button !== 0) return;
+    drag.current = { down: true, startX: e.clientX, startScroll: el.scrollLeft, moved: false };
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!drag.current.down || !el) return;
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 4) {
+      drag.current.moved = true;
+      el.setPointerCapture(e.pointerId);
+    }
+    el.scrollLeft = drag.current.startScroll - dx;
+  };
+  const endDrag = () => {
+    drag.current.down = false;
+  };
+  const onClickCapture = (e: React.MouseEvent) => {
+    if (drag.current.moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      drag.current.moved = false;
+    }
+  };
+
   const filtered = activeCategory
     ? insights.filter((p) => p.category === activeCategory)
     : insights;
+
+  const byDate = [...insights].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+  const featured = byDate[0];
+  const highlights = byDate.slice(1, 4);
 
   return (
     <div className="page-root">
@@ -24,76 +68,106 @@ const Insights = () => {
       />
       <Navigation />
 
-      {/* Hero */}
-      <section className="page-intro-space bg-black text-white">
+      {/* Portada de Insights: destacado + últimos */}
+      <section className="page-intro-space-article bg-koob-beige !pb-10">
         <div className="page-container">
-          <div className="content-container-medium">
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              className="mb-4 text-sm font-medium uppercase tracking-wider text-koob-gold"
+          <div className="content-container">
+            <h1 className="type-eyebrow text-koob-gold-ink">Insights KOOB</h1>
+
+            {/* Fila de últimos artículos */}
+            <div className="border-hairline-light mt-8 grid grid-cols-1 divide-y divide-[color:var(--line-light)] border-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              {highlights.map((post) => (
+                <Link
+                  key={post.slug}
+                  to={`/insights/${post.slug}`}
+                  className="group flex gap-4 py-6 sm:px-6 sm:py-7 sm:first:pl-0 sm:last:pr-0"
+                >
+                  <InsightCover
+                    slug={post.slug}
+                    className="aspect-square w-20 shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <p className="type-caption text-koob-gray-400">
+                      {formatDate(post.date)} · <span className="text-koob-gold-ink">{post.category}</span>
+                    </p>
+                    <h2 className="mt-1.5 text-[0.95rem] font-bold leading-snug tracking-[-0.02em] text-koob-black transition-colors group-hover:text-koob-gold-ink">
+                      {post.title}
+                    </h2>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Artículo destacado */}
+            <Link
+              to={`/insights/${featured.slug}`}
+              className="group relative mt-4 block aspect-[16/10] overflow-hidden bg-koob-black sm:aspect-[16/7]"
             >
-              Insights KOOB
-            </motion.p>
-            <motion.h1
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              transition={{ delay: 0.1 }}
-              className="mb-6 text-4xl font-semibold leading-tight text-white lg:text-5xl xl:text-6xl"
-            >
-              Ideas para empresas en cambio
-            </motion.h1>
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              transition={{ delay: 0.2 }}
-              className="max-w-2xl text-xl leading-relaxed text-gray-300"
-            >
-              Reflexiones y análisis sobre transformación, liderazgo, cultura y gestión
-              desde la experiencia de quienes han estado en primera línea.
-            </motion.p>
+              <PostCover
+                slug={featured.slug}
+                image={featured.image}
+                alt={featured.title}
+                eager
+                className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-koob-black via-koob-black/40 to-transparent" />
+              <span className="absolute left-5 top-5 bg-koob-white px-2.5 py-1 text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-koob-black">
+                {featured.category}
+              </span>
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+                <p className="type-caption text-white/70">
+                  {formatDate(featured.date)} · POR EL EQUIPO DE KOOB
+                </p>
+                <h2 className="mt-2 max-w-2xl text-balance text-[clamp(1.5rem,3vw,2.4rem)] font-bold leading-tight tracking-[-0.03em] text-white">
+                  {featured.title}
+                </h2>
+                <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr] motion-reduce:transition-none">
+                  <p className="overflow-hidden text-white/80 type-body-small [transition:margin_300ms_ease-out] group-hover:mt-3 motion-reduce:transition-none">
+                    {featured.excerpt}
+                  </p>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Filtros por categoría */}
-      <section className="border-hairline-light utility-bar-space sticky top-[72px] z-30 border-b bg-white">
+      {/* Filtros por categoría — ya sobre el fondo blanco del listado */}
+      <section className="sticky top-[72px] z-30 bg-koob-white py-4">
         <div className="page-container">
           <div className="content-container">
-            <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
-              <button
-                onClick={() => setActiveCategory(null)}
-                className={`flex-shrink-0 px-4 py-2 text-sm font-medium border transition-colors whitespace-nowrap ${
-                  activeCategory === null
-                    ? 'bg-black text-white border-black'
-                    : 'border-gray-300 text-gray-600 hover:border-black hover:text-black'
-                }`}
-              >
-                Todos
-              </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                  className={`flex-shrink-0 px-4 py-2 text-sm font-medium border transition-colors whitespace-nowrap ${
-                    activeCategory === cat
-                      ? 'bg-black text-white border-black'
-                      : 'border-gray-300 text-gray-600 hover:border-black hover:text-black'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+            <div
+              ref={scrollRef}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endDrag}
+              onPointerLeave={endDrag}
+              onClickCapture={onClickCapture}
+              className="scrollbar-hide flex cursor-grab gap-2 overflow-x-auto overscroll-x-contain pb-1 select-none active:cursor-grabbing"
+            >
+              {[null, ...categories].map((cat) => {
+                const active = activeCategory === cat;
+                return (
+                  <button
+                    key={cat ?? 'todos'}
+                    onClick={() => setActiveCategory(active ? null : cat)}
+                    className={`flex-shrink-0 whitespace-nowrap border px-4 py-2 text-sm font-medium transition-colors ${
+                      active
+                        ? 'border-koob-black bg-koob-black text-white'
+                        : 'border-koob-gray-300 text-koob-gray-500 hover:border-koob-black hover:text-koob-black'
+                    }`}
+                  >
+                    {cat ?? 'Todos'}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Grid de artículos */}
-      <section className="section-space-editorial">
+      <section className="section-space-editorial !pt-8 lg:!pt-10">
         <div className="page-container">
           <div className="content-container">
             <motion.div
@@ -109,14 +183,13 @@ const Insights = () => {
                   variants={staggerItem}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.2 }}
-                  className="border-hairline-light group overflow-hidden border transition-colors duration-300 hover:border-black"
+                  className="border-hairline-light group relative overflow-hidden border transition-colors duration-300 hover:border-black"
                 >
-                  {/* Image placeholder */}
-                  <div className="aspect-[16/9] bg-gray-100 overflow-hidden">
-                    <div className="w-full h-full flex items-center justify-center bg-koob-beige group-hover:bg-gray-200 transition-colors duration-300">
-                      <span className="text-xs text-gray-400 uppercase tracking-wider">{post.category}</span>
-                    </div>
-                  </div>
+                  <InsightCover
+                    slug={post.slug}
+                    category={post.category}
+                    className="aspect-[16/9]"
+                  />
 
                   {/* Content */}
                   <div className="p-6">
@@ -140,7 +213,8 @@ const Insights = () => {
 
                     <Link
                       to={`/insights/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-black group-hover:text-koob-gold transition-colors"
+                      aria-label={`Leer: ${post.title}`}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-black transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-koob-gold"
                     >
                       Leer más
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
