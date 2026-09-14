@@ -1,109 +1,184 @@
-import { ArrowRight, Target, Users, Lightbulb, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
+import ContactCTA from '../sections/ContactCTA';
 import SeoMeta from '../components/SeoMeta';
-import { fadeUp, staggerContainer, staggerItem, slideRight, slideLeft, viewportOnce } from '../lib/animations';
+import SweepArrowLink from '../components/SweepArrowLink';
+import LocalVideoEmbed from '../components/LocalVideoEmbed';
+import { reveal, revealViewport } from '../lib/animations';
 
-const valores = [
-  {
-    icon: Target,
-    title: 'Resultados',
-    description:
-      'Nos obsesionan los resultados tangibles. No entregamos informes que se quedan en un cajón: nos implicamos hasta ver el impacto real.',
-  },
-  {
-    icon: Users,
-    title: 'Cercanía',
-    description:
-      'Trabajamos codo a codo con nuestros clientes. Somos parte de tu equipo durante todo el proyecto, no observadores externos.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Pragmatismo',
-    description:
-      'Soluciones prácticas adaptadas a tu realidad. Nada de teorías académicas ni plantillas genéricas desconectadas del día a día.',
-  },
-  {
-    icon: Award,
-    title: 'Experiencia real',
-    description:
-      'Cada proyecto está liderado por profesionales que han ocupado posiciones de dirección y conocen los retos de gestionar una empresa desde dentro.',
-  },
-];
+/**
+ * Quiénes somos — textos del documento del cliente ("WEB CANVIS INICI",
+ * apartado Quiénes somos) mezclados con el briefing (por_que_elegir y los
+ * cinco puntos de diferenciación). Por indicación del cliente, la página NO
+ * lleva apartado de equipo: solo este relato + vídeo.
+ *
+ * Mismo lenguaje visual que Reimpulso y Servicios: bandas alternas, esquinas
+ * rectas, hairlines, sin sombras, un único acento champán. Cada elemento
+ * observa su propia visibilidad (ver "La Regla de la Animación Visible").
+ */
 
-const sectores = [
+const revealProps = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: revealViewport,
+  variants: reveal,
+} as const;
+
+// Los cinco puntos de `diferenciacion` del briefing.
+const diferenciales = [
   {
-    name: 'Banca y Finanzas',
+    n: '01',
+    title: 'Experiencia real en empresa',
     description:
-      'Acompañamos a entidades financieras en proyectos de transformación comercial, eficiencia operativa y mejora de procesos.',
+      'Hemos ocupado distintas posiciones y trabajado en múltiples sectores, lo que nos da una visión amplia y a la vez especializada de cada proyecto.',
   },
   {
-    name: 'Telecomunicaciones',
+    n: '02',
+    title: 'Enfoque práctico',
     description:
-      'Trabajamos con operadores en la redefinición de estrategias tecnológicas, captación de clientes y eficiencia operativa.',
+      'Priorizamos soluciones aplicables y efectivas frente a los planteamientos únicamente teóricos.',
   },
   {
-    name: 'Industrial y B2B',
+    n: '03',
+    title: 'Trabajo integrado con tus equipos',
     description:
-      'Ayudamos a empresas industriales a profesionalizar sus operaciones, optimizar la cadena de suministro y mejorar la productividad.',
+      'Aseguramos la transferencia de conocimiento: al terminar el proyecto, la capacidad queda instalada dentro de la organización.',
+  },
+  {
+    n: '04',
+    title: 'Acompañamiento en la implantación',
+    description:
+      'No solo diseñamos estrategias; acompañamos activamente para que los cambios se ejecuten con éxito.',
+  },
+  {
+    n: '05',
+    title: 'Compromiso compartido',
+    description:
+      'En determinados proyectos alineamos parte de nuestra remuneración a la consecución de objetivos, compartiendo el compromiso con el cliente.',
   },
 ];
 
 const QuienesSomos = () => {
   return (
-    <div className="page-root">
+    <div className="page-root bg-koob-white">
       <SeoMeta
-        title="Quiénes Somos — KOOB Advisory"
-        description="Somos una consultoría multidisciplinar con experiencia real en dirección de empresas. Conocemos los retos porque los hemos vivido desde dentro."
+        title="Quiénes somos — KOOB Advisory"
+        description="Consultoría estratégica desde la experiencia de quienes han liderado empresas. Todo el equipo de KOOB viene del mundo de la empresa: posiciones de dirección en estrategia, comercial, operaciones, finanzas, tecnología, personas y comunicación."
         url="https://koobadvisory.com/quienes-somos"
       />
       <Navigation />
 
-      {/* Hero */}
-      <section className="page-intro-space bg-koob-beige">
+      {/* ── Cabecera (negro) ──────────────────────────────────────── */}
+      <header className="page-intro-space overflow-hidden bg-black text-white pt-[calc(var(--layout-nav-height)+var(--section-y))]">
         <div className="page-container">
           <div className="content-container">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={staggerContainer}
-              >
-                <motion.p variants={staggerItem} className="text-sm font-medium text-koob-gold uppercase tracking-wider mb-4">
-                  Quiénes Somos
-                </motion.p>
-                <motion.h1 variants={staggerItem} className="text-4xl lg:text-5xl font-semibold text-black mb-6 leading-tight">
-                  Consultoría estratégica con experiencia real
+            <motion.p {...revealProps} className="type-eyebrow mb-5 text-koob-gold">
+              Quiénes somos
+            </motion.p>
+            <div className="grid items-start gap-wide lg:grid-cols-[3fr_2fr]">
+              <div>
+                <motion.h1 {...revealProps} custom={0.06} className="type-section-title text-white">
+                  Liderazgo empresarial convertido en consultoría
                 </motion.h1>
-                <motion.p variants={staggerItem} className="text-lg text-gray-600 leading-relaxed mb-8">
-                  KOOB es una consultoría multidisciplinar formada íntegramente por personas
-                  que han desempeñado cargos de responsabilidad y dirección en diferentes
-                  sectores y organizaciones. Por eso entendemos los retos reales a los que se
-                  enfrentan las empresas.
+              </div>
+              <motion.p
+                {...revealProps}
+                custom={0.18}
+                className="type-section-lead max-w-xl text-gray-300"
+              >
+                Hemos liderado negocios, tomado decisiones difíciles, cometido errores y aprendido
+                a responder por cada una de ellas.
+              </motion.p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* ── La experiencia (claro) ────────────────────────────────── */}
+      <section className="section-space overflow-hidden bg-koob-beige text-black">
+        <div className="page-container">
+          <div className="content-container">
+            {/* Declaración: titular a la izquierda, apuntes al pie derecho */}
+            <div className="grid gap-x-12 gap-y-8 lg:grid-cols-[1.1fr_1fr] lg:items-end">
+              <div>
+                <motion.p {...revealProps} className="type-eyebrow mb-5 text-koob-gold-ink">
+                  Nuestra experiencia
                 </motion.p>
-                <motion.div variants={staggerItem}>
-                  <Link
-                    to="/reimpulso"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white font-medium hover:bg-gray-800 transition-colors"
-                  >
-                    Conocer nuestro servicio
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                <motion.h2
+                  {...revealProps}
+                  custom={0.06}
+                  className="type-section-title text-balance text-black"
+                >
+                  Venimos del mundo de la empresa
+                </motion.h2>
+                <motion.div {...revealProps} custom={0.12} className="mt-8">
+                  <SweepArrowLink to="/contacto" variant="light">
+                    Hablar con un experto
+                  </SweepArrowLink>
                 </motion.div>
+              </div>
+
+              <div className="lg:pl-10">
+                <motion.p
+                  {...revealProps}
+                  custom={0.18}
+                  className="type-section-lead text-koob-gray-500"
+                >
+                  Hemos ocupado posiciones de dirección en empresas multinacionales y compañías
+                  líderes, en áreas como estrategia, comercial, operaciones, finanzas, tecnología,
+                  personas y comunicación.
+                </motion.p>
+                <motion.p
+                  {...revealProps}
+                  custom={0.24}
+                  className="type-section-lead mt-4 text-koob-gray-500"
+                >
+                  Por eso, en KOOB no nos limitamos a analizar tu empresa. Nos implicamos para
+                  entender el reto, aportar perspectiva y convertir las decisiones en acción.
+                </motion.p>
+              </div>
+            </div>
+
+            {/* Tira horizontal: vídeo + equipo, altura uniforme y contenida */}
+            <div className="section-content-gap grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {/* TODO: sustituir por el vídeo de lanzamiento del Drive cuando esté disponible. */}
+              <motion.div
+                {...revealProps}
+                className="border-hairline-light relative h-56 overflow-hidden border lg:h-64"
+              >
+                <LocalVideoEmbed
+                  src={`${import.meta.env.BASE_URL}videos/sobre-koob-nosotros.mp4`}
+                  poster={`${import.meta.env.BASE_URL}images/equipo-sesion-estrategica-koob.png`}
+                  title="KOOB Advisory — Quiénes somos"
+                />
               </motion.div>
 
               <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={slideLeft}
-                className="aspect-[4/3] bg-gray-100"
+                {...revealProps}
+                custom={0.08}
+                className="border-hairline-light relative h-56 overflow-hidden border lg:h-64"
               >
                 <img
-                  src="/images/about-team.jpg"
-                  alt="Equipo KOOB Advisory en reunión estratégica"
-                  className="w-full h-full object-cover"
+                  src={`${import.meta.env.BASE_URL}images/equipo-directivo-experimentado-traje-koob.png`}
+                  alt="Equipo directivo de KOOB con experiencia en dirección de empresas"
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-top grayscale transition-[filter] duration-500 hover:grayscale-0"
+                />
+              </motion.div>
+
+              <motion.div
+                {...revealProps}
+                custom={0.16}
+                className="border-hairline-light relative h-56 overflow-hidden border lg:h-64"
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}images/oficina-koob-sala-reuniones.png`}
+                  alt="Sala de reuniones de KOOB Advisory"
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-top grayscale transition-[filter] duration-500 hover:grayscale-0"
                 />
               </motion.div>
             </div>
@@ -111,184 +186,89 @@ const QuienesSomos = () => {
         </div>
       </section>
 
-      {/* Quiénes somos */}
-      <section className="section-space-compact">
+      {/* ── Lo que nos diferencia (negro) ─────────────────────────── */}
+      <section className="section-space overflow-hidden bg-black text-white">
         <div className="page-container">
           <div className="content-container">
-            <div className="grid lg:grid-cols-2 gap-16">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={slideRight}
-              >
-                <h2 className="text-3xl lg:text-4xl font-semibold text-black mb-6">
-                  No nos sentimos identificados con el modelo tradicional
+            <div className="section-heading-row section-heading-gap-large">
+              <motion.div {...revealProps} className="max-w-xl">
+                <p className="type-eyebrow mb-5 text-koob-gold">Lo que nos diferencia</p>
+                <h2 className="type-section-title text-white">
+                  No entregamos un informe y nos vamos
                 </h2>
-                <div className="space-y-6 text-gray-600 leading-relaxed">
-                  <p>
-                    No buscamos entregar únicamente informes o recomendaciones teóricas, sino
-                    implicarnos en cada proyecto, trabajar junto a los equipos y acompañar a las
-                    empresas en la ejecución e implantación de soluciones que generen impacto
-                    real.
-                  </p>
-                  <p>
-                    KOOB nació con una visión distinta: ofrecer un servicio más flexible,
-                    eficiente y cercano. Nuestro modelo de trabajo, basado en la colaboración por
-                    proyectos y sin una estructura tradicional de oficina, nos permite reunir a
-                    los mejores especialistas en cada área, adaptándonos a las necesidades reales
-                    de cada cliente.
-                  </p>
-                  <p>
-                    Elegir KOOB significa contar con talento experto, atención personalizada y
-                    una manera más moderna e inteligente de desarrollar proyectos.
-                  </p>
-                </div>
               </motion.div>
-
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={slideLeft}
-                className="bg-gray-50 p-8"
+              <motion.p
+                {...revealProps}
+                custom={0.08}
+                className="type-section-lead max-w-md text-gray-300"
               >
-                <h3 className="text-xl font-semibold text-black mb-6">Lo que nos diferencia</h3>
-                <ul className="space-y-4 text-gray-600">
-                  {[
-                    'Experiencia real en empresa, en múltiples sectores y posiciones de dirección',
-                    'Enfoque práctico orientado a soluciones aplicables, no solo teóricas',
-                    'Trabajo integrado con los equipos del cliente, dejando capacidades instaladas',
-                    'Acompañamiento activo durante la implantación, no solo en el diseño',
-                    'Compromiso compartido: en algunos proyectos alineamos parte de nuestra remuneración a los resultados',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-koob-gold rounded-full mt-2 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                No nos identificamos con el modelo tradicional asociado a la palabra «consultoría»:
+                nos implicamos en cada proyecto y acompañamos hasta la implantación.
+              </motion.p>
+            </div>
+
+            <ol className="border-t border-hairline-dark">
+              {diferenciales.map((item, index) => (
+                <motion.li
+                  key={item.n}
+                  {...revealProps}
+                  custom={index * 0.08}
+                  className="group grid gap-x-8 gap-y-2 border-b border-hairline-dark py-7 sm:grid-cols-[3.5rem_1fr] lg:grid-cols-[5rem_minmax(0,18rem)_1fr] lg:items-baseline"
+                >
+                  <span className="text-2xl font-bold tracking-[0.05em] text-koob-gold/60 transition-colors duration-200 group-hover:text-koob-gold">
+                    {item.n}
+                  </span>
+                  <h3 className="text-[1.35rem] font-bold leading-tight tracking-[-0.02em] text-white">
+                    {item.title}
+                  </h3>
+                  <p className="type-section-lead text-gray-300 sm:col-start-2 lg:col-start-3">
+                    {item.description}
+                  </p>
+                </motion.li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Cierre · el modelo KOOB (claro, formato franja) ───────── */}
+      <section
+        aria-label="El modelo de KOOB"
+        className="overflow-hidden border-y border-hairline-strong bg-koob-beige text-black"
+      >
+        <div className="page-container">
+          <div className="content-container">
+            <div className="flex flex-col gap-10 py-16 lg:flex-row lg:items-stretch lg:justify-between lg:gap-16 lg:py-20">
+              <motion.div
+                {...revealProps}
+                className="max-w-xl lg:flex lg:flex-col lg:justify-center"
+              >
+                <h2 className="type-section-title text-black">
+                  Una red de experiencia directiva al servicio de tu empresa
+                </h2>
+              </motion.div>
+              <motion.div
+                {...revealProps}
+                custom={0.08}
+                className="shrink-0 lg:flex lg:max-w-sm lg:flex-col lg:justify-center"
+              >
+                <p className="type-section-lead text-koob-gray-500">
+                  Un modelo por proyectos, sin estructura tradicional de oficina, que nos permite
+                  reunir a los mejores especialistas en cada área y adaptarnos a las necesidades
+                  reales de cada cliente.
+                </p>
+                <div className="mt-6">
+                  <SweepArrowLink to="/servicios" variant="light">
+                    Ver servicios
+                  </SweepArrowLink>
+                </div>
               </motion.div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Valores */}
-      <section className="section-space-compact bg-black text-white">
-        <div className="page-container">
-          <div className="content-container">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={fadeUp}
-              className="max-w-3xl mb-16"
-            >
-              <h2 className="text-3xl lg:text-4xl font-semibold mb-6">Nuestros valores</h2>
-              <p className="text-gray-400 leading-relaxed">
-                Estos son los principios que guían cada proyecto que emprendemos y cada
-                relación que construimos con nuestros clientes.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={staggerContainer}
-              className="grid md:grid-cols-2 gap-8"
-            >
-              {valores.map((valor) => (
-                <motion.div key={valor.title} variants={staggerItem} className="flex gap-6">
-                  <div className="w-12 h-12 bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-koob-gold transition-colors duration-300">
-                    <valor.icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">{valor.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{valor.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sectores */}
-      <section className="section-space-compact bg-koob-beige">
-        <div className="page-container">
-          <div className="content-container">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={fadeUp}
-              className="max-w-3xl mb-16"
-            >
-              <h2 className="text-3xl lg:text-4xl font-semibold text-black mb-6">
-                Sectores en los que trabajamos
-              </h2>
-              <p className="text-gray-600 leading-relaxed">
-                Nuestra experiencia multidisciplinar nos permite aportar valor en sectores
-                exigentes donde la eficiencia operativa y la rentabilidad son críticas.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={staggerContainer}
-              className="grid md:grid-cols-3 gap-8"
-            >
-              {sectores.map((sector) => (
-                <motion.div
-                  key={sector.name}
-                  variants={staggerItem}
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.2 }}
-                  className="border-hairline-light border bg-white p-8 transition-colors duration-300 hover:border-black"
-                >
-                  <h3 className="text-xl font-semibold text-black mb-4">{sector.name}</h3>
-                  <p className="text-gray-600 leading-relaxed">{sector.description}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-space-compact bg-black text-white">
-        <div className="page-container">
-          <div className="content-container-medium text-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={staggerContainer}
-            >
-              <motion.h2 variants={staggerItem} className="text-3xl lg:text-4xl font-semibold mb-6">
-                ¿Quieres conocer más sobre nosotros?
-              </motion.h2>
-              <motion.p variants={staggerItem} className="text-lg text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto">
-                Estamos disponibles para una conversación sin compromiso. Cuéntanos tu situación
-                y vemos cómo podemos ayudarte.
-              </motion.p>
-              <motion.div variants={staggerItem}>
-                <Link
-                  to="/contacto"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-medium hover:bg-koob-gold transition-colors"
-                >
-                  Contactar con nosotros
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <ContactCTA />
 
       <Footer />
     </div>

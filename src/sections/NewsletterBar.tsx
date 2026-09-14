@@ -50,7 +50,7 @@ const NewsletterBar = () => {
               <h2 className="mt-4 type-section-title-compact font-bold tracking-[-0.03em] text-white">
                 Cada mes, una lectura útil sobre tu sector
               </h2>
-              <p className="mt-3 type-body text-gray-400">
+              <p className="mt-3 type-section-lead text-gray-400">
                 Tendencias, criterios de gestión y aprendizajes de proyectos reales. Sin ruido.
               </p>
             </Reveal>

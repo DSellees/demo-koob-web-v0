@@ -75,7 +75,7 @@ const AboutIntro = () => {
                 viewport={inView}
                 variants={rise}
               >
-                <p className="text-pretty text-[1.05rem] leading-relaxed text-gray-300 max-w-xl mb-3">
+                <p className="type-section-lead text-gray-300 max-w-xl mb-3">
                   Todo el equipo de KOOB viene del mundo de la empresa. Hemos liderado
                   negocios, tomado decisiones difíciles, cometido errores y aprendido a
                   responder por cada una de ellas.
@@ -117,7 +117,7 @@ const AboutIntro = () => {
               viewport={inView}
               variants={riseVideo}
               className="relative mx-auto w-full max-w-xl overflow-hidden"
-              style={{ aspectRatio: '16/9' }}
+              style={{ aspectRatio: '3/2' }}
             >
               <LocalVideoEmbed
                 src={`${import.meta.env.BASE_URL}videos/sobre-koob-nosotros.mp4`}

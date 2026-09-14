@@ -16,6 +16,9 @@ import WhatsAppButton from './components/WhatsAppButton';
 import CookieConsent from './components/CookieConsent';
 import ScrollToTop from './components/ScrollToTop';
 
+import Reimpulso from './pages/Reimpulso';
+import Servicios from './pages/Servicios';
+import QuienesSomos from './pages/QuienesSomos';
 import Insights from './pages/Insights';
 import InsightPost from './pages/InsightPost';
 import Legal from './pages/Legal';
@@ -56,9 +59,9 @@ function App() {
           <div className="relative bg-white min-h-screen">
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/reimpulso" element={<EnConstruccion section="KOOB Reimpulso" url="https://koobadvisory.com/reimpulso" />} />
-              <Route path="/que-hacemos" element={<EnConstruccion section="Qué hacemos" url="https://koobadvisory.com/que-hacemos" />} />
-              <Route path="/quienes-somos" element={<EnConstruccion section="Quiénes somos" url="https://koobadvisory.com/quienes-somos" />} />
+              <Route path="/reimpulso" element={<Reimpulso />} />
+              <Route path="/servicios" element={<Servicios />} />
+              <Route path="/quienes-somos" element={<QuienesSomos />} />
               <Route path="/contacto" element={<EnConstruccion section="Contacto" url="https://koobadvisory.com/contacto" />} />
               <Route path="/insights" element={<Insights />} />
               <Route path="/insights/:slug" element={<InsightPost />} />

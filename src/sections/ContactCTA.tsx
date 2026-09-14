@@ -76,7 +76,7 @@ const ContactCTA = () => {
               <motion.h2 {...revealProps} custom={0.06} className="type-section-title-compact mb-6 font-bold tracking-[-0.03em]">
                 El cambio empieza con una conversación
               </motion.h2>
-              <motion.p {...revealProps} custom={0.12} className="text-gray-400 leading-relaxed mb-8">
+              <motion.p {...revealProps} custom={0.12} className="type-section-lead text-gray-400 mb-8">
                 Cuéntanos tu situación. Sin compromiso, sin formularios complejos. Solo una
                 conversación honesta sobre los retos de tu empresa y cómo podemos acompañarte.
               </motion.p>

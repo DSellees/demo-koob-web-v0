@@ -64,7 +64,7 @@ const ReimpulsoFlagshipCards = () => {
                 </span>
               </motion.h2>
               <motion.div {...revealProps} custom={0.12}>
-                <p className="text-pretty text-[1.05rem] leading-relaxed text-koob-gray-700 max-w-xl mb-3">
+                <p className="type-section-lead text-koob-gray-700 max-w-xl mb-3">
                   Cuando los resultados se tensan o las oportunidades crecen sin una dirección clara, ayudamos a tu empresa a volver a avanzar.
                 </p>
                 <SweepArrowLink to="/reimpulso" variant="light">

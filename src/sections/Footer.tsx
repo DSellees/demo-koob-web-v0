@@ -15,7 +15,7 @@ const Footer = () => {
               <Link to="/" className="mb-4 inline-flex items-center">
                 <img src={`${import.meta.env.BASE_URL}logo-koob-black.svg`} alt="KOOB Advisory" className="block h-6 w-auto" />
               </Link>
-              <p className="text-sm text-koob-gray-700 leading-relaxed mb-4 max-w-xs">
+              <p className="text-base text-koob-gray-700 leading-relaxed mb-4 max-w-sm">
                 Consultoría estratégica para empresas en momentos de transformación, crecimiento
                 y cambio. Experiencia ejecutiva real, implicación directa.
               </p>
@@ -32,22 +32,22 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/que-hacemos" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
+                  <Link to="/servicios" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
                     Recursos Humanos
                   </Link>
                 </li>
                 <li>
-                  <Link to="/que-hacemos" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
+                  <Link to="/servicios" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
                     Comunicación Interna
                   </Link>
                 </li>
                 <li>
-                  <Link to="/que-hacemos" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
+                  <Link to="/servicios" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
                     Ecosistema de Expertos
                   </Link>
                 </li>
                 <li>
-                  <Link to="/que-hacemos" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
+                  <Link to="/servicios" className="text-sm text-koob-gray-700 hover:text-black transition-colors">
                     Ver todas las áreas
                   </Link>
                 </li>

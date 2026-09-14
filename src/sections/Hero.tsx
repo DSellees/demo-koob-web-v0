@@ -85,32 +85,25 @@ const Hero = () => {
               variants={heroItem}
               className="type-eyebrow text-koob-gold-ink mb-6"
             >
-              Consultoría estratégica para pymes
+              Consultoría estratégica
             </motion.p>
 
             {/* Headline — bold, authoritative */}
             <motion.h1
               variants={heroItem}
-              className="type-display-hero text-black mb-8"
+              className="type-display-hero text-black mb-12"
             >
-              Recupera el control.<br />Reimpulsa tu empresa.
+              Define el rumbo.<br />Reimpulsa tu empresa.
             </motion.h1>
 
             {/* Body — lg size for readability */}
             <motion.p
               variants={heroItem}
-              className="type-lead-flagship text-koob-gray-700 mb-4 max-w-2xl"
+              className="type-lead-flagship font-normal leading-[1.45] text-koob-gray-700 mb-14 max-w-2xl"
             >
-              Si no sabes qué frena tu empresa, necesitas más que un diagnóstico. En KOOB
-              detectamos el bloqueo, tomamos decisiones y las ejecutamos contigo.
-            </motion.p>
-
-            {/* Cierre — misma fuente, tamaño y color que el subtítulo */}
-            <motion.p
-              variants={heroItem}
-              className="type-lead-flagship text-koob-gray-700 mb-10 max-w-2xl"
-            >
-              Estrategia, negocio y experiencia ejecutiva para conseguir resultados.
+              Cuando notas que los resultados podrían ser mejores, el primer paso es un diagnóstico
+              claro. En KOOB nos implicamos contigo para detectar el bloqueo y tomar las decisiones
+              que la empresa necesita.
             </motion.p>
 
             {/* CTA block */}
@@ -183,7 +176,7 @@ const Hero = () => {
           </motion.div>
         ))}
         <Link
-          to="/que-hacemos"
+          to="/servicios"
           className="strip-cell-space flex items-center justify-center gap-3 group cursor-pointer"
         >
           <span className="type-strip-action text-gray-400 group-hover:text-white transition-colors duration-200">Ver servicios de consultoría</span>
@@ -226,7 +219,7 @@ const Hero = () => {
 
         {/* Ver servicios de consultoría — pegado a la izquierda, justo tras la barra negra */}
         <InlineArrowLink
-          to="/que-hacemos"
+          to="/servicios"
           className="absolute left-[calc(63%+3rem)] top-1/2 -translate-y-1/2"
         >
           Ver servicios de consultoría

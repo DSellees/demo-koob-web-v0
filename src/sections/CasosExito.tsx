@@ -64,7 +64,7 @@ const CasosExito = () => (
               Proyectos reales.<br />Impacto medible.
             </h2>
           </motion.div>
-          <motion.p {...revealProps} custom={0.08} className="max-w-md text-base leading-relaxed text-koob-gray-500">
+          <motion.p {...revealProps} custom={0.08} className="type-section-lead max-w-md text-koob-gray-500">
             Detrás de cada proyecto hay una empresa que hoy funciona distinto. Eso es lo único que nos interesa contar.
           </motion.p>
         </div>

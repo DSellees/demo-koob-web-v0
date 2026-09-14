@@ -26,7 +26,7 @@ const TeamPreview = () => {
               <h2 className="text-[clamp(2rem,2.6vw,3rem)] font-bold leading-[0.98] tracking-[-0.045em] text-white">
                 Comité asesor de KOOB
               </h2>
-              <p className="text-pretty mt-6 max-w-sm text-[1.05rem] leading-relaxed text-gray-300">
+              <p className="type-section-lead mt-6 max-w-sm text-gray-300">
                 Directivos con trayectoria contrastada que aportan criterio externo a los proyectos de KOOB Advisory.
               </p>
             </motion.div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const STORAGE_KEY = 'koob-cookie-consent';
@@ -117,18 +118,56 @@ const CookieConsent = () => {
           exit={{ y: 40, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="page-container max-h-[80vh] overflow-y-auto py-6">
+          <div className="page-container max-h-[85vh] overflow-y-auto py-6">
             <div className="content-container">
-              <h2 className="text-lg font-bold tracking-[-0.01em] text-black">
-                Valoramos tu privacidad
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-koob-gray-700">
-                Usamos cookies necesarias para que el sitio funcione y, solo con tu consentimiento, cookies opcionales para mejorar tu experiencia. Puedes aceptarlas, rechazarlas o personalizarlas. Más información en nuestra{' '}
-                <Link to="/cookies" className="underline underline-offset-2 hover:text-black">
-                  política de cookies
-                </Link>
-                .
-              </p>
+              <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
+                <div className="lg:flex-1">
+                  <h2 className="text-lg font-bold tracking-[-0.01em] text-black">
+                    Valoramos tu privacidad
+                  </h2>
+                  <p className="mt-2 max-w-3xl text-sm leading-relaxed text-koob-gray-700">
+                    Usamos cookies necesarias para que el sitio funcione y, solo con tu
+                    consentimiento, cookies para analizar el tráfico y personalizar contenidos. Al
+                    pulsar «Aceptar todo» das tu consentimiento a nuestro uso de las cookies. Más
+                    información en nuestra{' '}
+                    <Link to="/cookies" className="underline underline-offset-2 hover:text-black">
+                      política de cookies
+                    </Link>
+                    .
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:shrink-0 lg:flex-nowrap">
+                  <button
+                    type="button"
+                    onClick={() => setShowPreferences((s) => !s)}
+                    aria-expanded={showPreferences}
+                    className="inline-flex items-center justify-center gap-2 border border-black/25 px-5 py-3 text-sm font-semibold text-black transition-colors duration-200 hover:border-black"
+                  >
+                    Personalizar
+                    <ChevronDown
+                      aria-hidden="true"
+                      className={`h-4 w-4 transition-transform duration-200 ${
+                        showPreferences ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={rejectAll}
+                    className="bg-black px-5 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-koob-gray-900"
+                  >
+                    Rechazar todo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={acceptAll}
+                    className="bg-black px-5 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-koob-gray-900"
+                  >
+                    Aceptar todo
+                  </button>
+                </div>
+              </div>
 
               <AnimatePresence initial={false}>
                 {showPreferences && (
@@ -181,42 +220,17 @@ const CookieConsent = () => {
                 )}
               </AnimatePresence>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <button
-                  type="button"
-                  onClick={() => setShowPreferences((s) => !s)}
-                  className="order-3 text-sm font-semibold text-koob-gray-700 underline underline-offset-2 hover:text-black sm:order-1 sm:mr-auto"
-                >
-                  {showPreferences ? 'Ocultar opciones' : 'Personalizar'}
-                </button>
-
-                {showPreferences ? (
+              {showPreferences && (
+                <div className="mt-6">
                   <button
                     type="button"
                     onClick={savePreferences}
-                    className="order-1 bg-black px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-koob-gray-900 sm:order-2"
+                    className="w-full bg-black px-5 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-koob-gray-900 sm:w-auto"
                   >
                     Guardar mis preferencias
                   </button>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      onClick={rejectAll}
-                      className="order-1 border border-black/20 px-6 py-3 text-sm font-semibold text-black transition-colors duration-200 hover:border-black sm:order-2"
-                    >
-                      Rechazar todo
-                    </button>
-                    <button
-                      type="button"
-                      onClick={acceptAll}
-                      className="order-2 bg-black px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-koob-gray-900 sm:order-3"
-                    >
-                      Aceptar todo
-                    </button>
-                  </>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

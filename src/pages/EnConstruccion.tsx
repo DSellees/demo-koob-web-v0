@@ -39,7 +39,7 @@ const EnConstruccion = ({ section, url }: EnConstruccionProps) => {
             </motion.h1>
             <motion.p
               variants={staggerItem}
-              className="text-pretty mx-auto mt-6 max-w-xl text-[1.05rem] leading-relaxed text-gray-300"
+              className="type-section-lead mx-auto mt-6 max-w-xl text-gray-300"
             >
               Estamos puliendo los últimos detalles para contarte esto como se merece. Mientras tanto, escríbenos y hablamos directamente.
             </motion.p>

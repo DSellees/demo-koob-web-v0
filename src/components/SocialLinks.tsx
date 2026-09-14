@@ -25,6 +25,9 @@ const socialLinks = [
     label: 'YouTube',
     Icon: Youtube,
     hoverClass: 'hover:text-[#FF0000]',
+    // El glifo de YouTube en lucide ocupa menos del viewBox que LinkedIn/Instagram;
+    // se agranda un punto para que ópticamente iguale a los demás.
+    scaleClass: 'scale-[1.18]',
   },
 ];
 
@@ -67,7 +70,7 @@ const SocialLinks = ({
           },
         }}
       >
-        {socialLinks.map(({ href, label, Icon, hoverClass }) => (
+        {socialLinks.map(({ href, label, Icon, hoverClass, scaleClass }) => (
           <motion.a
             key={label}
             href={href}
@@ -77,7 +80,7 @@ const SocialLinks = ({
             variants={iconAppear}
             className={linkClass(hoverClass)}
           >
-            <Icon className={iconClassName} />
+            <Icon className={`${iconClassName} ${scaleClass ?? ''}`} />
           </motion.a>
         ))}
       </motion.div>
@@ -86,7 +89,7 @@ const SocialLinks = ({
 
   return (
     <div className={`flex items-center ${gapClassName}`}>
-      {socialLinks.map(({ href, label, Icon, hoverClass }) => (
+      {socialLinks.map(({ href, label, Icon, hoverClass, scaleClass }) => (
         <a
           key={label}
           href={href}
@@ -95,7 +98,7 @@ const SocialLinks = ({
           aria-label={label}
           className={linkClass(hoverClass)}
         >
-          <Icon className={iconClassName} />
+          <Icon className={`${iconClassName} ${scaleClass ?? ''}`} />
         </a>
       ))}
     </div>

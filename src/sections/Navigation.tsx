@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeUp, slideLeft, slideRight, staggerContainer } from '../lib/animations';
 
 const navLinks = [
   { label: 'Inicio', href: '/' },
-  {
-    label: 'Consultoría',
-    href: '/que-hacemos',
-    children: [
-      { label: 'KOOB Reimpulso', href: '/reimpulso', desc: 'Transformación empresarial urgente' },
-      { label: 'Qué ofrecemos', href: '/que-hacemos', desc: 'Todas las áreas de especialización' },
-    ],
-  },
   { label: 'Quiénes somos', href: '/quienes-somos' },
+  { label: 'Servicios', href: '/servicios' },
   { label: 'Recursos', href: '/insights' },
   { label: 'Podcast', href: '/podcast' },
   { label: 'Contacto', href: '/contacto' },
@@ -27,7 +20,6 @@ interface NavigationProps {
 const Navigation = ({ variant = 'light' }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
   const isDark = variant === 'dark';
 
@@ -40,7 +32,6 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       setIsMobileMenuOpen(false);
-      setOpenDropdown(null);
     });
     return () => window.cancelAnimationFrame(frame);
   }, [location.pathname]);
@@ -82,66 +73,20 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
               initial="hidden"
               animate="visible"
             >
-              {navLinks.map((link) =>
-                link.children ? (
-                  <motion.div
-                    key={link.label}
-                    variants={fadeUp}
-                    className="relative"
-                    onMouseEnter={() => setOpenDropdown(link.label)}
-                    onMouseLeave={() => setOpenDropdown(null)}
+              {navLinks.map((link) => (
+                <motion.div key={link.label} variants={fadeUp}>
+                  <Link
+                    to={link.href}
+                    className={`text-[1rem] transition-colors duration-200 ${
+                      isActive(link.href)
+                        ? isDark ? 'text-white font-medium' : 'text-black font-medium'
+                        : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
+                    }`}
                   >
-                    <button
-                      className={`flex items-center gap-1 text-[1rem] transition-colors duration-200 cursor-pointer ${
-                        isActive(link.href)
-                          ? isDark ? 'text-white font-medium' : 'text-black font-medium'
-                          : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
-                      }`}
-                    >
-                      {link.label}
-                      <ChevronDown className={`w-[0.945rem] h-[0.945rem] transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
-                    </button>
-
-                    <AnimatePresence>
-                      {openDropdown === link.label && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 6 }}
-                          transition={{ duration: 0.18 }}
-                          className="absolute top-full left-0 mt-2 w-64 bg-white border border-hairline-light shadow-lg overflow-hidden"
-                        >
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.label}
-                              to={child.href}
-                              className="flex flex-col px-5 py-4 hover:bg-koob-beige transition-colors border-b border-hairline-subtle last:border-0"
-                            >
-                              <span className="text-sm font-medium text-black">{child.label}</span>
-                              {child.desc && (
-                                <span className="text-xs text-koob-gray-500 mt-0.5">{child.desc}</span>
-                              )}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                ) : (
-                  <motion.div key={link.label} variants={fadeUp}>
-                    <Link
-                      to={link.href}
-                      className={`text-[1rem] transition-colors duration-200 ${
-                        isActive(link.href)
-                          ? isDark ? 'text-white font-medium' : 'text-black font-medium'
-                          : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                )
-              )}
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
             </motion.div>
 
             {/* CTA desktop */}
@@ -234,20 +179,6 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
                   >
                     {link.label}
                   </Link>
-                  {link.children && (
-                    <div className="pl-4 pb-2 space-y-1">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          to={child.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="block py-2 text-base text-koob-gray-700 hover:text-black transition-colors"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </motion.div>
               ))}
 

@@ -7,7 +7,7 @@ const signals = [
   {
     icon: Search,
     title: 'Señales de bloqueo',
-    description: 'Los resultados empresariales pierden fuerza, los proyectos estratégicos no avanzan y la toma de decisiones depende demasiado de la dirección.',
+    description: 'Los resultados empresariales pierden fuerza, los proyectos estratégicos no avanzan y la toma de decisiones aún no se comparte lo suficiente.',
   },
   {
     icon: TrendingDown,
@@ -46,13 +46,13 @@ const ClientSituation = () => {
             {/* Izquierda: tesis + señales */}
             <div>
               <motion.p {...revealProps} className="type-eyebrow text-koob-gold mb-5">
-                Señales de alerta empresarial
+                Señales de alerta
               </motion.p>
               <motion.h2 {...revealProps} custom={0.06} className="type-section-title text-white mb-6">
                 El bloqueo no aparece de repente
               </motion.h2>
-              <motion.p {...revealProps} custom={0.12} className="text-pretty text-[1.05rem] leading-relaxed text-gray-300 mb-14 max-w-xl">
-                Decisiones que se posponen, crecimiento sin estructura y cambios que no arrancan. Reconocerlo a tiempo permite recuperar el control.
+              <motion.p {...revealProps} custom={0.12} className="type-section-lead text-gray-300 mb-14 max-w-xl">
+                Decisiones que se posponen, crecimiento sin estructura y cambios que no arrancan. Reconocerlo a tiempo marca la diferencia entre improvisar y decidir con criterio.
               </motion.p>
 
               <div className="grid sm:grid-cols-2 gap-10">

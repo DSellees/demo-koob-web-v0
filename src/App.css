@@ -16,11 +16,8 @@ section {
   outline-offset: 2px;
 }
 
-/* Selection */
-::selection {
-  background: var(--koob-black);
-  color: #ffffff;
-}
+/* Selección: definida una sola vez en index.css (evita que este archivo,
+   que se importa después, la pise con otro color). */
 
 /* Responsive typography */
 @media (max-width: 768px) {
