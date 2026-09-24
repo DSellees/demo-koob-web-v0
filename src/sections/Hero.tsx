@@ -102,7 +102,7 @@ const Hero = () => {
               className="type-lead-flagship font-normal leading-[1.45] text-koob-gray-700 mb-14 max-w-2xl"
             >
               Cuando notas que los resultados podrían ser mejores, el primer paso es un diagnóstico
-              claro. En KOOB nos implicamos contigo para detectar el bloqueo y tomar las decisiones
+              claro. En KOOB, nos implicamos contigo para detectar el bloqueo y tomar las decisiones
               que la empresa necesita.
             </motion.p>
 

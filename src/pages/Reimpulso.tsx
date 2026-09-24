@@ -64,7 +64,7 @@ const momentos = [
     title: 'Empresas con potencial',
     icon: 'icons/empresa-potencial.svg',
     description:
-      'Compañías listas para crecer pero, con incertidumbre estratégica. Tienen el producto y el mercado, pero faltan las estructuras y la hoja de ruta para escalar.',
+      'Compañías listas para crecer pero con incertidumbre estratégica. Tienen el producto y el mercado, pero faltan las estructuras y la hoja de ruta para escalar.',
     points: [
       '¿Tu negocio tiene potencial que no acaba de despegar?',
       '¿Necesitas claridad para elegir entre varios caminos?',
@@ -189,8 +189,8 @@ const Reimpulso = () => {
                 className="shrink-0 lg:flex lg:max-w-sm lg:flex-col lg:justify-center"
               >
                 <p className="type-section-lead text-gray-400">
-                  La inacción es el mayor riesgo. Agenda una primera sesión exploratoria sin
-                  compromiso para evaluar tu caso.
+                  Toda buena decisión empieza con una conversación. Agenda una primera sesión
+                  exploratoria, sin compromiso, y vemos juntos tu caso.
                 </p>
                 <div className="mt-6">
                   <SweepArrowLink to="/contacto" variant="dark">

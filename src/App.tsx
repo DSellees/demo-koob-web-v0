@@ -19,6 +19,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Reimpulso from './pages/Reimpulso';
 import Servicios from './pages/Servicios';
 import QuienesSomos from './pages/QuienesSomos';
+import Contacto from './pages/Contacto';
 import Insights from './pages/Insights';
 import InsightPost from './pages/InsightPost';
 import Legal from './pages/Legal';
@@ -62,7 +63,7 @@ function App() {
               <Route path="/reimpulso" element={<Reimpulso />} />
               <Route path="/servicios" element={<Servicios />} />
               <Route path="/quienes-somos" element={<QuienesSomos />} />
-              <Route path="/contacto" element={<EnConstruccion section="Contacto" url="https://koobadvisory.com/contacto" />} />
+              <Route path="/contacto" element={<Contacto />} />
               <Route path="/insights" element={<Insights />} />
               <Route path="/insights/:slug" element={<InsightPost />} />
               <Route path="/podcast" element={<EnConstruccion section="Podcast" url="https://koobadvisory.com/podcast" />} />

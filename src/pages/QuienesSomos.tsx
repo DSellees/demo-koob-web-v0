@@ -31,19 +31,19 @@ const diferenciales = [
     n: '01',
     title: 'Experiencia real en empresa',
     description:
-      'Hemos ocupado distintas posiciones y trabajado en múltiples sectores, lo que nos da una visión amplia y a la vez especializada de cada proyecto.',
+      'Hemos ocupado distintas posiciones de responsabilidad y trabajado en múltiples sectores, lo que nos aporta una visión amplia y, a la vez, especializada de cada proyecto.',
   },
   {
     n: '02',
     title: 'Enfoque práctico',
     description:
-      'Priorizamos soluciones aplicables y efectivas frente a los planteamientos únicamente teóricos.',
+      'Priorizamos soluciones aplicables y efectivas, alejadas de planteamientos únicamente teóricos.',
   },
   {
     n: '03',
     title: 'Trabajo integrado con tus equipos',
     description:
-      'Aseguramos la transferencia de conocimiento: al terminar el proyecto, la capacidad queda instalada dentro de la organización.',
+      'Aseguramos la transferencia de conocimiento: al terminar el proyecto, el conocimiento y las capacidades quedan dentro de la organización.',
   },
   {
     n: '04',
@@ -55,7 +55,7 @@ const diferenciales = [
     n: '05',
     title: 'Compromiso compartido',
     description:
-      'En determinados proyectos alineamos parte de nuestra remuneración a la consecución de objetivos, compartiendo el compromiso con el cliente.',
+      'En determinados proyectos, vinculamos parte de nuestra remuneración a la consecución de objetivos, compartiendo así el compromiso con el cliente.',
   },
 ];
 
@@ -140,46 +140,62 @@ const QuienesSomos = () => {
               </div>
             </div>
 
-            {/* Tira horizontal: vídeo + equipo, altura uniforme y contenida */}
+            {/* Tira horizontal: equipo · vídeo (centro) · oficina. Celdas 16/9. La
+                portada es el fotograma del segundo 1 sin las franjas negras; estas solo se ven al dar al play. */}
             <div className="section-content-gap grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {/* TODO: sustituir por el vídeo de lanzamiento del Drive cuando esté disponible. */}
               <motion.div
                 {...revealProps}
-                className="border-hairline-light relative h-56 overflow-hidden border lg:h-64"
+                className="border-hairline-light relative aspect-video overflow-hidden border"
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}images/en-koob-carretera.webp`}
+                  alt="Una carretera abierta hacia el horizonte"
+                  width={1280}
+                  height={720}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover grayscale contrast-[0.92] brightness-[0.94] transition-[filter] duration-500 hover:grayscale-0"
+                />
+                {/* Velo suave para igualar el tono apagado del fotograma original */}
+                <div className="pointer-events-none absolute inset-0 bg-black/15" aria-hidden="true" />
+                <span className="pointer-events-none absolute inset-0 flex items-center justify-center pb-[6%] text-[clamp(1.05rem,1.7vw,1.6rem)] font-bold tracking-[-0.02em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
+                  En KOOB
+                </span>
+              </motion.div>
+
+              {/* Vídeo en la celda central. TODO: sustituir por el vídeo de lanzamiento del Drive. */}
+              <motion.div
+                {...revealProps}
+                custom={0.08}
+                className="border-hairline-light relative aspect-video overflow-hidden border"
               >
                 <LocalVideoEmbed
                   src={`${import.meta.env.BASE_URL}videos/sobre-koob-nosotros.mp4`}
-                  poster={`${import.meta.env.BASE_URL}images/equipo-sesion-estrategica-koob.png`}
+                  poster={`${import.meta.env.BASE_URL}images/portada-sobre-koob-segundo-1.jpg`}
                   title="KOOB Advisory — Quiénes somos"
                 />
               </motion.div>
 
               <motion.div
                 {...revealProps}
-                custom={0.08}
-                className="border-hairline-light relative h-56 overflow-hidden border lg:h-64"
-              >
-                <img
-                  src={`${import.meta.env.BASE_URL}images/equipo-directivo-experimentado-traje-koob.png`}
-                  alt="Equipo directivo de KOOB con experiencia en dirección de empresas"
-                  loading="lazy"
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover object-top grayscale transition-[filter] duration-500 hover:grayscale-0"
-                />
-              </motion.div>
-
-              <motion.div
-                {...revealProps}
                 custom={0.16}
-                className="border-hairline-light relative h-56 overflow-hidden border lg:h-64"
+                className="border-hairline-light relative aspect-video overflow-hidden border"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}images/oficina-koob-sala-reuniones.png`}
-                  alt="Sala de reuniones de KOOB Advisory"
+                  src={`${import.meta.env.BASE_URL}images/acompanamos-bicicleta.webp`}
+                  alt="Un adulto acompaña a un niño que aprende a montar en bicicleta al atardecer"
+                  width={1280}
+                  height={720}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover object-top grayscale transition-[filter] duration-500 hover:grayscale-0"
+                  className="absolute inset-0 h-full w-full object-cover grayscale transition-[filter] duration-500 hover:grayscale-0"
                 />
+                {/* Velo suave y texto centrado, igual que "En KOOB". pointer-events-none
+                    para que el hover llegue a la imagen y recupere el color. */}
+                <div className="pointer-events-none absolute inset-0 bg-black/15" aria-hidden="true" />
+                <span className="pointer-events-none absolute inset-0 flex items-center justify-center pb-[6%] text-[clamp(1.05rem,1.7vw,1.6rem)] font-bold tracking-[-0.02em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
+                  Acompañamos
+                </span>
               </motion.div>
             </div>
           </div>
@@ -241,10 +257,12 @@ const QuienesSomos = () => {
             <div className="flex flex-col gap-10 py-16 lg:flex-row lg:items-stretch lg:justify-between lg:gap-16 lg:py-20">
               <motion.div
                 {...revealProps}
-                className="max-w-xl lg:flex lg:flex-col lg:justify-center"
+                className="max-w-2xl lg:flex lg:flex-col lg:justify-center"
               >
                 <h2 className="type-section-title text-black">
-                  Una red de experiencia directiva al servicio de tu empresa
+                  Una red de experiencia
+                  <br className="hidden sm:block" /> directiva al servicio
+                  <br className="hidden sm:block" /> de tu empresa
                 </h2>
               </motion.div>
               <motion.div

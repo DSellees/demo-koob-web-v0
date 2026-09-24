@@ -80,11 +80,21 @@ module.exports = {
           "0%,70%,100%": { opacity: "1" },
           "20%,50%": { opacity: "0" },
         },
+        // Bote breve (doble rebote) al inicio de un ciclo de 5 s; el resto del
+        // ciclo queda quieto. Se usa en el "Mucho más" de /servicios.
+        "bote-cada-5s": {
+          "0%,20%,100%": { transform: "translateY(0)", animationTimingFunction: "ease-out" },
+          "5%": { transform: "translateY(-8px)", animationTimingFunction: "ease-in" },
+          "10%": { transform: "translateY(0)", animationTimingFunction: "ease-out" },
+          "14%": { transform: "translateY(-4px)", animationTimingFunction: "ease-in" },
+          "18%": { transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        "bote-cada-5s": "bote-cada-5s 5s linear infinite",
       },
     },
   },

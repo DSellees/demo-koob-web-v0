@@ -9,11 +9,15 @@ interface BaseProps {
   variant?: Variant;
   layout?: Layout;
   className?: string;
+  /** Solo para lectores de pantalla, cuando el texto visible no basta. */
+  ariaLabel?: string;
 }
 
+// Exactamente uno de: ruta interna (`to`), enlace externo/mailto (`href`) o botón (`onClick`).
 type SweepArrowLinkProps =
-  | (BaseProps & { to: string; onClick?: never })
-  | (BaseProps & { to?: never; onClick: () => void });
+  | (BaseProps & { to: string; href?: never; onClick?: never; external?: never })
+  | (BaseProps & { href: string; external?: boolean; to?: never; onClick?: never })
+  | (BaseProps & { onClick: () => void; to?: never; href?: never; external?: never });
 
 const variantClasses: Record<Variant, { text: string; hoverText: string; sweep: string }> = {
   light: { text: 'text-black', hoverText: 'hover:text-white', sweep: 'bg-black' },
@@ -42,7 +46,7 @@ const ArrowIcon = () => (
  * solid color on hover. Used for every inline/full-width call-to-action
  * across the site so size, animation, and color logic stay in one place.
  */
-const SweepArrowLink = ({ children, to, onClick, variant = 'light', layout = 'inline', className = '' }: SweepArrowLinkProps) => {
+const SweepArrowLink = ({ children, to, href, external, onClick, variant = 'light', layout = 'inline', className = '', ariaLabel }: SweepArrowLinkProps) => {
   const { text, hoverText, sweep } = variantClasses[variant];
   const rootClass = `type-inline-link group relative inline-flex items-center overflow-hidden font-semibold transition-colors duration-300 ${text} ${hoverText} ${className}`;
 
@@ -65,14 +69,27 @@ const SweepArrowLink = ({ children, to, onClick, variant = 'light', layout = 'in
 
   if (to) {
     return (
-      <Link to={to} className={rootClass}>
+      <Link to={to} className={rootClass} aria-label={ariaLabel}>
         {content}
       </Link>
     );
   }
 
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={rootClass}
+        aria-label={ariaLabel}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        {content}
+      </a>
+    );
+  }
+
   return (
-    <button type="button" onClick={onClick} className={`${rootClass} w-full`}>
+    <button type="button" onClick={onClick} aria-label={ariaLabel} className={`${rootClass} w-full`}>
       {content}
     </button>
   );

@@ -57,7 +57,17 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
               transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
               className="flex-shrink-0"
             >
-              <Link to="/" className="flex items-center">
+              <Link
+                to="/"
+                className="flex items-center"
+                onClick={(e) => {
+                  // Ya en la home: el enlace no navega, así que subimos al inicio a mano.
+                  if (location.pathname === '/') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
                 <img
                   src={`${import.meta.env.BASE_URL}logo-koob-black.svg`}
                   alt="KOOB Advisory"
@@ -68,7 +78,7 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
 
             {/* Desktop Nav — resto de contenido +8% */}
             <motion.div
-              className="hidden lg:flex items-center gap-8"
+              className="hidden lg:flex items-center gap-8 xl:gap-11"
               variants={staggerContainer}
               initial="hidden"
               animate="visible"
@@ -77,9 +87,9 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
                 <motion.div key={link.label} variants={fadeUp}>
                   <Link
                     to={link.href}
-                    className={`text-[1rem] transition-colors duration-200 ${
+                    className={`text-[1.0625rem] font-medium transition-colors duration-200 ${
                       isActive(link.href)
-                        ? isDark ? 'text-white font-medium' : 'text-black font-medium'
+                        ? isDark ? 'text-white' : 'text-black'
                         : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
                     }`}
                   >

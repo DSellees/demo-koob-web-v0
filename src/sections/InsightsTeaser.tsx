@@ -1,58 +1,40 @@
-import { ArrowRight, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { insights } from '../data/insights';
+import PostCarousel from '../components/PostCarousel';
+import Reveal from '../components/Reveal';
 import SweepArrowLink from '../components/SweepArrowLink';
 
-const latest = [...insights]
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  .slice(0, 3);
+// Todos los artículos, del más reciente al más antiguo: con dos y media tarjetas
+// visibles hay recorrido de sobra para que la tira avance sola.
+const latest = [...insights].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+);
 
+/**
+ * Insights en la home: tira de artículos con dos tarjetas y media visibles y
+ * avance automático (se pausa al interactuar). El titular invita a leer: admite
+ * un "nos habría venido bien" propio en vez de señalar al lector.
+ */
 const InsightsTeaser = () => (
-  <section id="insights" className="section-space-editorial bg-koob-beige" aria-labelledby="insights-title">
+  <section id="insights" className="section-space-editorial overflow-hidden bg-koob-beige" aria-labelledby="insights-title">
     <div className="page-container">
       <div className="content-container">
         <div className="section-heading-row">
-          <div>
+          <Reveal>
             <p className="type-eyebrow mb-5 text-koob-gold-ink">Insights</p>
             <h2 id="insights-title" className="type-section-title text-black">
-              Seguimos pensando en esto
+              Lo que nos gustaría<br className="hidden lg:block" /> haber leído antes
             </h2>
-          </div>
-          <SweepArrowLink to="/insights" variant="light" className="self-start md:self-auto">
-            Ver todos los insights
-          </SweepArrowLink>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <SweepArrowLink to="/insights" variant="light" className="self-start md:self-auto">
+              Ver todos los insights
+            </SweepArrowLink>
+          </Reveal>
         </div>
 
-        <div className="grid gap-grid md:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr">
-          {latest.map((post) => (
-            <article
-              key={post.slug}
-              className="group relative flex min-h-80 flex-col border border-hairline-light bg-white module-padding transition-colors duration-200 hover:border-black"
-            >
-              <div className="mb-6 h-px w-9 bg-koob-gold-ink transition-[width] duration-200 group-hover:w-14" />
-              <div className="mb-4 flex flex-wrap items-center gap-3">
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-koob-gold-ink">
-                  {post.category}
-                </span>
-                <span className="h-3 w-px bg-black/20" aria-hidden="true" />
-                <span className="flex items-center gap-1.5 text-xs text-koob-gray-500">
-                  <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-                  {post.readTime}
-                </span>
-              </div>
-              <h4 className="type-card-heading mb-4 text-black">{post.title}</h4>
-              <p className="type-body-small mb-8 text-koob-gray-500">{post.excerpt}</p>
-              <Link
-                to={`/insights/${post.slug}`}
-                aria-label={`Leer: ${post.title}`}
-                className="mt-auto inline-flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-black transition-colors after:absolute after:inset-0 after:content-[''] hover:text-koob-gold-ink"
-              >
-                Leer más
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </article>
-          ))}
-        </div>
+        <Reveal delay={0.1}>
+          <PostCarousel posts={latest} visible={2.5} autoplayMs={4500} />
+        </Reveal>
       </div>
     </div>
   </section>
