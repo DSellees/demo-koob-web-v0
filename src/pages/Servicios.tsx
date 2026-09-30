@@ -408,7 +408,7 @@ const Servicios = () => {
             <div className="section-heading-row section-heading-gap-large">
               <motion.div {...revealProps} className="max-w-xl">
                 <p className="type-eyebrow mb-5 text-koob-gold-ink">Servicios</p>
-                <h2 className="type-section-title text-black">Cuatro formas de acompañarte</h2>
+                <h2 className="type-section-title text-black">Nuestros servicios destacados</h2>
               </motion.div>
               <motion.p
                 {...revealProps}
@@ -512,7 +512,7 @@ const Servicios = () => {
         <span
           ref={muchoMasRef}
           aria-hidden="true"
-          className="absolute bottom-4 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           {/* Bota cada 5 s. Solo se anima mientras está en pantalla (Regla de la
               Animación Visible) y se detiene con prefers-reduced-motion. */}

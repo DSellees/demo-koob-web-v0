@@ -125,15 +125,6 @@ const QuienesSomos = () => {
                   custom={0.18}
                   className="type-section-lead text-koob-gray-500"
                 >
-                  Hemos ocupado posiciones de dirección en empresas multinacionales y compañías
-                  líderes, en áreas como estrategia, comercial, operaciones, finanzas, tecnología,
-                  personas y comunicación.
-                </motion.p>
-                <motion.p
-                  {...revealProps}
-                  custom={0.24}
-                  className="type-section-lead mt-4 text-koob-gray-500"
-                >
                   Por eso, en KOOB no nos limitamos a analizar tu empresa. Nos implicamos para
                   entender el reto, aportar perspectiva y convertir las decisiones en acción.
                 </motion.p>
