@@ -17,13 +17,14 @@ const revealProps = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type FieldErrors = Partial<
-  Record<'nombre' | 'empresa' | 'email' | 'mensaje' | 'consent', string>
+  Record<'nombre' | 'empresa' | 'cargo' | 'email' | 'mensaje' | 'consent', string>
 >;
 
 const ContactCTA = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     empresa: '',
+    cargo: '',
     email: '',
     telefono: '',
     mensaje: '',
@@ -45,6 +46,7 @@ const ContactCTA = () => {
     const next: FieldErrors = {};
     if (!formData.nombre.trim()) next.nombre = 'Dinos cómo te llamas.';
     if (!formData.empresa.trim()) next.empresa = 'Indica el nombre de tu empresa.';
+    if (!formData.cargo.trim()) next.cargo = 'Indica tu cargo.';
     if (!formData.email.trim()) next.email = 'Necesitamos un correo para responderte.';
     else if (!EMAIL_RE.test(formData.email.trim())) next.email = 'Ese correo no parece válido.';
     if (!formData.mensaje.trim()) next.mensaje = 'Cuéntanos brevemente tu situación.';
@@ -57,9 +59,9 @@ const ContactCTA = () => {
     setSubmitted(true);
   };
 
-  const fieldClass = (field: keyof FieldErrors) =>
+  const fieldClass = (field?: keyof FieldErrors) =>
     `w-full border bg-white/5 px-4 py-3 text-white placeholder-gray-500 transition-colors focus:outline-none ${
-      errors[field] ? 'border-koob-gold' : 'border-hairline-dark focus:border-koob-gold'
+      field && errors[field] ? 'border-koob-gold' : 'border-hairline-dark focus:border-koob-gold'
     }`;
 
   return (
@@ -163,27 +165,51 @@ const ContactCTA = () => {
                     </AnimatePresence>
                   </motion.div>
 
-                  <motion.div {...revealProps} custom={0.06}>
-                    <label htmlFor="empresa" className="block text-sm font-medium mb-2">
-                      Empresa *
-                    </label>
-                    <input
-                      id="empresa"
-                      name="empresa"
-                      type="text"
-                      value={formData.empresa}
-                      onChange={handleChange}
-                      aria-invalid={errors.empresa ? true : undefined}
-                      aria-describedby={errors.empresa ? 'error-empresa' : undefined}
-                      className={fieldClass('empresa')}
-                      placeholder="Nombre de tu empresa"
-                    />
-                    <AnimatePresence initial={false}>
-                      {errors.empresa && (
-                        <ValidationNote id="error-empresa">{errors.empresa}</ValidationNote>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <motion.div {...revealProps} custom={0.06}>
+                      <label htmlFor="empresa" className="block text-sm font-medium mb-2">
+                        Empresa *
+                      </label>
+                      <input
+                        id="empresa"
+                        name="empresa"
+                        type="text"
+                        value={formData.empresa}
+                        onChange={handleChange}
+                        aria-invalid={errors.empresa ? true : undefined}
+                        aria-describedby={errors.empresa ? 'error-empresa' : undefined}
+                        className={fieldClass('empresa')}
+                        placeholder="Nombre de tu empresa"
+                      />
+                      <AnimatePresence initial={false}>
+                        {errors.empresa && (
+                          <ValidationNote id="error-empresa">{errors.empresa}</ValidationNote>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+
+                    <motion.div {...revealProps} custom={0.09}>
+                      <label htmlFor="cargo" className="block text-sm font-medium mb-2">
+                        Cargo *
+                      </label>
+                      <input
+                        id="cargo"
+                        name="cargo"
+                        type="text"
+                        value={formData.cargo}
+                        onChange={handleChange}
+                        aria-invalid={errors.cargo ? true : undefined}
+                        aria-describedby={errors.cargo ? 'error-cargo' : undefined}
+                        className={fieldClass('cargo')}
+                        placeholder="Tu cargo"
+                      />
+                      <AnimatePresence initial={false}>
+                        {errors.cargo && (
+                          <ValidationNote id="error-cargo">{errors.cargo}</ValidationNote>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  </div>
 
                   <motion.div {...revealProps} custom={0.12}>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">

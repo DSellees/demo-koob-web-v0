@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { reveal, revealViewport, EASE } from '../lib/animations';
-import AutodiagnosticoModal from '../components/AutodiagnosticoModal';
 import SweepArrowLink from '../components/SweepArrowLink';
 
 // Cada elemento observa su propia visibilidad — ver "La Regla de la Animación
@@ -37,8 +35,6 @@ const popVariants = (duration: number, delay: number) => ({
 });
 
 const ReimpulsoFlagshipCards = () => {
-  const [autodiagnosticoOpen, setAutodiagnosticoOpen] = useState(false);
-
   return (
     <section
       id="reimpulso-cards"
@@ -320,7 +316,7 @@ const ReimpulsoFlagshipCards = () => {
               </div>
             </motion.div>
 
-            {/* Right column: outcome card + autodiagnóstico CTA card */}
+            {/* Right column: outcome card + diagnóstico CTA card */}
             <div className="flex flex-col gap-3 lg:h-full">
               <motion.div
                 initial="hidden"
@@ -329,21 +325,24 @@ const ReimpulsoFlagshipCards = () => {
                 variants={reveal}
                 className="flex flex-col border border-black/15 bg-white/60 p-6 sm:p-7 lg:basis-[30%] lg:justify-center"
               >
-                <p className="type-eyebrow text-[0.8rem] text-koob-gold-ink">Autodiagnóstico</p>
+                <p className="type-eyebrow text-[0.8rem] text-koob-gold-ink">Diagnóstico</p>
                 <h3 className="mt-3 text-xl font-bold leading-tight tracking-[-0.03em]">
                   ¿Es KOOB Reimpulso para tu empresa?
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-koob-gray-700">
-                  Responde a unas preguntas sobre tu situación y recibe una lectura inicial de si este servicio encaja contigo.
+                  Acompañamiento práctico para empresas que necesitan recuperar rentabilidad, ordenar sus prioridades o encontrar el camino para crecer.
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-koob-gray-700">
+                  Partimos de la realidad del negocio, identificamos dónde está el problema y dónde está la oportunidad y construimos un plan de acción para conseguir resultados.
                 </p>
 
                 <SweepArrowLink
-                  onClick={() => setAutodiagnosticoOpen(true)}
+                  to="/contacto"
                   variant="light"
                   layout="block"
-                  className="-mx-6 -mb-6 mt-5 border-t border-black/15 sm:-mx-7 sm:-mb-7"
+                  className="-mx-6 -mb-6 mt-5 w-full border-t border-black/15 sm:-mx-7 sm:-mb-7"
                 >
-                  Empezar el autodiagnóstico
+                  Hablar con un experto
                 </SweepArrowLink>
               </motion.div>
 
@@ -383,11 +382,6 @@ const ReimpulsoFlagshipCards = () => {
           </div>
         </div>
       </div>
-
-      <AutodiagnosticoModal
-        open={autodiagnosticoOpen}
-        onClose={() => setAutodiagnosticoOpen(false)}
-      />
     </section>
   );
 };

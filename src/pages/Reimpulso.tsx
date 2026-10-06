@@ -52,10 +52,10 @@ const momentos = [
     title: 'Empresas con tensión en resultados',
     icon: 'icons/tension-resultados.svg',
     description:
-      'Organizaciones donde los números empiezan a generar tensión. Los márgenes se estrechan, la tesorería preocupa y existen dudas sobre la viabilidad futura del modelo actual.',
+      'Los márgenes se estrechan. Tesorería que preocupa y las decisiones pesan cada vez más.',
     points: [
       '¿Los números ya no acompañan como antes?',
-      '¿La rentabilidad pesa cada vez más sobre cada decisión?',
+      '¿La rentabilidad ya no te acompaña?',
       '¿Te enfrentas a decisiones difíciles sin margen de error?',
     ],
     tone: 'dark' as const,
@@ -64,7 +64,7 @@ const momentos = [
     title: 'Empresas con potencial',
     icon: 'icons/empresa-potencial.svg',
     description:
-      'Compañías listas para crecer pero con incertidumbre estratégica. Tienen el producto y el mercado, pero faltan las estructuras y la hoja de ruta para escalar.',
+      'Hay producto y mercado, pero falta estructura y una hoja de ruta para escalar.',
     points: [
       '¿Tu negocio tiene potencial que no acaba de despegar?',
       '¿Necesitas claridad para elegir entre varios caminos?',
@@ -106,15 +106,20 @@ const Reimpulso = () => {
                   </SweepArrowLink>
                 </motion.div>
               </div>
-              <motion.p
+              <motion.div
                 {...revealProps}
                 custom={0.18}
-                className="type-section-lead max-w-xl text-gray-300"
+                className="type-section-lead max-w-xl space-y-4 text-gray-300"
               >
-                Hay momentos en los que una empresa deja de avanzar como debería. Los resultados
-                empiezan a tensarse. O tienes ideas y oportunidades… pero no claridad sobre cómo
-                seguir avanzando. En ambos casos, podemos ayudarte a recuperar foco y dirección.
-              </motion.p>
+                <p>
+                  Acompañamiento práctico para empresas que necesitan recuperar rentabilidad,
+                  ordenar sus prioridades o encontrar el camino para crecer.
+                </p>
+                <p>
+                  Partimos de la realidad del negocio, identificamos dónde está el problema y dónde
+                  está la oportunidad y construimos un plan de acción para conseguir resultados.
+                </p>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -139,14 +144,14 @@ const Reimpulso = () => {
               </motion.p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-start">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {metodologia.map((fase, index) => (
                 <motion.div
                   key={fase.n}
                   {...revealProps}
                   custom={index * 0.08}
                   className={`flex flex-col border border-hairline-light bg-white p-7 transition-colors duration-200 hover:border-black ${
-                    index % 2 === 1 ? 'lg:mt-16' : ''
+                    index % 2 === 0 ? 'lg:mt-16' : 'lg:mb-16'
                   }`}
                 >
                   <span className="text-3xl font-bold tracking-[0.05em] text-koob-gold-ink">

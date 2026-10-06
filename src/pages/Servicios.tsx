@@ -378,7 +378,7 @@ const Servicios = () => {
             <div className="grid items-start gap-wide lg:grid-cols-[3fr_2fr]">
               <div>
                 <motion.h1 {...revealProps} custom={0.06} className="type-section-title text-white">
-                  Un partner estratégico para pensar y ejecutar contigo
+                  Un partner estratégico para tu empresa
                 </motion.h1>
               </div>
               <div>
@@ -387,7 +387,7 @@ const Servicios = () => {
                   custom={0.12}
                   className="type-section-lead max-w-xl text-gray-300"
                 >
-                  Pensamos, decidimos y ejecutamos contigo. Y nos quedamos hasta que el cambio
+                  Pensamos, decidimos y ejecutamos contigo, y nos quedamos hasta que el cambio
                   funciona por sí solo.
                 </motion.p>
                 <motion.div {...revealProps} custom={0.18} className="mt-6">

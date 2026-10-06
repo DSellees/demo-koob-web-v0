@@ -93,7 +93,7 @@ const Hero = () => {
               variants={heroItem}
               className="type-display-hero text-black mb-12"
             >
-              Define el rumbo.<br />Reimpulsa tu empresa.
+              De entender el reto,<br />a resolverlo contigo
             </motion.h1>
 
             {/* Body — lg size for readability */}
@@ -101,9 +101,8 @@ const Hero = () => {
               variants={heroItem}
               className="type-lead-flagship font-normal leading-[1.45] text-koob-gray-700 mb-14 max-w-2xl"
             >
-              Cuando notas que los resultados podrían ser mejores, el primer paso es un diagnóstico
-              claro. En KOOB, nos implicamos contigo para detectar el bloqueo y tomar las decisiones
-              que la empresa necesita.
+              Empezamos por entender tu empresa y nos implicamos hasta que las decisiones se
+              convierten en resultados.
             </motion.p>
 
             {/* CTA block */}

@@ -8,10 +8,13 @@ const navLinks = [
   { label: 'Inicio', href: '/' },
   { label: 'Quiénes somos', href: '/quienes-somos' },
   { label: 'Servicios', href: '/servicios' },
-  { label: 'Recursos', href: '/insights' },
+  { label: 'Tendencias', href: '/insights' },
   { label: 'Podcast', href: '/podcast' },
   { label: 'Contacto', href: '/contacto' },
 ];
+
+const desktopLinks = navLinks.filter((link) => link.href !== '/contacto');
+const contactLink = navLinks.find((link) => link.href === '/contacto')!;
 
 interface NavigationProps {
   variant?: 'light' | 'dark';
@@ -71,7 +74,7 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
                 <img
                   src={`${import.meta.env.BASE_URL}logo-koob-black.svg`}
                   alt="KOOB Advisory"
-                  className={`h-[1.65rem] w-auto ${isDark ? 'invert' : ''}`}
+                  className={`h-[2.2rem] w-auto ${isDark ? 'invert' : ''}`}
                 />
               </Link>
             </motion.div>
@@ -83,7 +86,7 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
               initial="hidden"
               animate="visible"
             >
-              {navLinks.map((link) => (
+              {desktopLinks.map((link) => (
                 <motion.div key={link.label} variants={fadeUp}>
                   <Link
                     to={link.href}
@@ -97,9 +100,21 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
                   </Link>
                 </motion.div>
               ))}
+              <motion.div variants={fadeUp}>
+                <Link
+                  to="/reimpulso"
+                  className={
+                    isDark
+                      ? 'px-[1.35rem] py-[0.675rem] border border-white bg-white text-black text-[0.945rem] font-bold hover:bg-koob-gold transition-colors'
+                      : 'px-[1.35rem] py-[0.675rem] border border-black bg-black text-white text-[0.945rem] font-bold hover:bg-koob-gray-900 transition-colors'
+                  }
+                >
+                  KOOB Reimpulso
+                </Link>
+              </motion.div>
             </motion.div>
 
-            {/* CTA desktop */}
+            {/* Contacto desktop */}
             <motion.div
               className="hidden lg:flex items-center"
               variants={slideLeft}
@@ -108,14 +123,14 @@ const Navigation = ({ variant = 'light' }: NavigationProps) => {
               transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <Link
-                to="/reimpulso"
-                className={
-                  isDark
-                    ? 'px-[1.35rem] py-[0.675rem] border border-white bg-white text-black text-[0.945rem] font-bold hover:bg-koob-gold transition-colors'
-                    : 'px-[1.35rem] py-[0.675rem] border border-black bg-black text-white text-[0.945rem] font-bold hover:bg-koob-gray-900 transition-colors'
-                }
+                to={contactLink.href}
+                className={`text-[1.0625rem] font-medium transition-colors duration-200 ${
+                  isActive(contactLink.href)
+                    ? isDark ? 'text-white' : 'text-black'
+                    : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
+                }`}
               >
-                KOOB Reimpulso
+                {contactLink.label}
               </Link>
             </motion.div>
 

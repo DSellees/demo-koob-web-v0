@@ -25,37 +25,29 @@ const revealProps = {
   variants: reveal,
 } as const;
 
-// Los cinco puntos de `diferenciacion` del briefing.
+// Los cuatro puntos de «¿Qué ofrecemos?».
 const diferenciales = [
   {
     n: '01',
-    title: 'Experiencia real en empresa',
+    title: 'Cocreamos',
     description:
-      'Hemos ocupado distintas posiciones de responsabilidad y trabajado en múltiples sectores, lo que nos aporta una visión amplia y, a la vez, especializada de cada proyecto.',
+      'La solución con el equipo de la compañía con un enfoque colaborativo.',
   },
   {
     n: '02',
-    title: 'Enfoque práctico',
-    description:
-      'Priorizamos soluciones aplicables y efectivas, alejadas de planteamientos únicamente teóricos.',
+    title: 'Transmitimos',
+    description: 'Nuestros conocimientos.',
   },
   {
     n: '03',
-    title: 'Trabajo integrado con tus equipos',
-    description:
-      'Aseguramos la transferencia de conocimiento: al terminar el proyecto, el conocimiento y las capacidades quedan dentro de la organización.',
+    title: 'Te acompañamos',
+    description: 'En la implementación del proyecto.',
   },
   {
     n: '04',
-    title: 'Acompañamiento en la implantación',
+    title: 'Nos adaptamos',
     description:
-      'No solo diseñamos estrategias; acompañamos activamente para que los cambios se ejecuten con éxito.',
-  },
-  {
-    n: '05',
-    title: 'Compromiso compartido',
-    description:
-      'En determinados proyectos, vinculamos parte de nuestra remuneración a la consecución de objetivos, compartiendo así el compromiso con el cliente.',
+      'Nuestro esquema de trabajo es altamente flexible. Ya sea desde un asesoramiento puntual hasta un proyecto completo.',
   },
 ];
 
@@ -100,8 +92,8 @@ const QuienesSomos = () => {
         <div className="page-container">
           <div className="content-container">
             {/* Declaración: titular a la izquierda, apuntes al pie derecho */}
-            <div className="grid gap-x-12 gap-y-8 lg:grid-cols-[1.1fr_1fr] lg:items-end">
-              <div>
+            <div className="section-heading-row">
+              <div className="max-w-xl">
                 <motion.p {...revealProps} className="type-eyebrow mb-5 text-koob-gold-ink">
                   Nuestra experiencia
                 </motion.p>
@@ -112,24 +104,22 @@ const QuienesSomos = () => {
                 >
                   Venimos del mundo de la empresa
                 </motion.h2>
-                <motion.div {...revealProps} custom={0.12} className="mt-8">
-                  <SweepArrowLink to="/contacto" variant="light">
-                    Hablar con un experto
-                  </SweepArrowLink>
-                </motion.div>
               </div>
 
-              <div className="lg:pl-10">
-                <motion.p
-                  {...revealProps}
-                  custom={0.18}
-                  className="type-section-lead text-koob-gray-500"
-                >
-                  Por eso, en KOOB no nos limitamos a analizar tu empresa. Nos implicamos para
-                  entender el reto, aportar perspectiva y convertir las decisiones en acción.
-                </motion.p>
-              </div>
+              <motion.p
+                {...revealProps}
+                custom={0.12}
+                className="type-section-lead max-w-md text-koob-gray-500"
+              >
+                Por eso, en KOOB no nos limitamos a analizar tu empresa. Nos implicamos para
+                entender el reto, aportar perspectiva y convertir las decisiones en acción.
+              </motion.p>
             </div>
+            <motion.div {...revealProps} custom={0.18} className="-mt-4">
+              <SweepArrowLink to="/contacto" variant="light">
+                Hablar con un experto
+              </SweepArrowLink>
+            </motion.div>
 
             {/* Tira horizontal: equipo · vídeo (centro) · oficina. Celdas 16/9. La
                 portada es el fotograma del segundo 1 sin las franjas negras; estas solo se ven al dar al play. */}
@@ -201,7 +191,7 @@ const QuienesSomos = () => {
               <motion.div {...revealProps} className="max-w-xl">
                 <p className="type-eyebrow mb-5 text-koob-gold">Lo que nos diferencia</p>
                 <h2 className="type-section-title text-white">
-                  No entregamos un informe y nos vamos
+                  Hacemos que las cosas pasen
                 </h2>
               </motion.div>
               <motion.p
@@ -262,9 +252,8 @@ const QuienesSomos = () => {
                 className="shrink-0 lg:flex lg:max-w-sm lg:flex-col lg:justify-center"
               >
                 <p className="type-section-lead text-koob-gray-500">
-                  Un modelo por proyectos, sin estructura tradicional de oficina, que nos permite
-                  reunir a los mejores especialistas en cada área y adaptarnos a las necesidades
-                  reales de cada cliente.
+                  Un modelo flexible por proyectos, con el equipo de especialistas que tu empresa
+                  necesita.
                 </p>
                 <div className="mt-6">
                   <SweepArrowLink to="/servicios" variant="light">
