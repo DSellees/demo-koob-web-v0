@@ -111,8 +111,9 @@ const QuienesSomos = () => {
                 custom={0.12}
                 className="type-section-lead max-w-md text-koob-gray-500"
               >
-                Por eso, en KOOB no nos limitamos a analizar tu empresa. Nos implicamos para
-                entender el reto, aportar perspectiva y convertir las decisiones en acción.
+                Por eso somos compañeros de ruta para empresas que quieren dar un salto: nos
+                implicamos para entender el reto, aportar perspectiva y convertir las decisiones
+                en acción.
               </motion.p>
             </div>
             <motion.div {...revealProps} custom={0.18} className="-mt-4">
@@ -139,9 +140,6 @@ const QuienesSomos = () => {
                 />
                 {/* Velo suave para igualar el tono apagado del fotograma original */}
                 <div className="pointer-events-none absolute inset-0 bg-black/15" aria-hidden="true" />
-                <span className="pointer-events-none absolute inset-0 flex items-center justify-center pb-[6%] text-[clamp(1.05rem,1.7vw,1.6rem)] font-bold tracking-[-0.02em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
-                  En KOOB
-                </span>
               </motion.div>
 
               {/* Vídeo en la celda central. TODO: sustituir por el vídeo de lanzamiento del Drive. */}
@@ -171,12 +169,8 @@ const QuienesSomos = () => {
                   decoding="async"
                   className="absolute inset-0 h-full w-full object-cover grayscale transition-[filter] duration-500 hover:grayscale-0"
                 />
-                {/* Velo suave y texto centrado, igual que "En KOOB". pointer-events-none
-                    para que el hover llegue a la imagen y recupere el color. */}
+                {/* Velo suave. pointer-events-none para que el hover llegue a la imagen y recupere el color. */}
                 <div className="pointer-events-none absolute inset-0 bg-black/15" aria-hidden="true" />
-                <span className="pointer-events-none absolute inset-0 flex items-center justify-center pb-[6%] text-[clamp(1.05rem,1.7vw,1.6rem)] font-bold tracking-[-0.02em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
-                  Acompañamos
-                </span>
               </motion.div>
             </div>
           </div>

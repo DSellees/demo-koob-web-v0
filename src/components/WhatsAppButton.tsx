@@ -117,10 +117,10 @@ const WhatsAppButton = () => {
               <Headset aria-hidden="true" className="mb-3 h-6 w-6 text-koob-gold" strokeWidth={1.75} />
               <span className="mb-3 block h-px w-8 bg-koob-gold" aria-hidden="true" />
               <strong className="block text-base font-semibold tracking-[-0.01em]">
-                ¿Necesitas ayuda con tu empresa?
+                ¿Cuánto hace que no tienes una mirada externa y objetiva?
               </strong>
               <span className="mt-2 block text-sm leading-relaxed text-gray-300">
-                Cuéntanos tu situación y hablamos sin compromiso.
+                A veces, para avanzar, necesitas ver lo que desde dentro no se ve.
               </span>
               <span className="mt-4 flex items-center gap-2 text-sm font-semibold text-white">
                 Hablar con KOOB

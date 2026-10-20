@@ -1,5 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Plus } from 'lucide-react';
+import { useRef, useState } from 'react';
+import {
+  ArrowDown,
+  BarChart3,
+  BrainCircuit,
+  Coins,
+  Compass,
+  HeartHandshake,
+  Laptop,
+  MessagesSquare,
+  Plus,
+  Settings,
+  TrendingUp,
+  Users,
+  type LucideIcon,
+} from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
@@ -27,46 +41,31 @@ const revealProps = {
   variants: reveal,
 } as const;
 
-// Los cuatro servicios "completos" del briefing del cliente.
+// Los cuatro servicios "completos": títulos del briefing, descripciones de la lámina del cliente.
 const servicios = [
   {
     title: 'KOOB Reimpulso',
-    audience:
-      'Empresas con tensión de tesorería, con oportunidades de crecimiento sin un plan claro, o ante un proceso de transformación.',
     description:
-      'Visión estratégica, acompañamiento ejecutivo y capacidad de implementación en los momentos clave de la evolución de una empresa: estabilidad financiera, crecimiento y transformación.',
-    points: [] as string[],
+      'Nuestro acompañamiento estratégico integral para empresas que quieren crecer, mejorar su rentabilidad o abordar un proceso de transformación.',
     to: '/reimpulso' as string | null,
-    cta: 'Conocer KOOB Reimpulso' as string | null,
   },
   {
     title: 'Recursos Humanos',
-    audience:
-      'Empresas que necesitan que RRHH deje de gestionar personas y empiece a impulsar el negocio.',
     description:
-      'Convertimos la función de RRHH en un socio estratégico: proactivo, que anticipa y lidera los cambios, que habla en términos de resultados y tiene voz en el Comité de Dirección.',
-    points: [] as string[],
+      'Para empresas que quieren impulsar su talento, mejorar la cultura y alinear a sus equipos con la estrategia del negocio.',
     to: null,
-    cta: null,
   },
   {
     title: 'Comunicación Interna y Eventos',
-    audience:
-      'Empresas que quieren ser un lugar donde las personas quieran trabajar, crecer y permanecer.',
     description:
-      'Comunicación interna como herramienta estratégica, no como canal informativo: cultura sólida y coherente, mejor diálogo entre equipos y liderazgo, y experiencias internas que refuerzan el sentimiento de pertenencia.',
-    points: [] as string[],
+      'Para empresas que quieren crear un entorno donde las personas se informen, se impliquen y vivan el cambio, a través de una comunicación efectiva y experiencias con impacto.',
     to: null,
-    cta: null,
   },
   {
     title: 'Ecosistema Estratégico de Expertos',
-    audience: 'Proyectos que piden una mirada multidisciplinar, específica de su sector.',
     description:
-      'Conectamos a tu empresa con especialistas y colaboradores expertos según las necesidades concretas de cada proyecto y sector.',
-    points: [] as string[],
+      'Ponemos a tu disposición una red de profesionales senior y especialistas por sector, para aportar una mirada experta y multidisciplinar a tus retos.',
     to: null,
-    cta: null,
   },
 ];
 
@@ -181,6 +180,18 @@ const bandas = [
   },
 ];
 
+const ICONOS: Record<string, LucideIcon> = {
+  'Experiencia de cliente': HeartHandshake,
+  'Estrategia empresarial': Compass,
+  'Finanzas y control interno': Coins,
+  'Comercial y marketing': TrendingUp,
+  'Operaciones y procesos': Settings,
+  'Organización y personas': Users,
+  'Comunicación y eventos': MessagesSquare,
+  'Data e IA': BrainCircuit,
+  Tecnología: Laptop,
+};
+
 const WHATSAPP_NUMBER = '34609483114';
 const CONTACT_EMAIL = 'info@koobadvisory.com';
 
@@ -215,59 +226,36 @@ const contactoServicio = (titulo: string) => {
 };
 
 /**
- * Fila desplegable: título + una frase, y el detalle (los puntos de la lámina)
- * oculto hasta que se pulsa. El detalle sigue en el DOM (solo colapsado con
- * la técnica grid 0fr → 1fr), así que sigue siendo texto indexable.
+ * Caja de una línea de negocio: icono, título y una frase. El detalle (los
+ * puntos de la lámina) queda colapsado hasta que se pulsa "Ver detalle", pero
+ * sigue en el DOM (técnica grid 0fr → 1fr), así que sigue siendo texto indexable.
  */
 const Linea = ({
   title,
   resumen,
   items,
-  dark = false,
 }: {
   title: string;
   resumen: string;
   items: string[];
-  dark?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
   const id = `linea-${title.replace(/\s+/g, '-').toLowerCase()}`;
+  const Icono = ICONOS[title] ?? BarChart3;
 
   return (
-    <div
-      className={`group/fila ${
-        dark ? 'border-b border-hairline-dark' : 'border-b border-hairline-strong'
-      }`}
-    >
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={id}
-        className="flex w-full cursor-pointer items-center gap-6 py-7 text-left lg:grid lg:grid-cols-[17rem_1fr_auto] lg:gap-10"
-      >
-        <span
-          className={`text-[1.35rem] font-bold leading-tight tracking-[-0.025em] ${
-            dark ? 'text-white' : 'text-black'
-          }`}
-        >
-          {title}
-        </span>
-        <span
-          className={`hidden text-base leading-snug lg:block ${
-            dark ? 'text-gray-300' : 'text-koob-gray-500'
-          }`}
-        >
-          {resumen}
-        </span>
-        <Plus
-          aria-hidden="true"
-          className={`ml-auto h-6 w-6 shrink-0 transition-transform duration-300 group-hover/fila:scale-125 ${
-            open ? 'rotate-45 group-hover/fila:rotate-45' : ''
-          } ${dark ? 'text-koob-gold' : 'text-koob-gold-ink'}`}
-          strokeWidth={1.75}
-        />
-      </button>
+    <article className="group flex flex-col border border-hairline-dark p-7 transition-colors duration-300 hover:border-hairline-light hover:bg-koob-beige">
+      <Icono
+        aria-hidden="true"
+        className="h-7 w-7 text-koob-gold transition-colors duration-300 group-hover:text-koob-gold-ink"
+        strokeWidth={1.5}
+      />
+      <h3 className="mt-6 text-[1.35rem] font-bold leading-tight tracking-[-0.025em] text-white transition-colors duration-300 group-hover:text-black">
+        {title}
+      </h3>
+      <p className="mt-3 text-[0.95rem] leading-snug text-gray-300 transition-colors duration-300 group-hover:text-koob-gray-700">
+        {resumen}
+      </p>
 
       <div
         id={id}
@@ -277,26 +265,15 @@ const Linea = ({
         }`}
       >
         <div className="overflow-hidden">
-          <p
-            className={`pb-5 text-base leading-snug lg:hidden ${
-              dark ? 'text-gray-300' : 'text-koob-gray-500'
-            }`}
-          >
-            {resumen}
-          </p>
-          <ul className="grid gap-x-10 gap-y-3 pb-8 sm:grid-cols-2 lg:grid-cols-3 lg:pl-[calc(17rem+2.5rem)]">
+          <ul className="grid gap-y-2.5 pt-6">
             {items.map((item) => (
               <li
                 key={item}
-                className={`flex items-start gap-3 text-[0.95rem] leading-snug ${
-                  dark ? 'text-gray-300' : 'text-koob-gray-700'
-                }`}
+                className="flex items-start gap-3 text-[0.9rem] leading-snug text-gray-300 transition-colors duration-300 group-hover:text-koob-gray-700"
               >
                 <span
                   aria-hidden="true"
-                  className={`mt-[0.45rem] h-1.5 w-1.5 shrink-0 ${
-                    dark ? 'bg-koob-gold' : 'bg-koob-gold-ink'
-                  }`}
+                  className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 bg-koob-gold transition-colors duration-300 group-hover:bg-koob-gold-ink"
                 />
                 {item}
               </li>
@@ -304,60 +281,28 @@ const Linea = ({
           </ul>
         </div>
       </div>
-    </div>
+
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={id}
+        className="mt-auto flex cursor-pointer items-center gap-2 pt-6 text-sm font-semibold text-white transition-colors duration-300 group-hover:text-black"
+      >
+        {open ? 'Ocultar detalle' : 'Ver detalle'}
+        <Plus
+          aria-hidden="true"
+          className={`h-4 w-4 transition-transform duration-300 ${open ? 'rotate-45' : ''}`}
+          strokeWidth={1.75}
+        />
+      </button>
+    </article>
   );
 };
 
 const Servicios = () => {
-  // Las cuatro cards comparten dos alturas: la de reposo (la de la más larga cerrada)
-  // y un MÁXIMO al desplegarse (la de la más larga abierta), de modo que todas
-  // llegan por igual hasta el mismo punto. Cada una se abre por su cuenta sin
-  // estirar a las demás: la rejilla es `items-start` y la igualdad se fija con
-  // las variables --min-closed / --min-open, que usa el `min-height` de la card.
-  // Solo se mide en carga y al redimensionar (nunca con una card abierta).
-  const cardsRef = useRef<HTMLDivElement>(null);
   const muchoMasRef = useRef<HTMLSpanElement>(null);
   const muchoMasVisible = useInView(muchoMasRef);
-  useEffect(() => {
-    const igualar = () => {
-      const cards = Array.from(cardsRef.current?.querySelectorAll('article') ?? []);
-      if (cards.length === 0) return;
-      const paneles = cards.map((c) =>
-        Array.from(c.querySelectorAll<HTMLElement>('div')).find((d) =>
-          d.className.includes('grid-rows-'),
-        ),
-      );
-      const altura = () => Math.ceil(Math.max(...cards.map((c) => c.getBoundingClientRect().height)));
-
-      // Todo el proceso se hace con las transiciones apagadas y forzando un reflow
-      // antes de restaurarlas: así no se ve ninguna animación al cargar/medir.
-      const raiz = cardsRef.current as HTMLElement;
-      cards.forEach((c) => (c.style.transition = 'none'));
-      paneles.forEach((p) => p && (p.style.transition = 'none'));
-      cards.forEach((c) => {
-        c.style.setProperty('--min-closed', '0px');
-        c.style.setProperty('--min-open', '0px');
-      });
-      void raiz.offsetHeight;
-      const cerrada = altura();
-
-      paneles.forEach((p) => p && (p.style.gridTemplateRows = '1fr'));
-      const abierta = altura();
-      paneles.forEach((p) => p && (p.style.gridTemplateRows = ''));
-
-      cards.forEach((c) => {
-        c.style.setProperty('--min-closed', `${cerrada}px`);
-        c.style.setProperty('--min-open', `${abierta}px`);
-      });
-      void raiz.offsetHeight;
-      cards.forEach((c) => (c.style.transition = ''));
-      paneles.forEach((p) => p && (p.style.transition = ''));
-    };
-    igualar();
-    window.addEventListener('resize', igualar);
-    document.fonts?.ready.then(igualar);
-    return () => window.removeEventListener('resize', igualar);
-  }, []);
 
   return (
     <div className="page-root bg-koob-white">
@@ -408,21 +353,18 @@ const Servicios = () => {
             <div className="section-heading-row section-heading-gap-large">
               <motion.div {...revealProps} className="max-w-xl">
                 <p className="type-eyebrow mb-5 text-koob-gold-ink">Servicios</p>
-                <h2 className="type-section-title text-black">Nuestros servicios destacados</h2>
+                <h2 className="type-section-title text-black">Nuestras líneas de negocio</h2>
               </motion.div>
               <motion.p
                 {...revealProps}
                 custom={0.08}
                 className="type-section-lead max-w-md text-koob-gray-500"
               >
-                Somos una consultora multidisciplinar. Estas son nuestras áreas de mayor impulso.
+                Entendemos tu reto, definimos el camino y te acompañamos en la implementación.
               </motion.p>
             </div>
 
-            <div
-              ref={cardsRef}
-              className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2 lg:grid-cols-4"
-            >
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {servicios.map((servicio, index) => {
                 // KOOB Reimpulso es el servicio insignia: su celda va en oscuro.
                 const dark = servicio.to === '/reimpulso';
@@ -432,7 +374,7 @@ const Servicios = () => {
                     key={servicio.title}
                     {...revealProps}
                     custom={index * 0.08}
-                    className={`group/card relative flex min-h-[var(--min-closed,0px)] flex-col border p-7 transition-[min-height] duration-300 ease-out [@media(hover:hover)]:focus-within:min-h-[var(--min-open,0px)] [@media(hover:hover)]:hover:min-h-[var(--min-open,0px)] ${
+                    className={`relative flex flex-col border p-7 ${
                       dark
                         ? 'border-black bg-black text-white'
                         : 'border-hairline-light bg-white'
@@ -442,43 +384,19 @@ const Servicios = () => {
                       className={`mb-6 h-0.5 w-10 ${dark ? 'bg-koob-gold' : 'bg-koob-gold-ink'}`}
                     />
                     <h3
-                      className={`text-[1.5rem] font-bold leading-[1.1] tracking-[-0.03em] ${
+                      className={`text-[1.75rem] font-bold leading-[1.1] tracking-[-0.03em] lg:min-h-[5.775rem] ${
                         dark ? 'text-white' : 'text-black'
                       }`}
                     >
                       {servicio.title}
                     </h3>
                     <p
-                      className={`mt-4 text-xs font-semibold uppercase tracking-[0.16em] ${
-                        dark ? 'text-koob-gold' : 'text-koob-gold-ink'
+                      className={`mt-4 text-[0.95rem] leading-relaxed ${
+                        dark ? 'text-gray-300' : 'text-koob-gray-700'
                       }`}
                     >
-                      Para quién
+                      {servicio.description}
                     </p>
-                    <p
-                      className={`mt-1.5 text-[0.95rem] leading-relaxed ${
-                        dark ? 'text-gray-200' : 'text-koob-gray-700'
-                      }`}
-                    >
-                      {servicio.audience}
-                    </p>
-
-                    {/* Descripción: se despliega al pasar el cursor (o al enfocar con teclado)
-                        empujando hacia abajo lo que hay debajo; el botón queda siempre al final.
-                        En dispositivos sin hover (móvil/tablet) va siempre visible. Colapsada
-                        sigue en el DOM. `group/card` (con nombre) evita que el hover de la card
-                        active también el barrido del botón, que es otro `group`. */}
-                    <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none [@media(hover:hover)]:grid-rows-[0fr] [@media(hover:hover)]:group-focus-within/card:grid-rows-[1fr] [@media(hover:hover)]:group-hover/card:grid-rows-[1fr]">
-                      <div className="overflow-hidden">
-                        <p
-                          className={`pt-4 text-[0.95rem] leading-relaxed ${
-                            dark ? 'text-gray-400' : 'text-koob-gray-500'
-                          }`}
-                        >
-                          {servicio.description}
-                        </p>
-                      </div>
-                    </div>
 
                     <div className="mt-auto pt-5">
                       <SweepArrowLink
@@ -542,23 +460,23 @@ const Servicios = () => {
           <div className="content-container">
             <div className="section-heading-row section-heading-gap-large">
               <motion.div {...revealProps} className="max-w-xl">
-                <p className="type-eyebrow mb-5 text-koob-gold">Especialidades</p>
-                <h2 className="type-section-title text-white">Nuestras líneas estratégicas</h2>
+                <p className="type-eyebrow mb-5 text-koob-gold">Sectores</p>
+                <h2 className="type-section-title text-white">Cada realidad pide una mirada propia</h2>
               </motion.div>
               <motion.p
                 {...revealProps}
                 custom={0.08}
                 className="type-section-lead max-w-md text-gray-300"
               >
-                Las áreas de conocimiento desde las que trabajamos. Y cuando el proyecto lo pide,
-                sumamos especialistas expertos de cada sector.
+                Cada sector tiene su propia manera de funcionar. Trabajamos con especialistas que
+                la conocen desde dentro para aportar soluciones más rápidas y prácticas.
               </motion.p>
             </div>
 
-            <div className="border-t border-hairline-dark">
+            <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {[...lineas, ...bandas].map((linea, index) => (
-                <motion.div key={linea.title} {...revealProps} custom={(index % 5) * 0.04}>
-                  <Linea title={linea.title} resumen={linea.resumen} items={linea.items} dark />
+                <motion.div key={linea.title} {...revealProps} custom={(index % 3) * 0.06}>
+                  <Linea title={linea.title} resumen={linea.resumen} items={linea.items} />
                 </motion.div>
               ))}
             </div>

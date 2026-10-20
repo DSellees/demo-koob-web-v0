@@ -121,7 +121,7 @@ const AboutIntro = () => {
             >
               <LocalVideoEmbed
                 src={`${import.meta.env.BASE_URL}videos/sobre-koob-nosotros.mp4`}
-                poster={`${import.meta.env.BASE_URL}images/equipo-sesion-estrategica-koob.png`}
+                poster={`${import.meta.env.BASE_URL}images/en-koob-carretera.webp`}
                 title="KOOB Advisory — Nosotros"
               />
             </motion.div>
