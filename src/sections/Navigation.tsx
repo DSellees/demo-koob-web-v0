@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Inicio', href: '/' },
   { label: 'Quiénes somos', href: '/quienes-somos' },
   { label: 'Servicios', href: '/servicios' },
-  { label: 'Tendencias', href: '/insights' },
+  { label: 'Blog', href: '/insights' },
   { label: 'Podcast', href: '/podcast' },
   { label: 'Contacto', href: '/contacto' },
 ];

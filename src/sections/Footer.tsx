@@ -98,10 +98,6 @@ const Footer = () => {
                     609 483 114
                   </a>
                 </li>
-                <li className="pt-2">
-                  <p className="text-xs text-koob-gray-500">Barcelona · España</p>
-                  <p className="text-xs text-koob-gray-500">Atención nacional, presencial y remota</p>
-                </li>
               </ul>
             </div>
           </div>

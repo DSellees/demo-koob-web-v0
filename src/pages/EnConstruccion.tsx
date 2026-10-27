@@ -45,7 +45,7 @@ const EnConstruccion = ({ section, url }: EnConstruccionProps) => {
             </motion.p>
             <motion.div variants={staggerItem} className="mt-8 flex justify-center">
               <SweepArrowLink
-                onClick={() => window.open('https://wa.me/34609483114?text=Hola,%20me%20gustaría%20hablar%20con%20KOOB.', '_blank', 'noopener,noreferrer')}
+                onClick={() => window.open('https://wa.me/34609483114?text=Hola,%20me%20gustaría%20una%20primera%20conversación%20con%20KOOB,%20sin%20compromiso.', '_blank', 'noopener,noreferrer')}
                 variant="dark"
               >
                 Hablemos por WhatsApp

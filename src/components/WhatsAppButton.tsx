@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Headset, MessageCircle, X } from 'lucide-react';
 
-const WHATSAPP_URL = 'https://wa.me/34609483114?text=Hola,%20me%20gustaría%20hablar%20sobre%20KOOB.';
+const WHATSAPP_URL = 'https://wa.me/34609483114?text=Hola,%20me%20gustaría%20una%20primera%20conversación%20con%20KOOB,%20sin%20compromiso.';
 const PROMPT_DELAY_MS = 7000;
 // Además del aviso al entrar, si el usuario se queda quieto (sin tocar
 // ratón/teclado) este tiempo, se le vuelve a mostrar el mensaje.

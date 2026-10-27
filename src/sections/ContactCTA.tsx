@@ -98,7 +98,7 @@ const ContactCTA = () => {
                 </a>
 
                 <a
-                  href="https://wa.me/34609483114?text=Hola,%20me%20gustaría%20hablar%20sobre%20KOOB."
+                  href="https://wa.me/34609483114?text=Hola,%20me%20gustaría%20una%20primera%20conversación%20con%20KOOB,%20sin%20compromiso."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-white/5 hover:bg-white/10 transition-colors"
