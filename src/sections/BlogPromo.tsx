@@ -1,17 +1,17 @@
 import Reveal from '../components/Reveal';
 import SweepArrowLink from '../components/SweepArrowLink';
-import { insights } from '../data/insights';
+import { blogPosts } from '../data/blog';
 
 /**
- * Franja fina que recomienda un artículo de Insights, con el mismo formato
+ * Franja fina que recomienda un artículo de Blog, con el mismo formato
  * horizontal que la franja de newsletter (texto a la izquierda, acción a la
  * derecha) pero en claro y mucho más compacta. Sin cifras: no muestra tiempo
  * de lectura. Si no se indica `slug`, recomienda el artículo más reciente.
  */
-const InsightPromo = ({ slug }: { slug?: string }) => {
+const BlogPromo = ({ slug }: { slug?: string }) => {
   const post =
-    insights.find((p) => p.slug === slug) ??
-    [...insights].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+    blogPosts.find((p) => p.slug === slug) ??
+    [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
 
   if (!post) return null;
 
@@ -30,7 +30,7 @@ const InsightPromo = ({ slug }: { slug?: string }) => {
             </Reveal>
             <Reveal delay={0.08} className="shrink-0">
               <SweepArrowLink
-                to={`/insights/${post.slug}`}
+                to={`/blog/${post.slug}`}
                 variant="light"
                 ariaLabel={`Leer el artículo: ${post.title}`}
               >
@@ -44,4 +44,4 @@ const InsightPromo = ({ slug }: { slug?: string }) => {
   );
 };
 
-export default InsightPromo;
+export default BlogPromo;

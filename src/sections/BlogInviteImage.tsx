@@ -1,4 +1,4 @@
-import { insights } from '../data/insights';
+import { blogPosts } from '../data/blog';
 import PostCarousel from '../components/PostCarousel';
 import Reveal from '../components/Reveal';
 import SweepArrowLink from '../components/SweepArrowLink';
@@ -9,9 +9,9 @@ import SweepArrowLink from '../components/SweepArrowLink';
  * recientes, en la que se ve UNO Y MEDIO. Comparte el carrusel con la home
  * (PostCarousel), aquí sin avance automático.
  */
-const InsightInviteImage = () => {
+const BlogInviteImage = () => {
   // Los tres artículos más recientes.
-  const posts = [...insights]
+  const posts = [...blogPosts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 
@@ -36,7 +36,7 @@ const InsightInviteImage = () => {
                   de quienes han dirigido empresas.
                 </p>
                 <div className="mt-6">
-                  <SweepArrowLink to="/insights" variant="light">
+                  <SweepArrowLink to="/blog" variant="light">
                     Explorar el blog
                   </SweepArrowLink>
                 </div>
@@ -53,4 +53,4 @@ const InsightInviteImage = () => {
   );
 };
 
-export default InsightInviteImage;
+export default BlogInviteImage;

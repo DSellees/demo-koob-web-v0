@@ -41,7 +41,7 @@ import Reveal from '@/components/Reveal';
 
 **SEO:** Each route must include `<SeoMeta>` from `src/components/SeoMeta.tsx` (wraps react-helmet-async). Pass `title`, `description`, and `url`.
 
-**Content data:** `src/data/insights.ts` is the single source of truth for all blog post content. `InsightPost` interface and `insights` array are defined there; `src/pages/InsightPost.tsx` and `src/pages/Insights.tsx` read from it.
+**Content data:** `src/data/blog.ts` is the single source of truth for all blog post content. `BlogPost` interface and `blogPosts` array are defined there; `src/pages/BlogArticle.tsx` and `src/pages/Blog.tsx` read from it.
 
 ## Design tokens
 

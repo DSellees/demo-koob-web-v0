@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useInView } from 'framer-motion';
 import PostCover from './PostCover';
-import type { InsightPost } from '../data/insights';
+import type { BlogPost } from '../data/blog';
 
 interface PostCarouselProps {
-  posts: InsightPost[];
+  posts: BlogPost[];
   /** Tarjetas visibles a la vez, con decimales: 1.5 → "una y media", 2.5 → "dos y media". */
   visible?: number;
   /** Si se indica, avanza sola una tarjeta cada tantos milisegundos. */
@@ -130,7 +130,7 @@ const PostCarousel = ({ posts, visible = 1.5, autoplayMs }: PostCarouselProps) =
         {posts.map((post) => (
           <Link
             key={post.slug}
-            to={`/insights/${post.slug}`}
+            to={`/blog/${post.slug}`}
             draggable={false}
             aria-label={`Leer el artículo: ${post.title}`}
             style={{ width: anchoTarjeta }}
@@ -163,7 +163,7 @@ const PostCarousel = ({ posts, visible = 1.5, autoplayMs }: PostCarouselProps) =
 
         {/* Cierre de la tira: también un enlace completo */}
         <Link
-          to="/insights"
+          to="/blog"
           draggable={false}
           style={{ width: anchoCierre }}
           className="group/tarjeta flex shrink-0 snap-start flex-col justify-end border border-black bg-black p-5 text-white"

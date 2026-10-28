@@ -7,7 +7,7 @@ import { reveal, revealViewport } from '../lib/animations';
 const koobMessage = {
   statement: 'Si algo de esto te resulta familiar, no es casualidad.',
   support:
-    'Antes de cualquier propuesta hay una conversación. Cuéntanos qué no funciona y te decimos si podemos ayudar.',
+    'Antes de cualquier propuesta hay una conversación.',
 };
 
 /** Cada elemento observa su propia visibilidad (ver "La Regla de la Animación Visible"). */

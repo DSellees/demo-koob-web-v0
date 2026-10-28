@@ -8,7 +8,7 @@ import AboutIntro from './sections/AboutIntro';
 import ReimpulsoFlagshipCards from './sections/ReimpulsoFlagshipCards';
 import NewsletterBar from './sections/NewsletterBar';
 import CasosExito from './sections/CasosExito';
-import InsightsTeaser from './sections/InsightsTeaser';
+import BlogTeaser from './sections/BlogTeaser';
 import SeoMeta from './components/SeoMeta';
 import ContactCTA from './sections/ContactCTA';
 import Footer from './sections/Footer';
@@ -20,8 +20,8 @@ import Reimpulso from './pages/Reimpulso';
 import Servicios from './pages/Servicios';
 import QuienesSomos from './pages/QuienesSomos';
 import Contacto from './pages/Contacto';
-import Insights from './pages/Insights';
-import InsightPost from './pages/InsightPost';
+import Blog from './pages/Blog';
+import BlogArticle from './pages/BlogArticle';
 import Legal from './pages/Legal';
 import Privacy from './pages/Privacy';
 import Cookies from './pages/Cookies';
@@ -44,7 +44,7 @@ const LandingPage = () => (
       <NewsletterBar />
       <CasosExito />
       <ClientSituation />
-      <InsightsTeaser />
+      <BlogTeaser />
       <ContactCTA />
     </main>
     <Footer />
@@ -64,8 +64,8 @@ function App() {
               <Route path="/servicios" element={<Servicios />} />
               <Route path="/quienes-somos" element={<QuienesSomos />} />
               <Route path="/contacto" element={<Contacto />} />
-              <Route path="/insights" element={<Insights />} />
-              <Route path="/insights/:slug" element={<InsightPost />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/podcast" element={<EnConstruccion section="Podcast" url="https://koobadvisory.com/podcast" />} />
               <Route path="/legal" element={<Legal />} />
               <Route path="/privacidad" element={<Privacy />} />

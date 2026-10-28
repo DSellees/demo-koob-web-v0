@@ -330,9 +330,6 @@ const ReimpulsoFlagshipCards = () => {
                   ¿Es KOOB Reimpulso para tu empresa?
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-koob-gray-700">
-                  Acompañamiento práctico para empresas que necesitan recuperar rentabilidad, ordenar sus prioridades o encontrar el camino para crecer.
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-koob-gray-700">
                   Partimos de la realidad del negocio, identificamos dónde está el problema y dónde está la oportunidad y construimos un plan de acción para conseguir resultados.
                 </p>
 

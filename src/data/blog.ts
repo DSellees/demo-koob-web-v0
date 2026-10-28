@@ -1,4 +1,4 @@
-export interface InsightPost {
+export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
@@ -6,6 +6,8 @@ export interface InsightPost {
   date: string;
   readTime: string;
   image: string;
+  /** ID del vídeo de YouTube; si existe, el detalle muestra el reproductor. */
+  video?: string;
   content: string;
   tags: string[];
   related: string[];
@@ -25,7 +27,7 @@ export const categories = [
   'Inteligencia artificial',
 ];
 
-export const insights: InsightPost[] = [
+export const blogPosts: BlogPost[] = [
   {
     slug: 'ia-en-hospitality-cuando-la-tecnologia-habla-de-negocio',
     title: 'IA en hospitality: cuando la tecnología empieza a hablar de negocio',
@@ -34,7 +36,8 @@ export const insights: InsightPost[] = [
     category: 'Inteligencia artificial',
     date: '2026-10-16',
     readTime: '4 min',
-    image: '',
+    image: 'images/blog/ia-en-hospitality.jpg',
+    video: '57DGR0ABuo8',
     tags: ['inteligencia artificial', 'hospitality', 'tecnología'],
     related: [
       'la-estrategia-no-falla-en-el-comite',
@@ -96,7 +99,7 @@ Fuente: conversación completa en nuestro canal de YouTube — https://youtu.be/
     category: 'Dirección estratégica',
     date: '2026-10-13',
     readTime: '4 min',
-    image: '',
+    image: 'images/blog/la-estrategia-no-falla-en-el-comite.jpg',
     tags: ['estrategia', 'ejecución', 'comunicación interna', 'eventos'],
     related: [
       'la-comunicacion-ha-cambiado-y-nosotros',
@@ -166,7 +169,8 @@ Hablemos.
     category: 'Comunicación interna',
     date: '2026-10-06',
     readTime: '5 min',
-    image: '',
+    image: 'images/blog/la-comunicacion-ha-cambiado.jpg',
+    video: 'vGrLihLvQTk',
     tags: ['comunicación interna', 'cultura', 'experiencia de empleado'],
     related: [
       'la-estrategia-no-falla-en-el-comite',
@@ -256,7 +260,7 @@ Fuente: vídeo en nuestro canal de YouTube — https://youtu.be/vGrLihLvQTk?si=m
     category: 'Liderazgo',
     date: '2026-09-29',
     readTime: '5 min',
-    image: '',
+    image: 'images/blog/tu-gente-no-ha-dejado-de-liderar.jpg',
     tags: ['liderazgo', 'cultura', 'organización'],
     related: [
       'liderazgo-cultura-e-ia-las-preguntas-que-deberian-hacerse-las-organizaciones',
@@ -374,7 +378,8 @@ Es preguntarnos algo más incómodo:
     category: 'Liderazgo',
     date: '2026-09-22',
     readTime: '3 min',
-    image: '',
+    image: 'images/blog/liderazgo-cultura-e-ia.jpg',
+    video: 'TNPJ-zJ-lS0',
     tags: ['liderazgo', 'cultura', 'inteligencia artificial'],
     related: [
       'tu-gente-no-ha-dejado-de-liderar',
@@ -426,7 +431,8 @@ Fuente: conversación completa en nuestro canal de YouTube — https://youtu.be/
     category: 'Transformación empresarial',
     date: '2026-09-15',
     readTime: '5 min',
-    image: '',
+    image: 'images/blog/una-mirada-externa-y-objetiva-sobre-tu-empresa.jpg',
+    video: 'gwcGSkRZ1YM',
     tags: ['transformación', 'reimpulso', 'dirección estratégica'],
     related: [
       'koob-una-forma-diferente-de-acompanar-a-las-empresas',
@@ -526,7 +532,8 @@ Fuente: vídeo en nuestro canal de YouTube — https://youtu.be/gwcGSkRZ1YM?si=7
     category: 'Transformación empresarial',
     date: '2026-09-08',
     readTime: '4 min',
-    image: '',
+    image: 'images/acompanamos-bicicleta.webp',
+    video: 'OxZx1jPkdJY',
     tags: ['KOOB', 'consultoría', 'transformación'],
     related: [
       'una-mirada-externa-y-objetiva-sobre-tu-empresa',
@@ -606,7 +613,7 @@ Fuente: vídeo en nuestro canal de YouTube — https://youtu.be/OxZx1jPkdJY?si=r
     category: 'Transformación empresarial',
     date: '2026-09-01',
     readTime: '1 min',
-    image: '',
+    image: 'images/blog/ideas-que-hacen-avanzar.jpg',
     tags: ['KOOB', 'blog', 'estrategia'],
     related: [
       'koob-una-forma-diferente-de-acompanar-a-las-empresas',

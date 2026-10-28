@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SeoMeta from '../components/SeoMeta';
-import { insights, categories } from '../data/insights';
-import InsightCover from '../components/InsightCover';
+import { blogPosts, categories } from '../data/blog';
 import PostCover from '../components/PostCover';
 import { staggerContainer, staggerItem, viewportOnce } from '../lib/animations';
 
@@ -16,7 +15,7 @@ const formatDate = (iso: string) =>
     .replace('.', '')
     .toUpperCase();
 
-const Insights = () => {
+const Blog = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   // Arrastrar la barra de filtros con el ratón (no hay scrollbar visible).
@@ -50,10 +49,10 @@ const Insights = () => {
   };
 
   const filtered = activeCategory
-    ? insights.filter((p) => p.category === activeCategory)
-    : insights;
+    ? blogPosts.filter((p) => p.category === activeCategory)
+    : blogPosts;
 
-  const byDate = [...insights].sort(
+  const byDate = [...blogPosts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const featured = byDate[0];
@@ -62,28 +61,29 @@ const Insights = () => {
   return (
     <div className="page-root">
       <SeoMeta
-        title="Insights — KOOB Advisory | Ideas para empresas en cambio"
+        title="Blog — KOOB Advisory | Ideas para empresas en cambio"
         description="Reflexiones y análisis sobre transformación empresarial, liderazgo, cultura organizativa y gestión del cambio. El conocimiento de quienes lo han vivido desde dentro."
-        url="https://koobadvisory.com/insights"
+        url="https://koobadvisory.com/blog"
       />
       <Navigation />
 
-      {/* Portada de Insights: destacado + últimos */}
+      {/* Portada de Blog: destacado + últimos */}
       <section className="page-intro-space-article bg-koob-beige !pb-10">
         <div className="page-container">
           <div className="content-container">
-            <h1 className="type-eyebrow text-koob-gold-ink">Insights KOOB</h1>
+            <h1 className="type-eyebrow text-koob-gold-ink">Blog KOOB</h1>
 
             {/* Fila de últimos artículos */}
             <div className="border-hairline-light mt-8 grid grid-cols-1 divide-y divide-[color:var(--line-light)] border-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
               {highlights.map((post) => (
                 <Link
                   key={post.slug}
-                  to={`/insights/${post.slug}`}
+                  to={`/blog/${post.slug}`}
                   className="group flex gap-4 py-6 sm:px-6 sm:py-7 sm:first:pl-0 sm:last:pr-0"
                 >
-                  <InsightCover
+                  <PostCover
                     slug={post.slug}
+                    image={post.image}
                     className="aspect-square w-20 shrink-0"
                   />
                   <div className="min-w-0">
@@ -100,7 +100,7 @@ const Insights = () => {
 
             {/* Artículo destacado */}
             <Link
-              to={`/insights/${featured.slug}`}
+              to={`/blog/${featured.slug}`}
               className="group relative mt-4 block aspect-[16/10] overflow-hidden bg-koob-black sm:aspect-[16/7]"
             >
               <PostCover
@@ -185,8 +185,9 @@ const Insights = () => {
                   transition={{ duration: 0.2 }}
                   className="border-hairline-light group relative overflow-hidden border transition-colors duration-300 hover:border-black"
                 >
-                  <InsightCover
+                  <PostCover
                     slug={post.slug}
+                    image={post.image}
                     category={post.category}
                     className="aspect-[16/9]"
                   />
@@ -212,7 +213,7 @@ const Insights = () => {
                     </p>
 
                     <Link
-                      to={`/insights/${post.slug}`}
+                      to={`/blog/${post.slug}`}
                       aria-label={`Leer: ${post.title}`}
                       className="inline-flex items-center gap-2 text-sm font-medium text-black transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-koob-gold"
                     >
@@ -275,4 +276,4 @@ const Insights = () => {
   );
 };
 
-export default Insights;
+export default Blog;

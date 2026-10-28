@@ -18,7 +18,7 @@ import { motion, useInView } from 'framer-motion';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import ContactCTA from '../sections/ContactCTA';
-import InsightInviteImage from '../sections/InsightInviteImage';
+import BlogInviteImage from '../sections/BlogInviteImage';
 import SeoMeta from '../components/SeoMeta';
 import SweepArrowLink from '../components/SweepArrowLink';
 import { reveal, revealViewport } from '../lib/animations';
@@ -146,6 +146,16 @@ const lineas = [
       'Diseño y gestión de organización de eventos',
     ],
   },
+];
+
+// Sectores en los que ha trabajado KOOB, con sus subsectores.
+const sectores = [
+  { title: 'Primario y medioambiente', items: ['Medioambiental', 'Reciclaje'] },
+  { title: 'Industria y materiales', items: ['Metalúrgico', 'Químico', 'Construcción'] },
+  { title: 'Tecnología y electrónica', items: ['Electrónico', 'Telecomunicaciones'] },
+  { title: 'Consumo y comercio', items: ['Alimentación', 'Gran consumo', 'Retail', 'B2B y B2B2C'] },
+  { title: 'Servicios', items: ['Real estate', 'Banca', 'Seguros'] },
+  { title: 'Innovación y salud', items: ['Farma', 'Healthcare'] },
 ];
 
 // Las dos bandas de la lámina, aparte de las siete líneas.
@@ -353,7 +363,7 @@ const Servicios = () => {
             <div className="section-heading-row section-heading-gap-large">
               <motion.div {...revealProps} className="max-w-xl">
                 <p className="type-eyebrow mb-5 text-koob-gold-ink">Servicios</p>
-                <h2 className="type-section-title text-black">Nuestras líneas de negocio</h2>
+                <h2 className="type-section-title text-black">Destacados</h2>
               </motion.div>
               <motion.p
                 {...revealProps}
@@ -460,7 +470,7 @@ const Servicios = () => {
           <div className="content-container">
             <div className="section-heading-row section-heading-gap-large">
               <motion.div {...revealProps} className="max-w-xl">
-                <p className="type-eyebrow mb-5 text-koob-gold">Sectores</p>
+                <p className="type-eyebrow mb-5 text-koob-gold">Líneas de negocio</p>
                 <h2 className="type-section-title text-white">Cada realidad pide una mirada propia</h2>
               </motion.div>
               <motion.p
@@ -485,7 +495,46 @@ const Servicios = () => {
         </div>
       </section>
 
-      <InsightInviteImage />
+      {/* ── Sectores (claro) ──────────────────────────────────────── */}
+      <section className="section-space overflow-hidden bg-koob-white text-black">
+        <div className="page-container">
+          <div className="content-container">
+            <div className="section-heading-row section-heading-gap-large">
+              <motion.div {...revealProps} className="max-w-xl">
+                <p className="type-eyebrow mb-5 text-koob-gold-ink">Sectores</p>
+                <h2 className="type-section-title text-black">Sectores en los que hemos trabajado</h2>
+              </motion.div>
+              <motion.p
+                {...revealProps}
+                custom={0.08}
+                className="type-section-lead max-w-md text-koob-gray-500"
+              >
+                Conocemos cómo funciona cada sector desde dentro.
+              </motion.p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {sectores.map((sector, index) => (
+                <motion.div
+                  key={sector.title}
+                  {...revealProps}
+                  custom={(index % 3) * 0.06}
+                  className="border-t border-hairline-ink pt-5"
+                >
+                  <h3 className="text-[1.35rem] font-bold leading-tight tracking-[-0.02em] text-black">
+                    {sector.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed text-koob-gray-500">
+                    {sector.items.join(' · ')}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <BlogInviteImage />
 
       <ContactCTA />
 

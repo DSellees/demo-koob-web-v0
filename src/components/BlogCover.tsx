@@ -1,4 +1,4 @@
-interface InsightCoverProps {
+interface BlogCoverProps {
   /** Semilla: mismo slug → misma composición. */
   slug: string;
   /** Etiqueta opcional sobreimpresa (categoría del post). */
@@ -22,7 +22,7 @@ const hash = (s: string) => {
  * logo. Determinista por `slug`, así cada post tiene una imagen estable y
  * distinta sin necesidad de ficheros.
  */
-const InsightCover = ({ slug, category, className = '' }: InsightCoverProps) => {
+const BlogCover = ({ slug, category, className = '' }: BlogCoverProps) => {
   const h = hash(slug);
   const barCount = 6 + (h % 4); // 6–9 barras
   const panelX = 168 + ((h >> 2) % 5) * 10; // 168–208
@@ -73,4 +73,4 @@ const InsightCover = ({ slug, category, className = '' }: InsightCoverProps) => 
   );
 };
 
-export default InsightCover;
+export default BlogCover;

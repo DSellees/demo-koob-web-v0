@@ -1,10 +1,12 @@
-import InsightCover from './InsightCover';
+import BlogCover from './BlogCover';
 
 interface PostCoverProps {
   slug: string;
-  /** URL de imagen real. Si falta o no es http(s), se usa la portada generada. */
+  /** Imagen real: URL http(s) o ruta relativa a `public/` (p. ej. `images/blog/x.jpg`). Si falta, se usa la portada generada. */
   image?: string;
   alt?: string;
+  /** Categoría, solo para la portada generada de reserva. */
+  category?: string;
   /** Clases del contenedor: proporción y tamaño (aspect-*, w-full…). */
   className?: string;
   /** true para la portada principal (carga inmediata); resto perezoso. */
@@ -12,14 +14,15 @@ interface PostCoverProps {
 }
 
 /**
- * Portada de un post: usa la foto real (`image`) si existe; si no, cae en la
- * portada generada `InsightCover`. Esquinas rectas, `object-cover`.
+ * Portada de un post: usa la imagen real (`image`) si existe; si no, cae en la
+ * portada generada `BlogCover`. Esquinas rectas, `object-cover`.
  */
-const PostCover = ({ slug, image, alt, className = '', eager = false }: PostCoverProps) => {
-  if (image && /^https?:\/\//.test(image)) {
+const PostCover = ({ slug, image, alt, category, className = '', eager = false }: PostCoverProps) => {
+  if (image) {
+    const src = /^https?:\/\//.test(image) ? image : `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}`;
     return (
       <img
-        src={image}
+        src={src}
         alt={alt ?? ''}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
@@ -27,7 +30,7 @@ const PostCover = ({ slug, image, alt, className = '', eager = false }: PostCove
       />
     );
   }
-  return <InsightCover slug={slug} className={className} />;
+  return <BlogCover slug={slug} category={category} className={className} />;
 };
 
 export default PostCover;

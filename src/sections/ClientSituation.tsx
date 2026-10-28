@@ -98,8 +98,8 @@ const ClientSituation = () => {
               >
                 <div className="border-hairline-dark relative overflow-hidden border" style={{ aspectRatio: '3/5' }}>
                   <img
-                    src={`${import.meta.env.BASE_URL}images/equipo-directivo-experimentado-traje-koob.png`}
-                    alt="Profesionales con experiencia analizando el crecimiento y la estrategia de su empresa"
+                    src={`${import.meta.env.BASE_URL}images/escalera-luz-koob.jpg`}
+                    alt="Escalera de hormigón que asciende hacia la luz"
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 h-full w-full object-cover object-top grayscale transition-[filter] duration-500 hover:grayscale-0"

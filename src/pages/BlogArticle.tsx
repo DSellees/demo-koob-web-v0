@@ -15,17 +15,17 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import NewsletterBar from '../sections/NewsletterBar';
 import SeoMeta from '../components/SeoMeta';
-import InsightCover from '../components/InsightCover';
 import PostCover from '../components/PostCover';
-import { insights } from '../data/insights';
+import YouTubeEmbed from '../components/YouTubeEmbed';
+import { blogPosts } from '../data/blog';
 import { reveal, revealViewport } from '../lib/animations';
 
 /**
- * Plantilla estándar del detalle de un post del blog (Insights).
+ * Plantilla estándar del detalle de un post del blog (Blog).
  * Cabecera a la izquierda, portada al ancho del texto, cuerpo en dos columnas
  * (artículo + barra lateral: Sobre KOOB, Destacados, Explora por tema), rejilla
  * de relacionados y newsletter. Sistema plano de KOOB (esquinas rectas,
- * hairlines, sin sombras). Ruta /insights/:slug.
+ * hairlines, sin sombras). Ruta /blog/:slug.
  */
 
 const formatDate = (iso: string) =>
@@ -53,18 +53,18 @@ const Chip = ({ children, dark = true }: { children: string; dark?: boolean }) =
   </span>
 );
 
-const InsightPost = () => {
+const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = insights.find((p) => p.slug === slug);
+  const post = blogPosts.find((p) => p.slug === slug);
 
-  if (!post) return <Navigate to="/insights" replace />;
+  if (!post) return <Navigate to="/blog" replace />;
 
-  const byDate = [...insights].sort(
+  const byDate = [...blogPosts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const featured = byDate.filter((p) => p.slug !== post.slug).slice(0, 3);
-  const related = insights.filter((p) => p.slug !== post.slug).slice(0, 6);
-  const topics = [...new Set(insights.map((p) => p.category))];
+  const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 6);
+  const topics = [...new Set(blogPosts.map((p) => p.category))];
 
   const lines = post.content
     .trim()
@@ -77,9 +77,9 @@ const InsightPost = () => {
   return (
     <div className="page-root bg-koob-white">
       <SeoMeta
-        title={`${post.title} — KOOB Insights`}
+        title={`${post.title} — KOOB Blog`}
         description={post.excerpt}
-        url={`https://koobadvisory.com/insights/${post.slug}`}
+        url={`https://koobadvisory.com/blog/${post.slug}`}
       />
       <Navigation variant="dark" />
 
@@ -91,13 +91,13 @@ const InsightPost = () => {
               aria-label="Ruta de navegación"
               className="flex items-center gap-2 type-body-small text-koob-gray-500"
             >
-              <Link to="/insights" className="shrink-0 transition-colors hover:text-koob-black">
-                Insights
+              <Link to="/blog" className="shrink-0 transition-colors hover:text-koob-black">
+                Blog
               </Link>
               <span aria-hidden="true" className="shrink-0">
                 ›
               </span>
-              <Link to="/insights" className="shrink-0 transition-colors hover:text-koob-black">
+              <Link to="/blog" className="shrink-0 transition-colors hover:text-koob-black">
                 {post.category}
               </Link>
               <span aria-hidden="true" className="shrink-0">
@@ -141,14 +141,31 @@ const InsightPost = () => {
 
             {/* Artículo */}
             <article className="min-w-0">
-              {/* Portada — al ancho del texto, justo antes de leer */}
-              <PostCover
-                slug={post.slug}
-                image={post.image}
-                alt={post.title}
-                eager
-                className="mb-12 aspect-[16/8] w-full"
-              />
+              {/* Portada — al ancho del texto, justo antes de leer. Si el post tiene
+                  vídeo de YouTube, la portada es el reproductor (se carga al pulsar). */}
+              {post.video ? (
+                <div className="relative mb-12 aspect-video w-full overflow-hidden bg-koob-black">
+                  <YouTubeEmbed
+                    videoId={post.video}
+                    title={post.title}
+                    posterSrc={
+                      post.image
+                        ? /^https?:\/\//.test(post.image)
+                          ? post.image
+                          : `${import.meta.env.BASE_URL}${post.image}`
+                        : undefined
+                    }
+                  />
+                </div>
+              ) : (
+                <PostCover
+                  slug={post.slug}
+                  image={post.image}
+                  alt={post.title}
+                  eager
+                  className="mb-12 aspect-[16/8] w-full"
+                />
+              )}
 
               {lines.map((line, i) => {
                 if (line.startsWith('## ')) {
@@ -264,8 +281,8 @@ const InsightPost = () => {
                 <ul className="flex flex-col gap-5">
                   {featured.map((f) => (
                     <li key={f.slug}>
-                      <Link to={`/insights/${f.slug}`} className="group block">
-                        <InsightCover slug={f.slug} className="aspect-[16/10] w-full" />
+                      <Link to={`/blog/${f.slug}`} className="group block">
+                        <PostCover slug={f.slug} image={f.image} className="aspect-[16/10] w-full" />
                         <p className="mt-3 type-caption text-koob-gray-400">
                           <span className="text-koob-gold-ink">{f.category}</span>
                           {'  ·  '}
@@ -289,7 +306,7 @@ const InsightPost = () => {
                     return (
                       <li key={topic}>
                         <Link
-                          to="/insights"
+                          to="/blog"
                           className="group flex items-center gap-3 text-koob-black"
                         >
                           <span className="border-hairline-light flex size-10 shrink-0 items-center justify-center border transition-colors group-hover:border-koob-black">
@@ -308,7 +325,7 @@ const InsightPost = () => {
                   })}
                 </ul>
                 <Link
-                  to="/insights"
+                  to="/blog"
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-koob-black transition-colors hover:text-koob-gold-ink"
                 >
                   Más categorías
@@ -340,7 +357,7 @@ const InsightPost = () => {
                   className="border-hairline-light group relative flex flex-col border bg-koob-white transition-colors hover:border-koob-black"
                 >
                   <div className="relative">
-                    <InsightCover slug={rel.slug} className="aspect-[16/9] w-full" />
+                    <PostCover slug={rel.slug} image={rel.image} className="aspect-[16/9] w-full" />
                     <span className="absolute left-3 top-3">
                       <Chip dark={false}>{rel.category}</Chip>
                     </span>
@@ -354,7 +371,7 @@ const InsightPost = () => {
                       {rel.excerpt}
                     </p>
                     <Link
-                      to={`/insights/${rel.slug}`}
+                      to={`/blog/${rel.slug}`}
                       aria-label={`Leer: ${rel.title}`}
                       className="mt-4 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-koob-black transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-koob-gold-ink"
                     >
@@ -367,10 +384,10 @@ const InsightPost = () => {
             </div>
 
             <Link
-              to="/insights"
+              to="/blog"
               className="mt-10 inline-flex items-center gap-2 bg-koob-black px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-koob-gray-900"
             >
-              Ver todos los insights
+              Ver todo el blog
               <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </Link>
           </div>
@@ -384,4 +401,4 @@ const InsightPost = () => {
   );
 };
 
-export default InsightPost;
+export default BlogArticle;
